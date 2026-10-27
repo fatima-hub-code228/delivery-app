@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary": "#323126", "primary-container": "#facc15", "on-primary-container": "#6c5700", "primary": "#ffecb9", "on-primary-fixed": "#231b00", "secondary-container": "#ba880f", "surface-variant": "#383432", "on-tertiary-fixed-variant": "#48473c", "inverse-primary": "#735c00", "tertiary-fixed-dim": "#cac7b8", "background": "#161311", "tertiary": "#f1eddd", "surface-tint": "#eec200", "on-primary-fixed-variant": "#574500", "error-container": "#93000a", "on-primary": "#3c2f00", "tertiary-fixed": "#e6e3d3", "on-surface": "#e9e1dd", "tertiary-container": "#d4d1c2", "outline": "#9a9078", "surface-container-low": "#1e1b19", "inverse-surface": "#e9e1dd", "surface-dim": "#161311", "on-background": "#e9e1dd", "surface-container-lowest": "#100e0c", "on-secondary-fixed-variant": "#5d4200", "on-secondary": "#412d00", "surface-container": "#221f1d", "primary-fixed-dim": "#eec200", "secondary-fixed": "#ffdea6", "primary-fixed": "#ffe083", "surface-container-high": "#2d2927", "on-tertiary-container": "#5b5a4e", "surface-container-highest": "#383432", "on-tertiary-fixed": "#1c1c13", "surface-bright": "#3c3836", "on-surface-variant": "#d1c6ab", "on-error": "#690005", "on-secondary-fixed": "#271900", "secondary-fixed-dim": "#f7bd48", "on-secondary-container": "#392700", "surface": "#161311", "on-error-container": "#ffdad6", "secondary": "#f7bd48", "outline-variant": "#4d4632", "error": "#ffb4ab", "inverse-on-surface": "#33302d" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter-sm": "0.75rem", "margin-mobile": "1rem", "space-lg": "1.5rem", "space-xs": "0.25rem", "space-md": "1rem", "space-sm": "0.5rem", "margin": "2rem", "space-xl": "2.5rem", "gutter-lg": "2rem", "gutter": "1.5rem" }, "fontFamily": { "display-lg": [ "Plus Jakarta Sans" ], "title-md": [ "Plus Jakarta Sans" ], "body-sm": [ "Inter" ], "headline-md": [ "Plus Jakarta Sans" ], "body-lg": [ "Inter" ], "body-md": [ "Inter" ], "currency-display": [ "Plus Jakarta Sans" ], "currency-caption": [ "Inter" ], "headline-lg": [ "Plus Jakarta Sans" ], "headline-xl": [ "Plus Jakarta Sans" ], "label-sm": [ "Inter" ], "label-md": [ "Inter" ], "display-lg-mobile": [ "Plus Jakarta Sans" ] }, "fontSize": { "display-lg": [ "3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.03em", "fontWeight": "700" } ], "title-md": [ "1.125rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "body-sm": [ "0.8125rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "400" } ], "headline-md": [ "1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "body-lg": [ "1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "400" } ], "body-md": [ "0.9375rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "400" } ], "currency-display": [ "1.75rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "currency-caption": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.08em", "fontWeight": "600" } ], "headline-lg": [ "1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "headline-xl": [ "2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.025em", "fontWeight": "700" } ], "label-sm": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "600" } ], "label-md": [ "0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.02em", "fontWeight": "500" } ], "display-lg-mobile": [ "2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.02em", "fontWeight": "700" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="flex flex-col h-full overflow-hidden"><div class="h-20 px-space-md flex items-center gap-space-sm bg-surface-container-lowest/60 backdrop-blur-md"><img alt="VAYORA Partner Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Vu_ERvxM1TR_WtX3iJxrhFOEEmv5C686HsjH3CyVYBYC9u-V9_1S46iKEAom3NtM3XPY1HePkEOVmpyVKLJomFOb33Ws5hhdUubFia9Xhgy6fV2XvtjCnifOYwDwkhlM14zGcWEcuEbDzdpBaKLFpI_P7P7KFIYnOsE9DVapMFuAwGYiSc7gOIhDXksVBbLvrRWT7Cby0Mbd6WCfy8yHszed4qPAomY1GvqoS_DjpD9TlAGusetj7d"/><div class="flex flex-col"><span class="font-title-md text-title-md tracking-tight text-primary leading-none">VAYORA</span><span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold mt-0.5">Partner Portal</span></div></div><div class="px-space-md py-space-sm"><div class="p-space-sm rounded-lg bg-surface-container flex items-center justify-between shadow-[0_1px_4px_rgba(0,0,0,0.2)]"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-sm text-label-sm text-on-surface font-medium">Abu Dhabi Hub</span></div><span class="font-currency-caption text-currency-caption text-secondary font-semibold uppercase">UAE VIP</span></div></div><nav class="flex-1 px-space-md py-space-xs space-y-1 overflow-y-auto" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-[0_0_16px_rgba(250,204,21,0.2)]"><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="dashboard" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">dashboard</span><span class="font-label-md text-label-md">Dashboard</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="live-orders" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">room_service</span><span class="font-label-md text-label-md">Live Orders</span></div><span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold shadow-sm">4 New</span></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="order-details-&amp;-history" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">receipt_long</span><span class="font-label-md text-label-md">Order Details &amp; History</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="menu-&amp;-inventory-management" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">inventory_2</span><span class="font-label-md text-label-md">Menu &amp; Inventory</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="add-/-edit-dish" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">restaurant_menu</span><span class="font-label-md text-label-md">Add / Edit Dish</span></div></a><a aria-current="page" class="flex items-center justify-between px-space-md py-2.5 transition-all group bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-[0_0_16px_rgba(250,204,21,0.2)]" data-path="restaurant-profile-&amp;-delivery-zones" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">map</span><span class="font-label-md text-label-md">Profile &amp; Zones</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="analytics-&amp;-sales-reports" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">monitoring</span><span class="font-label-md text-label-md">Analytics &amp; Sales</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="partner-settings-&amp;-uae-tax" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">settings</span><span class="font-label-md text-label-md">Settings &amp; UAE Tax</span></div></a></nav><div class="p-space-md bg-surface-container-lowest/80 backdrop-blur-md space-y-space-sm"><div class="p-space-sm rounded-lg bg-surface-container-high flex flex-col gap-1"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm uppercase text-on-surface-variant font-medium">Today's Shift</span><span class="font-currency-caption text-currency-caption uppercase text-secondary font-bold">AED</span></div><div class="flex items-baseline justify-between"><span class="font-currency-display text-currency-display text-primary leading-tight">14,820</span><span class="font-label-sm text-label-sm text-secondary font-semibold">+18.4%</span></div></div><div class="p-space-sm rounded-lg bg-surface-container flex items-center justify-between"><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant">UAE Concierge Support</span><span class="font-label-md text-label-md text-primary font-semibold tracking-tight">+971 2 600 VAYORA</span></div><span class="material-symbols-outlined text-secondary text-lg">support_agent</span></div></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-20 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.3)] z-40 px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-lg flex-1"><div class="flex items-center gap-space-sm py-1.5 px-space-md rounded-xl bg-surface-container-low shadow-[0_1px_4px_rgba(0,0,0,0.15)]"><span class="material-symbols-outlined text-secondary text-xl">storefront</span><div class="flex flex-col"><div class="flex items-center gap-2"><span class="font-label-md text-label-md text-on-surface font-semibold">The Grand Pavilion</span><span class="font-label-sm text-label-sm text-on-surface-variant">• Al Maryah Island, Abu Dhabi</span></div><div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span><span class="font-label-sm text-label-sm text-secondary font-semibold tracking-wide uppercase">Open &amp; Accepting Orders</span></div></div><button class="ml-space-sm p-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button"><span class="material-symbols-outlined text-lg">expand_more</span></button></div><div class="relative max-w-md w-full hidden xl:block"><span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">search</span><input class="w-full pl-10 pr-4 py-2 bg-surface-container-low rounded-xl text-on-surface placeholder:text-on-surface-variant/50 font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-secondary-container transition-all" placeholder="Search orders, menu items, guests, or tables..." type="text"/></div></div><div class="flex items-center gap-space-md"><button class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" title="Live Sound Alerts Enabled" type="button"><span class="material-symbols-outlined text-secondary text-lg">volume_up</span><span class="font-label-sm text-label-sm hidden sm:inline text-on-surface-variant font-medium">Chime Live</span></button><button class="relative p-2 rounded-xl bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" type="button"><span class="material-symbols-outlined text-xl">notifications</span><span class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm flex items-center justify-center font-bold shadow-md">3</span></button><div class="flex items-center gap-space-sm pl-space-sm"><div class="flex flex-col text-right hidden lg:block"><span class="font-label-md text-label-md text-on-surface font-semibold leading-tight">Tariq Al Mansoori</span><span class="font-label-sm text-label-sm text-secondary uppercase font-medium">General Director</span></div><div class="relative flex items-center gap-1.5 p-1 rounded-full bg-surface-container-low"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrlF07D7rcBKVtzkU4_A51hJFZgKReEOtctmAqEotlcBypQJMRlHl26LyYOa3tIQeKb8NwFIldaLy6zW0Wd2XzOS11wWEOw05lX2MI0SdiWOEx_izf9ynUDaWYwRcFLYB4RGpDeWTEPWQufNxo_sOEK41nFzMT6DOrWzgAADsoew9EsCNK9bdA84yzmp8bdAMXwJ5Fckop26XoUT7Ct5C2UiF4rwhqCqTelxxp3cKop9R9gkMzFJw"/><span class="material-symbols-outlined text-on-surface-variant text-base pr-1">keyboard_arrow_down</span></div></div></div></header><main class="w-full pt-20 px-space-lg pb-space-xl bg-surface min-h-screen"><div class="flex flex-col w-full">
+<div class="relative w-full overflow-hidden rounded-xl bg-surface-container mb-space-lg shadow-xl">
+<div class="absolute -right-20 -top-24 w-96 h-96 rounded-full bg-primary-container/5 blur-3xl pointer-events-none"></div>
+<div class="relative p-space-lg md:p-space-xl flex flex-col md:flex-row md:items-end justify-between gap-space-lg">
+<div class="space-y-space-xs max-w-3xl">
+<div class="flex items-center gap-space-sm text-secondary">
+<span class="material-symbols-outlined text-lg">verified_user</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-secondary font-semibold">Department of Economic Development • Abu Dhabi Verified</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-primary font-bold tracking-tight">Restaurant Profile &amp; Delivery Logistics</h1>
+<p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
+<span>The Grand Pavilion Restaurant &amp; Lounge</span>
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="text-on-surface">Al Maryah Island Flagship</span>
+</p>
+</div>
+<div class="flex items-center gap-space-sm self-start md:self-end">
+<div class="px-space-md py-space-xs rounded-full bg-surface-container-high flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Fleet Sync Active (4 Zones)</span>
+</div>
+<button class="px-space-md py-space-sm rounded-lg bg-primary-container hover:bg-secondary-container text-on-primary-container font-label-md text-label-md font-semibold transition-all duration-200 shadow-md flex items-center gap-2" id="save-top-btn">
+<span class="material-symbols-outlined text-base">cloud_sync</span>
+<span>Save Changes</span>
+</button>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<div class="flex items-center overflow-x-auto px-space-lg bg-surface-container-low/70 backdrop-blur-md">
+<button class="tab-trigger flex items-center gap-2 px-space-md py-3.5 text-on-primary-container bg-primary-container rounded-t-lg font-label-md text-label-md font-semibold transition-all" data-tab="profile">
+<span class="material-symbols-outlined text-lg">storefront</span>
+<span>General Profile</span>
+</button>
+<button class="tab-trigger flex items-center gap-2 px-space-md py-3.5 text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-medium transition-all" data-tab="zones">
+<span class="material-symbols-outlined text-lg">radar</span>
+<span>Abu Dhabi Delivery Zones</span>
+<span class="px-1.5 py-0.2 rounded-full bg-surface-container-high text-[10px] text-secondary font-bold">3 LIVE</span>
+</button>
+<button class="tab-trigger flex items-center gap-2 px-space-md py-3.5 text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-medium transition-all" data-tab="hours">
+<span class="material-symbols-outlined text-lg">schedule</span>
+<span>Operating Hours &amp; Ramadan</span>
+</button>
+<button class="tab-trigger flex items-center gap-2 px-space-md py-3.5 text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-medium transition-all" data-tab="finance">
+<span class="material-symbols-outlined text-lg">account_balance</span>
+<span>Banking &amp; UAE Tax (TRN)</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg">
+<!-- Left Column: Primary Sections -->
+<div class="xl:col-span-8 flex flex-col gap-space-lg">
+<!-- Section 1: Brand & Dining Atmosphere -->
+<section class="bg-surface-container rounded-xl p-space-lg shadow-md relative overflow-hidden">
+<div class="flex items-center justify-between pb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="p-2 rounded-lg bg-surface-container-high text-secondary material-symbols-outlined">palette</span>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary font-bold">Brand &amp; Dining Atmosphere</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Visual assets, venue identity and luxury culinary accreditation</p>
+</div>
+</div>
+<span class="px-space-sm py-1 rounded-full bg-surface-container-high text-secondary font-label-sm text-label-sm font-semibold">Tier 1 Dining</span>
+</div>
+<!-- Cover & Crest Upload Mosaic -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md mt-space-sm">
+<div class="md:col-span-8 relative h-48 md:h-56 rounded-xl overflow-hidden group shadow-inner">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="An opulent fine dining interior in Abu Dhabi showing gilded contemporary arabesque screens, ambient warm amber recessed lighting, linen-draped tables overlooking Al Maryah Island waterfront promenade at twilight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGveaB2TI-m_l6joI5EgzBDtldtpJ4EPjJAD6vpphoToHZqL5x22IA509pvk9wXUpaT6bdBo5-uLRXGnKNIsmnxK9-WIIYRdq8hy5NLDLWEy6TMGssVltctRSvzcJB1j9-9pOCmYHgAzEiLOmRXvrn6hlvvh7_eCArZtPVnyy0KG8FQeG9uWjoGuMwB9RfpLDp9tNIup9nmULVSDGf5RRSO4JpbDO31FZv5oFexP2qIdOQp7ufXv0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-surface-container-lowest/30 to-transparent flex flex-col justify-end p-space-md">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">Hero Showcase • Waterfront Promenade</span>
+<p class="font-body-sm text-body-sm text-on-surface">Dimensions 2560x1080px (Optimal 2.39:1 Cinema Ratio)</p>
+</div>
+<button class="absolute top-3 right-3 px-3 py-1.5 rounded-lg bg-surface-container-lowest/80 backdrop-blur-md text-on-surface text-label-sm font-medium hover:bg-surface-container-high transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">photo_camera</span>
+<span>Update Banner</span>
+</button>
+</div>
+<div class="md:col-span-4 relative h-48 md:h-56 rounded-xl bg-surface-container-low flex flex-col items-center justify-center p-space-md text-center group">
+<div class="relative w-20 h-20 rounded-full bg-surface-container-high shadow-lg flex items-center justify-center mb-space-sm overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="An intricately detailed golden royal insignia emblem and monogram logo for The Grand Pavilion on a deep matte black velvet background with fine metallic filigree work." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhApTFj7H7F-ODvIvwDdhM6wVOlOzpM8m-zc3WQlM9kiy36hrLMSSXOAKFnaIz2vCmUvDUd2Er1xthCFW4bsidv8ZQgAp9UTrjfTq99IqDmwtCGhdX0PzvM6QyZeCAqvTZvVg29LkdSlR51xavzjTQN4Kd2dQB2M_NrpKOkKVrmYACYBBUrr3gjBgcepwyDdHDf9FH7sBmEfHuqavIrXES0phGiK0wxdDKOdWi-GoQTm4XBEO-OsY"/>
+<div class="absolute inset-0 bg-surface-container-lowest/40 backdrop-blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl">upload</span>
+</div>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Imperial Brand Crest</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">SVG, PNG with Alpha Transparency</span>
+<button class="mt-2 text-secondary hover:text-primary font-label-sm text-label-sm font-semibold underline underline-offset-4">Replace Crest</button>
+</div>
+</div>
+<!-- Venue Metadata Inputs -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md mt-space-lg">
+<div class="space-y-1.5">
+<label class="font-label-sm text-label-sm font-medium text-on-surface-variant uppercase tracking-wider">Restaurant Registered Name</label>
+<div class="relative">
+<input class="w-full px-space-md py-2.5 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:outline-none focus:bg-surface-container-high transition-all" type="text" value="The Grand Pavilion Restaurant &amp; Lounge"/>
+<span class="material-symbols-outlined absolute right-3 top-3 text-secondary text-base">verified</span>
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-sm text-label-sm font-medium text-on-surface-variant uppercase tracking-wider">Commercial License / DED Number</label>
+<div class="relative">
+<input class="w-full px-space-md py-2.5 rounded-lg bg-surface-container-low text-primary font-currency-display text-base tracking-wider focus:outline-none focus:bg-surface-container-high transition-all" type="text" value="CN-1049281"/>
+<span class="material-symbols-outlined absolute right-3 top-3 text-on-surface-variant text-base">badge</span>
+</div>
+</div>
+<div class="md:col-span-2 space-y-1.5">
+<label class="font-label-sm text-label-sm font-medium text-on-surface-variant uppercase tracking-wider">Official Location &amp; Dispatch Point</label>
+<div class="relative">
+<input class="w-full pl-10 pr-space-md py-2.5 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md focus:outline-none focus:bg-surface-container-high transition-all" type="text" value="Four Seasons Hotel Promenade, Al Maryah Island, Abu Dhabi, UAE"/>
+<span class="material-symbols-outlined absolute left-3 top-3 text-secondary text-base">location_on</span>
+</div>
+</div>
+<div class="md:col-span-2 space-y-2">
+<label class="font-label-sm text-label-sm font-medium text-on-surface-variant uppercase tracking-wider">Curated Cuisine Styles</label>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 rounded-lg bg-surface-container-high text-primary font-label-md text-label-md flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-secondary">star</span>
+<span>Contemporary Emirati</span>
+<button class="material-symbols-outlined text-sm text-on-surface-variant hover:text-error ml-1">close</button>
+</span>
+<span class="px-3 py-1.5 rounded-lg bg-surface-container-high text-primary font-label-md text-label-md flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-secondary">wine_bar</span>
+<span>Fine Dining Mediterranean</span>
+<button class="material-symbols-outlined text-sm text-on-surface-variant hover:text-error ml-1">close</button>
+</span>
+<span class="px-3 py-1.5 rounded-lg bg-surface-container-high text-primary font-label-md text-label-md flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-secondary">skillet</span>
+<span>Steakhouse</span>
+<button class="material-symbols-outlined text-sm text-on-surface-variant hover:text-error ml-1">close</button>
+</span>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-low text-secondary font-label-md text-label-md font-medium hover:bg-surface-container-high transition-all flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">add</span>
+<span>Add Cuisine Tag</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Abu Dhabi Delivery Zones & Geo-Fence Settings -->
+<section class="bg-surface-container rounded-xl p-space-lg shadow-md relative">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="p-2 rounded-lg bg-surface-container-high text-secondary material-symbols-outlined">distance</span>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary font-bold">Abu Dhabi Delivery Zones &amp; Geo-Fence Logistics</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Real-time driver dispatch boundaries, dynamic pricing, and minimum baskets</p>
+</div>
+</div>
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-secondary font-label-sm text-label-sm font-semibold transition-all self-start sm:self-auto flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">add_location_alt</span>
+<span>Configure New Zone</span>
+</button>
+</div>
+<!-- Static Delivery Zone Map Overview -->
+<div class="relative w-full h-52 rounded-xl overflow-hidden mb-space-lg group">
+<div class="w-full h-full bg-cover bg-center" data-location="Al Maryah Island, Abu Dhabi" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDj8fUO5LNcCsSqMXzz9rgCzCLzBdFjeV3E03jKnIzfeLrbLaXOWraFRI2OBdBG65KiaoWzgrR1NISIs1yzZCkq070-0uwHnECZifPSUvXpmWsxWHgs-xzB7ghbKiC07XnH9XBh-sJkPBMJfbFldYpeb5ZiP51i0Z3UzEcrW9tb8U9vdqOLNtuW4VAcTj0qSeVntjYeSftYKgVGMVs07JIa0lmniKauBjWtRjd_PwUYrCgXR_15qUQ')"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-surface-container-lowest/80 via-transparent to-surface-container-lowest/60 flex items-end p-space-md">
+<div class="bg-surface-container/90 backdrop-blur-md p-space-sm rounded-lg flex items-center gap-space-md">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-on-surface">Hub: Al Maryah Island</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary-container"></span>
+<span class="font-label-sm text-label-sm text-on-surface">Active Coverage: 18km Radius</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Zone Cards Grid -->
+<div class="space-y-space-md">
+<!-- Zone 1 -->
+<div class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-all">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="space-y-1">
+<div class="flex items-center gap-space-sm">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold">Zone 1</span>
+<h3 class="font-title-md text-title-md text-on-surface font-semibold">Al Maryah &amp; Al Reem Island</h3>
+<span class="px-2 py-0.5 rounded-full bg-primary-container/20 text-secondary font-label-sm text-label-sm font-semibold">Primary Core</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-secondary">explore</span>
+<span>Radius: 0 - 5 km from Four Seasons Dispatch</span>
+</p>
+</div>
+<!-- Zone 1 Metrics Bar -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-md bg-surface-container p-space-sm rounded-lg">
+<div>
+<span class="font-currency-caption text-currency-caption uppercase text-on-surface-variant block">Delivery Fee</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">AED 10</span>
+<span class="font-label-sm text-label-sm text-secondary block text-[11px]">Free above 150</span>
+</div>
+<div>
+<span class="font-currency-caption text-currency-caption uppercase text-on-surface-variant block">Min. Order</span>
+<span class="font-headline-md text-headline-md text-on-surface font-bold">AED 80</span>
+</div>
+<div>
+<span class="font-currency-caption text-currency-caption uppercase text-on-surface-variant block">Est. Window</span>
+<span class="font-headline-md text-headline-md text-secondary font-bold">25-35m</span>
+</div>
+<div class="flex flex-col justify-center items-end pr-1">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-primary-container after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+<span class="font-label-sm text-label-sm text-secondary font-bold mt-1">ACTIVE</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Zone 2 -->
+<div class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-all">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="space-y-1">
+<div class="flex items-center gap-space-sm">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold">Zone 2</span>
+<h3 class="font-title-md text-title-md text-on-surface font-semibold">Corniche &amp; Al Bateen</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-secondary">explore</span>
+<span>Radius: 5 - 12 km • Diplomatic &amp; Waterfront Residences</span>
+</p>
+</div>
+<!-- Zone 2 Metrics Bar -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-md bg-surface-container p-space-sm rounded-lg">
+<div>
+<span class="font-currency-caption text-currency-caption uppercase text-on-surface-variant block">Delivery Fee</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">AED 20</span>
+</div>
+<div>
+<span class="font-currency-caption text-currency-caption uppercase text-on-surface-variant block">Min. Order</span>
+<span class="font-headline-md text-headline-md text-on-surface font-bold">AED 150</span>
+</div>
+<div>
+<span class="font-currency-caption text-currency-caption uppercase text-on-surface-variant block">Est. Window</span>
+<span class="font-headline-md text-headline-md text-secondary font-bold">35-45m</span>
+</div>
+<div class="flex flex-col justify-center items-end pr-1">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-primary-container after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+<span class="font-label-sm text-label-sm text-secondary font-bold mt-1">ACTIVE</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Zone 3 -->
+<div class="p-space-md rounded-xl bg-surface-container-low hover:bg-surface-container-high transition-all">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="space-y-1">
+<div class="flex items-center gap-space-sm">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm font-bold">Zone 3</span>
+<h3 class="font-title-md text-title-md text-on-surface font-semibold">Saadiyat Cultural District &amp; Beach</h3>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/30 text-secondary font-label-sm text-label-sm font-semibold">Louvre / St. Regis</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-secondary">explore</span>
+<span>Radius: 10 - 18 km • High Check Average Corridors</span>
+</p>
+</div>
+<!-- Zone 3 Metrics Bar -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-md bg-surface-container p-space-sm rounded-lg">
+<div>
+<span class="font-currency-caption text-currency-caption uppercase text-on-surface-variant block">Delivery Fee</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">AED 25</span>
+</div>
+<div>
+<span class="font-currency-caption text-currency-caption uppercase text-on-surface-variant block">Min. Order</span>
+<span class="font-headline-md text-headline-md text-on-surface font-bold">AED 200</span>
+</div>
+<div>
+<span class="font-currency-caption text-currency-caption uppercase text-on-surface-variant block">Est. Window</span>
+<span class="font-headline-md text-headline-md text-secondary font-bold">40-50m</span>
+</div>
+<div class="flex flex-col justify-center items-end pr-1">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-primary-container after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+<span class="font-label-sm text-label-sm text-secondary font-bold mt-1">ACTIVE</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Zone 4 -->
+<div class="p-space-md rounded-xl bg-surface-container-low/50 hover:bg-surface-container-low transition-all opacity-85">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="space-y-1">
+<div class="flex items-center gap-space-sm">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-label-sm text-label-sm font-bold">Zone 4</span>
+<h3 class="font-title-md text-title-md text-on-surface-variant font-semibold">Yas Island &amp; Khalifa City</h3>
+<span class="px-2 py-0.5 rounded-full bg-error-container/30 text-error font-label-sm text-label-sm font-semibold">Auto-Throttled</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-on-surface-variant">schedule</span>
+<span>Disabled during peak dinner rush (19:30 - 22:30) to safeguard floor kitchen capacity</span>
+</p>
+</div>
+<!-- Zone 4 Metrics Bar -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-md bg-surface-container/60 p-space-sm rounded-lg">
+<div>
+<span class="font-currency-caption text-currency-caption uppercase text-on-surface-variant block">Delivery Fee</span>
+<span class="font-headline-md text-headline-md text-on-surface-variant font-bold">AED 35</span>
+</div>
+<div>
+<span class="font-currency-caption text-currency-caption uppercase text-on-surface-variant block">Min. Order</span>
+<span class="font-headline-md text-headline-md text-on-surface-variant font-bold">AED 250</span>
+</div>
+<div>
+<span class="font-currency-caption text-currency-caption uppercase text-on-surface-variant block">Est. Window</span>
+<span class="font-headline-md text-headline-md text-on-surface-variant font-bold">50-65m</span>
+</div>
+<div class="flex flex-col justify-center items-end pr-1">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-surface-variant after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-bold mt-1">OFFLINE</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Weekly Operating Schedule & Ramadan Timings -->
+<section class="bg-surface-container rounded-xl p-space-lg shadow-md relative">
+<div class="flex items-center justify-between pb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="p-2 rounded-lg bg-surface-container-high text-secondary material-symbols-outlined">more_time</span>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary font-bold">Weekly Operating Schedule &amp; Ramadan Protocols</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">UAE regulatory dining windows and religious observance service shifts</p>
+</div>
+</div>
+</div>
+<!-- Ramadan Special Banner Toggle -->
+<div class="p-space-md rounded-xl bg-gradient-to-r from-surface-container-low via-surface-container-high to-surface-container-low mb-space-lg flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-xl bg-secondary-container/40 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-2xl">nights_stay</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-md text-title-md text-primary font-bold">Ramadan Special Iftar &amp; Suhoor Schedule</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm font-bold">UAE Holy Month</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Automatically switches platform menus to Sunset Iftar sets and extends late-night Suhoor delivery to 04:00 AM</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm self-end md:self-auto">
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Enabled for Ramadan 1446 AH</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-12 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-on-primary-container after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+</div>
+<!-- Standard Schedule Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Mon - Thu -->
+<div class="p-space-md rounded-xl bg-surface-container-low space-y-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-base">calendar_view_week</span>
+<span>Monday - Thursday</span>
+</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold uppercase">Regular Weekday</span>
+</div>
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container">
+<div>
+<span class="font-currency-caption text-currency-caption uppercase text-on-surface-variant block">Kitchen Open</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">12:00 PM</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">arrow_forward</span>
+<div class="text-right">
+<span class="font-currency-caption text-currency-caption uppercase text-on-surface-variant block">Last Dispatch</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">01:00 AM</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-body-sm text-on-surface-variant px-1">
+<span>Afternoon Service: 12:00 - 16:30</span>
+<span>Dinner Shift: 18:00 - 01:00</span>
+</div>
+</div>
+<!-- Fri - Sun -->
+<div class="p-space-md rounded-xl bg-surface-container-low space-y-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-base">weekend</span>
+<span>Friday - Sunday</span>
+</span>
+<span class="font-label-sm text-label-sm text-secondary font-semibold uppercase">Weekend Peak</span>
+</div>
+<div class="flex items-center justify-between p-space-sm rounded-lg bg-surface-container">
+<div>
+<span class="font-currency-caption text-currency-caption uppercase text-on-surface-variant block">Kitchen Open</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">12:00 PM</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">arrow_forward</span>
+<div class="text-right">
+<span class="font-currency-caption text-currency-caption uppercase text-on-surface-variant block">Last Dispatch</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">02:30 AM</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-body-sm text-on-surface-variant px-1">
+<span>Continuous Friday Brunch &amp; Late Night Lounge</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Operational Stats, UAE Compliance & Executive Quick-Sync -->
+<div class="xl:col-span-4 flex flex-col gap-space-lg">
+<!-- Primary Save Card -->
+<div class="p-space-lg rounded-xl bg-gradient-to-b from-surface-container-high to-surface-container shadow-xl space-y-space-md sticky top-24">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-semibold">Cloud Sync Console</span>
+<span class="font-currency-caption text-currency-caption text-on-surface-variant">AD-SERVER-09</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold leading-tight">Instant Network Dispatch</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Changes propagate immediately across VAYORA Concierge, customer mobile applications, and private butler stations.</p>
+</div>
+<div class="space-y-space-xs p-space-md rounded-lg bg-surface-container-low">
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Zones Configured</span>
+<span class="text-on-surface font-semibold">4 Sectors (3 Live)</span>
+</div>
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Avg Delivery Window</span>
+<span class="text-secondary font-semibold">32 Minutes</span>
+</div>
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant">Dispatch Surcharge (VAT 5%)</span>
+<span class="text-on-surface font-semibold">Automated</span>
+</div>
+</div>
+<!-- Primary Action Button -->
+<button class="w-full py-3.5 px-space-md rounded-xl bg-primary-container hover:bg-secondary-container text-on-primary-container font-label-md text-label-md font-bold tracking-tight shadow-lg transition-all duration-200 flex items-center justify-center gap-2 group" id="save-main-btn">
+<span class="material-symbols-outlined text-lg transition-transform group-hover:rotate-180">sync</span>
+<span>Save &amp; Update Profile</span>
+</button>
+<span class="block text-center font-currency-caption text-currency-caption uppercase text-on-surface-variant/80">Live Sync across Abu Dhabi Emirates</span>
+</div>
+<!-- UAE Tax & Financial Compliance Snapshot -->
+<div class="p-space-lg rounded-xl bg-surface-container shadow-md space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-xl">account_balance</span>
+<h3 class="font-title-md text-title-md text-primary font-bold">Federal Tax Authority (UAE)</h3>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-secondary font-label-sm text-label-sm font-bold">FTA Validated</span>
+</div>
+<div class="space-y-space-sm">
+<div class="p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-currency-caption text-currency-caption uppercase text-on-surface-variant block">TRN (Tax Registration Number)</span>
+<span class="font-title-md text-title-md text-primary font-bold tracking-wider">100-2490-8839-0003</span>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-container-low">
+<span class="font-currency-caption text-currency-caption uppercase text-on-surface-variant block">Corporate IBAN Account</span>
+<span class="font-body-md text-body-md text-on-surface font-semibold">AE29 0330 0000 1289 4019 92</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant block">First Abu Dhabi Bank (FAB) • Al Maryah Branch</span>
+</div>
+</div>
+<button class="w-full py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-sm text-label-sm font-semibold transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-base">receipt_long</span>
+<span>Download FTA Clearance PDF</span>
+</button>
+</div>
+<!-- Fleet Readiness Indicator Card -->
+<div class="p-space-lg rounded-xl bg-surface-container shadow-md space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-title-md text-title-md text-on-surface font-semibold">Courier Fleet Saturation</span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">94% Fleet Health</span>
+</div>
+<!-- Inline SVG Performance Gauge -->
+<div class="flex items-center gap-space-md">
+<div class="relative w-20 h-20 flex items-center justify-center shrink-0">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 36 36">
+<path class="text-surface-container-highest" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-width="3.5"></path>
+<path class="text-secondary" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="currentColor" stroke-dasharray="94, 100" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+<span class="absolute font-title-md text-title-md text-primary font-bold">94%</span>
+</div>
+<div class="space-y-1">
+<p class="font-label-md text-label-md text-on-surface font-semibold">18 Active Couriers Staged</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Average turnaround time from kitchen hotplate to driver pouch: 3.4 mins.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Micro-interaction Notification Toast (Hidden by default, triggered on save) -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-32 opacity-0 transition-all duration-300 pointer-events-none" id="save-toast">
+<div class="bg-surface-container-highest px-space-lg py-space-md rounded-xl shadow-2xl flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-xl">cloud_done</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface font-bold">Profile Synchronized</p>
+<p class="font-body-sm text-body-sm text-secondary">Delivery zones and Ramadan parameters are live across the Abu Dhabi grid.</p>
+</div>
+</div>
+</div>
+</div>
+<script>
+  (function() {
+    // Tab Interaction
+    const tabs = document.querySelectorAll('.tab-trigger');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => {
+          t.classList.remove('bg-primary-container', 'text-on-primary-container', 'font-semibold');
+          t.classList.add('text-on-surface-variant', 'font-medium');
+        });
+        tab.classList.add('bg-primary-container', 'text-on-primary-container', 'font-semibold');
+        tab.classList.remove('text-on-surface-variant', 'font-medium');
+      });
+    });
+
+    // Save Toast Micro-interaction
+    const saveMainBtn = document.getElementById('save-main-btn');
+    const saveTopBtn = document.getElementById('save-top-btn');
+    const toast = document.getElementById('save-toast');
+
+    function triggerSave() {
+      if (!toast) return;
+      toast.classList.remove('translate-y-32', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-32', 'opacity-0');
+      }, 3500);
+    }
+
+    if (saveMainBtn) saveMainBtn.addEventListener('click', triggerSave);
+    if (saveTopBtn) saveTopBtn.addEventListener('click', triggerSave);
+  })();
+</script></main></div></body></html>

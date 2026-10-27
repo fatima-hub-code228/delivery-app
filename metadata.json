@@ -1,0 +1,6 @@
+{
+  "name": "VAYORA - Luxury Restaurant Partner Portal",
+  "description": "Haute gastronomy operations, real-time kitchen orchestration, delivery logistics, and UAE VAT settlement intelligence for Abu Dhabi's premier dining destinations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

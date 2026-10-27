@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary": "#323126", "primary-container": "#facc15", "on-primary-container": "#6c5700", "primary": "#ffecb9", "on-primary-fixed": "#231b00", "secondary-container": "#ba880f", "surface-variant": "#383432", "on-tertiary-fixed-variant": "#48473c", "inverse-primary": "#735c00", "tertiary-fixed-dim": "#cac7b8", "background": "#161311", "tertiary": "#f1eddd", "surface-tint": "#eec200", "on-primary-fixed-variant": "#574500", "error-container": "#93000a", "on-primary": "#3c2f00", "tertiary-fixed": "#e6e3d3", "on-surface": "#e9e1dd", "tertiary-container": "#d4d1c2", "outline": "#9a9078", "surface-container-low": "#1e1b19", "inverse-surface": "#e9e1dd", "surface-dim": "#161311", "on-background": "#e9e1dd", "surface-container-lowest": "#100e0c", "on-secondary-fixed-variant": "#5d4200", "on-secondary": "#412d00", "surface-container": "#221f1d", "primary-fixed-dim": "#eec200", "secondary-fixed": "#ffdea6", "primary-fixed": "#ffe083", "surface-container-high": "#2d2927", "on-tertiary-container": "#5b5a4e", "surface-container-highest": "#383432", "on-tertiary-fixed": "#1c1c13", "surface-bright": "#3c3836", "on-surface-variant": "#d1c6ab", "on-error": "#690005", "on-secondary-fixed": "#271900", "secondary-fixed-dim": "#f7bd48", "on-secondary-container": "#392700", "surface": "#161311", "on-error-container": "#ffdad6", "secondary": "#f7bd48", "outline-variant": "#4d4632", "error": "#ffb4ab", "inverse-on-surface": "#33302d" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter-sm": "0.75rem", "margin-mobile": "1rem", "space-lg": "1.5rem", "space-xs": "0.25rem", "space-md": "1rem", "space-sm": "0.5rem", "margin": "2rem", "space-xl": "2.5rem", "gutter-lg": "2rem", "gutter": "1.5rem" }, "fontFamily": { "display-lg": [ "Plus Jakarta Sans" ], "title-md": [ "Plus Jakarta Sans" ], "body-sm": [ "Inter" ], "headline-md": [ "Plus Jakarta Sans" ], "body-lg": [ "Inter" ], "body-md": [ "Inter" ], "currency-display": [ "Plus Jakarta Sans" ], "currency-caption": [ "Inter" ], "headline-lg": [ "Plus Jakarta Sans" ], "headline-xl": [ "Plus Jakarta Sans" ], "label-sm": [ "Inter" ], "label-md": [ "Inter" ], "display-lg-mobile": [ "Plus Jakarta Sans" ] }, "fontSize": { "display-lg": [ "3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.03em", "fontWeight": "700" } ], "title-md": [ "1.125rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "body-sm": [ "0.8125rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "400" } ], "headline-md": [ "1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "body-lg": [ "1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "400" } ], "body-md": [ "0.9375rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "400" } ], "currency-display": [ "1.75rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "currency-caption": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.08em", "fontWeight": "600" } ], "headline-lg": [ "1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "headline-xl": [ "2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.025em", "fontWeight": "700" } ], "label-sm": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "600" } ], "label-md": [ "0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.02em", "fontWeight": "500" } ], "display-lg-mobile": [ "2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.02em", "fontWeight": "700" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="flex flex-col h-full overflow-hidden"><div class="h-20 px-space-md flex items-center gap-space-sm bg-surface-container-lowest/60 backdrop-blur-md"><img alt="VAYORA Partner Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Vu_ERvxM1TR_WtX3iJxrhFOEEmv5C686HsjH3CyVYBYC9u-V9_1S46iKEAom3NtM3XPY1HePkEOVmpyVKLJomFOb33Ws5hhdUubFia9Xhgy6fV2XvtjCnifOYwDwkhlM14zGcWEcuEbDzdpBaKLFpI_P7P7KFIYnOsE9DVapMFuAwGYiSc7gOIhDXksVBbLvrRWT7Cby0Mbd6WCfy8yHszed4qPAomY1GvqoS_DjpD9TlAGusetj7d"/><div class="flex flex-col"><span class="font-title-md text-title-md tracking-tight text-primary leading-none">VAYORA</span><span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold mt-0.5">Partner Portal</span></div></div><div class="px-space-md py-space-sm"><div class="p-space-sm rounded-lg bg-surface-container flex items-center justify-between shadow-[0_1px_4px_rgba(0,0,0,0.2)]"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-sm text-label-sm text-on-surface font-medium">Abu Dhabi Hub</span></div><span class="font-currency-caption text-currency-caption text-secondary font-semibold uppercase">UAE VIP</span></div></div><nav class="flex-1 px-space-md py-space-xs space-y-1 overflow-y-auto" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-[0_0_16px_rgba(250,204,21,0.2)]"><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="dashboard" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">dashboard</span><span class="font-label-md text-label-md">Dashboard</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="live-orders" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">room_service</span><span class="font-label-md text-label-md">Live Orders</span></div><span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold shadow-sm">4 New</span></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="order-details-&amp;-history" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">receipt_long</span><span class="font-label-md text-label-md">Order Details &amp; History</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="menu-&amp;-inventory-management" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">inventory_2</span><span class="font-label-md text-label-md">Menu &amp; Inventory</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="add-/-edit-dish" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">restaurant_menu</span><span class="font-label-md text-label-md">Add / Edit Dish</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="restaurant-profile-&amp;-delivery-zones" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">map</span><span class="font-label-md text-label-md">Profile &amp; Zones</span></div></a><a aria-current="page" class="flex items-center justify-between px-space-md py-2.5 transition-all group bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-[0_0_16px_rgba(250,204,21,0.2)]" data-path="analytics-&amp;-sales-reports" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">monitoring</span><span class="font-label-md text-label-md">Analytics &amp; Sales</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="partner-settings-&amp;-uae-tax" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">settings</span><span class="font-label-md text-label-md">Settings &amp; UAE Tax</span></div></a></nav><div class="p-space-md bg-surface-container-lowest/80 backdrop-blur-md space-y-space-sm"><div class="p-space-sm rounded-lg bg-surface-container-high flex flex-col gap-1"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm uppercase text-on-surface-variant font-medium">Today's Shift</span><span class="font-currency-caption text-currency-caption uppercase text-secondary font-bold">AED</span></div><div class="flex items-baseline justify-between"><span class="font-currency-display text-currency-display text-primary leading-tight">14,820</span><span class="font-label-sm text-label-sm text-secondary font-semibold">+18.4%</span></div></div><div class="p-space-sm rounded-lg bg-surface-container flex items-center justify-between"><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant">UAE Concierge Support</span><span class="font-label-md text-label-md text-primary font-semibold tracking-tight">+971 2 600 VAYORA</span></div><span class="material-symbols-outlined text-secondary text-lg">support_agent</span></div></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-20 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.3)] z-40 px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-lg flex-1"><div class="flex items-center gap-space-sm py-1.5 px-space-md rounded-xl bg-surface-container-low shadow-[0_1px_4px_rgba(0,0,0,0.15)]"><span class="material-symbols-outlined text-secondary text-xl">storefront</span><div class="flex flex-col"><div class="flex items-center gap-2"><span class="font-label-md text-label-md text-on-surface font-semibold">The Grand Pavilion</span><span class="font-label-sm text-label-sm text-on-surface-variant">• Al Maryah Island, Abu Dhabi</span></div><div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span><span class="font-label-sm text-label-sm text-secondary font-semibold tracking-wide uppercase">Open &amp; Accepting Orders</span></div></div><button class="ml-space-sm p-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button"><span class="material-symbols-outlined text-lg">expand_more</span></button></div><div class="relative max-w-md w-full hidden xl:block"><span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">search</span><input class="w-full pl-10 pr-4 py-2 bg-surface-container-low rounded-xl text-on-surface placeholder:text-on-surface-variant/50 font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-secondary-container transition-all" placeholder="Search orders, menu items, guests, or tables..." type="text"/></div></div><div class="flex items-center gap-space-md"><button class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" title="Live Sound Alerts Enabled" type="button"><span class="material-symbols-outlined text-secondary text-lg">volume_up</span><span class="font-label-sm text-label-sm hidden sm:inline text-on-surface-variant font-medium">Chime Live</span></button><button class="relative p-2 rounded-xl bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" type="button"><span class="material-symbols-outlined text-xl">notifications</span><span class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm flex items-center justify-center font-bold shadow-md">3</span></button><div class="flex items-center gap-space-sm pl-space-sm"><div class="flex flex-col text-right hidden lg:block"><span class="font-label-md text-label-md text-on-surface font-semibold leading-tight">Tariq Al Mansoori</span><span class="font-label-sm text-label-sm text-secondary uppercase font-medium">General Director</span></div><div class="relative flex items-center gap-1.5 p-1 rounded-full bg-surface-container-low"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrlF07D7rcBKVtzkU4_A51hJFZgKReEOtctmAqEotlcBypQJMRlHl26LyYOa3tIQeKb8NwFIldaLy6zW0Wd2XzOS11wWEOw05lX2MI0SdiWOEx_izf9ynUDaWYwRcFLYB4RGpDeWTEPWQufNxo_sOEK41nFzMT6DOrWzgAADsoew9EsCNK9bdA84yzmp8bdAMXwJ5Fckop26XoUT7Ct5C2UiF4rwhqCqTelxxp3cKop9R9gkMzFJw"/><span class="material-symbols-outlined text-on-surface-variant text-base pr-1">keyboard_arrow_down</span></div></div></div></header><main class="w-full pt-20 px-space-lg pb-space-xl bg-surface min-h-screen"><div class="flex flex-col w-full gap-space-xl">
+<!-- Top Control Ribbon & Date Engine -->
+<section class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md pt-2">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-sm">
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-currency-caption text-currency-caption uppercase tracking-widest">FTA Verified Tax Engine</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">• TRN 100482910300003</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Financial &amp; VAT Settlement Intelligence</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Live audit reconciliations, luxury dine-out margins, and Federal Tax Authority settlement dispatches for The Grand Pavilion.</p>
+</div>
+<!-- Quick Actions & Range Picker -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<div class="flex items-center p-1 rounded-xl bg-surface-container shadow-inner">
+<button class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" type="button">Today</button>
+<button class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors" type="button">Last 7D</button>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-primary font-label-md text-label-md font-semibold shadow-sm" type="button">Oct 1 - Oct 31, 2024</button>
+<button class="px-3 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface font-label-md text-label-md flex items-center gap-1 transition-colors" type="button">
+<span>Custom</span>
+<span class="material-symbols-outlined text-sm">calendar_month</span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-surface-container hover:bg-surface-container-high text-on-surface font-label-md text-label-md shadow-sm transition-all" type="button">
+<span class="material-symbols-outlined text-secondary text-base">receipt_long</span>
+<span>Export PDF Tax Invoice</span>
+</button>
+<button class="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-primary-container hover:bg-secondary-container text-on-primary-container font-label-md text-label-md font-semibold shadow-md transition-all" type="button">
+<span class="material-symbols-outlined text-base">download</span>
+<span>Export CSV Report</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Executive Performance Indicators (Institutional Matrix) -->
+<section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- Card 1: Gross Platform Sales -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container p-space-lg flex flex-col justify-between shadow-lg">
+<div class="absolute -right-6 -bottom-6 w-24 h-24 rounded-full bg-secondary-container/10 blur-xl pointer-events-none"></div>
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-currency-caption text-currency-caption uppercase tracking-wider text-on-surface-variant">Gross Platform GMV</span>
+<span class="font-label-sm text-label-sm text-secondary font-medium">October 2024 Consolidated</span>
+</div>
+<span class="p-2 rounded-lg bg-surface-container-high text-secondary material-symbols-outlined text-xl">payments</span>
+</div>
+<div class="flex flex-col mt-4">
+<div class="flex items-baseline gap-2">
+<span class="font-currency-caption text-currency-caption uppercase font-bold text-secondary">AED</span>
+<span class="font-currency-display text-currency-display text-primary tracking-tight">342,850.00</span>
+</div>
+<div class="flex items-center gap-2 mt-2">
+<span class="inline-flex items-center text-secondary font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-sm mr-0.5">trending_up</span>+18.4%
+          </span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">vs. previous period</span>
+</div>
+</div>
+</div>
+<!-- Card 2: Total Orders Completed -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container p-space-lg flex flex-col justify-between shadow-lg">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-currency-caption text-currency-caption uppercase tracking-wider text-on-surface-variant">Volume &amp; Demand</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">99.8% Successful delivery</span>
+</div>
+<span class="p-2 rounded-lg bg-surface-container-high text-primary material-symbols-outlined text-xl">concierge</span>
+</div>
+<div class="flex flex-col mt-4">
+<div class="flex items-baseline gap-2">
+<span class="font-currency-display text-currency-display text-on-surface tracking-tight">1,248</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Cover Orders</span>
+</div>
+<div class="flex items-center justify-between mt-2">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Avg Basket Size:</span>
+<span class="font-label-sm text-label-sm font-semibold text-secondary">AED 274.70 / guest</span>
+</div>
+</div>
+</div>
+<!-- Card 3: UAE 5% VAT Collected -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container p-space-lg flex flex-col justify-between shadow-lg">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-currency-caption text-currency-caption uppercase tracking-wider text-secondary">FTA 5% Statutory VAT</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Segregated Escrow Account</span>
+</div>
+<span class="p-2 rounded-lg bg-surface-container-high text-secondary material-symbols-outlined text-xl">account_balance</span>
+</div>
+<div class="flex flex-col mt-4">
+<div class="flex items-baseline gap-2">
+<span class="font-currency-caption text-currency-caption uppercase font-bold text-secondary">AED</span>
+<span class="font-currency-display text-currency-display text-primary tracking-tight">17,142.50</span>
+</div>
+<div class="flex items-center justify-between mt-2">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-sm text-label-sm font-semibold">Q4 Ready to File</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Due Nov 28</span>
+</div>
+</div>
+</div>
+<!-- Card 4: Net Restaurant Settlement -->
+<div class="relative overflow-hidden rounded-xl bg-surface-container p-space-lg flex flex-col justify-between shadow-lg">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-currency-caption text-currency-caption uppercase tracking-wider text-on-surface-variant">Net Net Payout</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Post-Commission &amp; Fees</span>
+</div>
+<span class="p-2 rounded-lg bg-surface-container-high text-primary-container material-symbols-outlined text-xl">assured_workload</span>
+</div>
+<div class="flex flex-col mt-4">
+<div class="flex items-baseline gap-2">
+<span class="font-currency-caption text-currency-caption uppercase font-bold text-secondary">AED</span>
+<span class="font-currency-display text-currency-display text-primary tracking-tight">298,280.00</span>
+</div>
+<div class="flex items-center gap-1.5 mt-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Auto-Dispatched: Emirates NBD VIP Corporate</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Macro Analytical Split: Revenue Velocity & Culinary Item Performance -->
+<section class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg">
+<!-- Visual Sales Trajectory Chart (8 cols) -->
+<div class="xl:col-span-8 rounded-xl bg-surface-container p-space-lg flex flex-col justify-between shadow-lg">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm mb-4">
+<div>
+<span class="font-currency-caption text-currency-caption text-secondary uppercase">Shift Dynamics</span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">Revenue by Meal Period &amp; Peak Hour Distribution</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-primary-container"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Dinner Rush (62%)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Lunch (28%)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-3 h-3 rounded-full bg-surface-variant"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Late Night (10%)</span>
+</div>
+</div>
+</div>
+<!-- Custom SVG Revenue Trajectory Graph -->
+<div class="relative w-full h-56 flex items-end">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 760 200">
+<defs>
+<lineargradient id="goldGlow" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#facc15" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#facc15" stop-opacity="0.0"></stop>
+</lineargradient>
+<lineargradient id="lunchGlow" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#f7bd48" stop-opacity="0.25"></stop>
+<stop offset="100%" stop-color="#f7bd48" stop-opacity="0.0"></stop>
+</lineargradient>
+</defs>
+<!-- Horizontal Grid Guides -->
+<line stroke="#383432" stroke-dasharray="4 4" stroke-width="1" x1="0" x2="760" y1="20" y2="20"></line>
+<line stroke="#383432" stroke-dasharray="4 4" stroke-width="1" x1="0" x2="760" y1="75" y2="75"></line>
+<line stroke="#383432" stroke-dasharray="4 4" stroke-width="1" x1="0" x2="760" y1="130" y2="130"></line>
+<line stroke="#383432" stroke-width="1" x1="0" x2="760" y1="185" y2="185"></line>
+<!-- Shaded Area Chart: Dinner Dominance -->
+<path d="M 0,160 Q 95,150 190,135 T 380,80 T 570,30 T 760,110 L 760,185 L 0,185 Z" fill="url(#goldGlow)"></path>
+<!-- Smooth Line Chart: Total Dynamic GMV -->
+<path d="M 0,160 Q 95,150 190,135 T 380,80 T 570,30 T 760,110" fill="none" stroke="#facc15" stroke-linecap="round" stroke-width="3.5"></path>
+<!-- Smooth Line Chart: Lunch Service Secondary -->
+<path d="M 0,175 Q 95,140 190,105 T 380,140 T 570,160 T 760,175" fill="none" stroke="#f7bd48" stroke-dasharray="6 3" stroke-width="2"></path>
+<!-- Interactive Highlight Nodes -->
+<circle cx="570" cy="30" fill="#facc15" r="5" stroke="#161311" stroke-width="2"></circle>
+<circle cx="190" cy="105" fill="#f7bd48" r="4" stroke="#161311" stroke-width="2"></circle>
+</svg>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant font-currency-caption text-currency-caption pt-3">
+<span>12:00 (Lunch Start)</span>
+<span>15:00 (Afternoon Tea)</span>
+<span>19:30 (Peak Dinner Service)</span>
+<span>22:00 (Royal Service)</span>
+<span>01:00 (Lounge Wrap)</span>
+</div>
+<!-- Shift Proportional Summary Strip -->
+<div class="grid grid-cols-3 gap-2 mt-4 pt-4 bg-surface-container-high/40 p-space-sm rounded-lg">
+<div class="flex flex-col">
+<span class="font-currency-caption text-currency-caption text-secondary">DINNER CRITICAL</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">AED 212,567.00</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">774 Covers Served</span>
+</div>
+<div class="flex flex-col">
+<span class="font-currency-caption text-currency-caption text-on-surface-variant">LUNCH SERVICE</span>
+<span class="font-headline-md text-headline-md text-on-surface font-semibold">AED 95,998.00</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">349 Covers Served</span>
+</div>
+<div class="flex flex-col">
+<span class="font-currency-caption text-currency-caption text-on-surface-variant">LATE NIGHT LOUNGE</span>
+<span class="font-headline-md text-headline-md text-on-surface font-semibold">AED 34,285.00</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">125 Covers Served</span>
+</div>
+</div>
+</div>
+<!-- Zone Distribution & High Net-Worth Catchment (4 cols) -->
+<div class="xl:col-span-4 rounded-xl bg-surface-container p-space-lg flex flex-col justify-between shadow-lg">
+<div class="flex items-center justify-between">
+<div>
+<span class="font-currency-caption text-currency-caption text-secondary uppercase">Geo-Territorial Reach</span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">Delivery Zones</h2>
+</div>
+<span class="p-2 rounded-lg bg-surface-container-high text-secondary material-symbols-outlined text-xl">share_location</span>
+</div>
+<!-- Donut Visual Breakdown -->
+<div class="flex items-center justify-center my-4">
+<div class="relative w-44 h-44 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 100 100">
+<!-- Background base circle -->
+<circle cx="50" cy="50" fill="transparent" r="38" stroke="#2d2927" stroke-width="12"></circle>
+<!-- Al Maryah (38%) -> stroke-dasharray = 90.7 238.7 -->
+<circle cx="50" cy="50" fill="transparent" r="38" stroke="#facc15" stroke-dasharray="90.7 238.7" stroke-dashoffset="0" stroke-width="12"></circle>
+<!-- Saadiyat (32%) -> stroke-dasharray = 76.4 238.7 -->
+<circle cx="50" cy="50" fill="transparent" r="38" stroke="#f7bd48" stroke-dasharray="76.4 238.7" stroke-dashoffset="-90.7" stroke-width="12"></circle>
+<!-- Al Bateen (18%) -> stroke-dasharray = 43 238.7 -->
+<circle cx="50" cy="50" fill="transparent" r="38" stroke="#ba880f" stroke-dasharray="43 238.7" stroke-dashoffset="-167.1" stroke-width="12"></circle>
+<!-- Other Zones (12%) -> stroke-dasharray = 28.6 238.7 -->
+<circle cx="50" cy="50" fill="transparent" r="38" stroke="#4d4632" stroke-dasharray="28.6 238.7" stroke-dashoffset="-210.1" stroke-width="12"></circle>
+</svg>
+<div class="absolute flex flex-col items-center justify-center text-center">
+<span class="font-label-sm text-label-sm uppercase text-on-surface-variant">Primary Hub</span>
+<span class="font-headline-md text-headline-md text-primary font-bold">38%</span>
+<span class="font-currency-caption text-currency-caption text-secondary">Al Maryah</span>
+</div>
+</div>
+</div>
+<!-- Zone List Items -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-high/40">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<span class="font-label-md text-label-md text-on-surface">Al Maryah Island (Financial Hub)</span>
+</div>
+<span class="font-label-md text-label-md text-primary font-semibold">AED 130,283 (38%)</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-high/40">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="font-label-md text-label-md text-on-surface">Saadiyat Island Resorts &amp; Villas</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">AED 109,712 (32%)</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-high/40">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-container"></span>
+<span class="font-label-md text-label-md text-on-surface">Al Bateen Marina Mansions</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface font-semibold">AED 61,713 (18%)</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded-lg bg-surface-container-high/40">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-outline-variant"></span>
+<span class="font-label-md text-label-md text-on-surface">Yas Bay &amp; Al Raha Beach</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant font-medium">AED 41,142 (12%)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Culinary Stars & Operational Health Matrix -->
+<section class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg">
+<!-- Top 5 Best-Selling Dishes (7 cols) -->
+<div class="xl:col-span-7 rounded-xl bg-surface-container p-space-lg flex flex-col justify-between shadow-lg">
+<div class="flex items-center justify-between mb-4">
+<div>
+<span class="font-currency-caption text-currency-caption text-secondary uppercase">Signature Revenue Drivers</span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">Top Signature Culinary Selections</h2>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">Ranked by Volume</span>
+</div>
+<div class="flex flex-col gap-space-md">
+<!-- Item 1: Chilean Sea Bass -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm p-3 rounded-xl bg-surface-container-high/60 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3">
+<img class="w-14 h-14 rounded-lg object-cover shadow-sm" data-alt="Plated luxury miso glazed Chilean sea bass on dark slate dish garnished with gold leaf, gourmet presentation, dramatic culinary lighting, warm gold highlights, high contrast fine dining" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJ4qkUyu-YGFjvYX7lk7-qQp4Ap73mH3cu18Orz-5TrutKYc0r2Vw6Mlvb25hZfhsCNGiTqT_FGLEcm0s5cejWkO_t8hBxQpBW7Suap27sd0XgoAGJ4sjG2FqLSKxlQgX1YRy7rBHCeg0i_fo-kvc8M5PRPQ6rCiA-GNobHr5yO5wvfP0vhsNsjv4ur1JOBIzpSg4ssWrqBBYrxpUZJKqGOAArGUO6y4lOPdr0H0nur2DFYrwtPls"/>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-primary leading-tight">Glazed Chilean Sea Bass</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">White Miso • Shiso Leaf Emulsion • Yuzu Caviar</span>
+</div>
+</div>
+<div class="flex sm:flex-col items-end justify-between sm:justify-center">
+<div class="flex items-baseline gap-1">
+<span class="font-title-md text-title-md text-primary font-bold">312</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Orders</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">AED 84,240</span>
+</div>
+</div>
+<!-- Item 2: Wagyu Ribeye MB9 -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm p-3 rounded-xl bg-surface-container-high/60 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3">
+<img class="w-14 h-14 rounded-lg object-cover shadow-sm" data-alt="Tender Wagyu ribeye steak MB9 grilled to medium rare sliced over natural charred stone, rosemary smoke aroma, charcoal slate styling, gold infused butter drizzle, executive dining aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNCkfUd4Ovh3NmTlKL2kWS-mZQpb48m1Ue08CwVGWKcH_4DzNmJmuPZYn3PGnlw0lOnSf0I-Ouv6AkTIFfAWZ1cKmBR5UeJFYddCzpPcp6Ohlk1Oqo_UNLAYILyiRrRbSRrUsyIkb-o4pavEfR46T8cE2T9-B9K_4fglxr6C4C3LFdv8ASnyz3dZPBWFe6eysWdrcwRkB6zxwZg_Bih2BHvXEaDrDiAor9dQssjGiyTCZH434LjUE"/>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-primary leading-tight">Wagyu Ribeye MB9 (400g)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Smoked Black Garlic • Bone Marrow Demi-Glace</span>
+</div>
+</div>
+<div class="flex sm:flex-col items-end justify-between sm:justify-center">
+<div class="flex items-baseline gap-1">
+<span class="font-title-md text-title-md text-primary font-bold">204</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Orders</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">AED 91,800</span>
+</div>
+</div>
+<!-- Item 3: Truffle Risotto -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm p-3 rounded-xl bg-surface-container-high/60 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-3">
+<img class="w-14 h-14 rounded-lg object-cover shadow-sm" data-alt="Acquerello risotto topped with fresh shaved black winter truffles and 36-month aged parmesan crisps, dark luxury porcelain dishware, warm ambient kitchen lighting with gold undertones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGFt1JC2MCGal4E1fpa98YELeM0rmirUzeNZBT7TmlmgFVy978evRQQGpKUvVwIP9D2ngF_MPbkBxWowzTyDuSqJZ_KT0mJf4fMDSc1S9KZJ4LYGUd22N4juB_sgO0Zm0v1lkgWRX1v49xk0m37EgnpG-w4c47eyyg360KQaqGAE4dytlHR-UL1mP8MtJ4swU3xSneVcWuJ6WIH01SeB7MKAMIro7e0xNPUjMzKiaZW5L2RgMMxi8"/>
+<div class="flex flex-col">
+<span class="font-title-md text-title-md text-primary leading-tight">Alba Black Truffle Risotto</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Acquerello Aged Rice • Parmigiano 36M • Forest Jus</span>
+</div>
+</div>
+<div class="flex sm:flex-col items-end justify-between sm:justify-center">
+<div class="flex items-baseline gap-1">
+<span class="font-title-md text-title-md text-primary font-bold">188</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Orders</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">AED 37,600</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Kitchen Health & Executive Resolution SLA (5 cols) -->
+<div class="xl:col-span-5 rounded-xl bg-surface-container p-space-lg flex flex-col justify-between shadow-lg">
+<div>
+<span class="font-currency-caption text-currency-caption text-secondary uppercase">Operational Rigor</span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold mb-4">Kitchen Fulfillment &amp; Service Health</h2>
+<div class="grid grid-cols-1 gap-space-md">
+<!-- Metric 1: Fulfillment Rate -->
+<div class="p-space-md rounded-xl bg-surface-container-high">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-md text-label-md text-on-surface">Kitchen Fulfillment Rate</span>
+<span class="font-title-md text-title-md text-secondary font-bold">99.2%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-lowest overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 99.2%"></div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-2 inline-block">3 rejections across 1,248 orders (strictly inventory zero-stock triggers).</span>
+</div>
+<!-- Metric 2: Avg Guest Satisfaction -->
+<div class="p-space-md rounded-xl bg-surface-container-high">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-md text-label-md text-on-surface">Guest Experience Index</span>
+<div class="flex items-center gap-1 text-primary-container">
+<span class="material-symbols-outlined text-base">star</span>
+<span class="font-title-md text-title-md font-bold">4.93</span>
+<span class="text-on-surface-variant font-body-sm text-body-sm">/ 5.0</span>
+</div>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-lowest overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 98.6%"></div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-2 inline-block">Direct VIP feedback rated temperature, plating precision, and speed.</span>
+</div>
+<!-- Metric 3: Courier Handover -->
+<div class="p-space-md rounded-xl bg-surface-container-high">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-md text-label-md text-on-surface">Courier Expedite Handover</span>
+<span class="font-title-md text-title-md text-primary font-bold">1.4 mins</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-lowest overflow-hidden">
+<div class="h-full bg-secondary-container rounded-full" style="width: 92%"></div>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-2 inline-block">Heated staging pass-through under maître d' inspection.</span>
+</div>
+</div>
+</div>
+<!-- Compliance Seal -->
+<div class="flex items-center gap-3 p-3 mt-4 rounded-xl bg-surface-container-lowest/80">
+<span class="material-symbols-outlined text-secondary text-2xl">verified_user</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">ADAFSA Grade-A Excellence Verified</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Abu Dhabi Agriculture and Food Safety Authority active compliance</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Comprehensive Financial Ledger & UAE Tax Settlement Table -->
+<section class="rounded-xl bg-surface-container p-space-lg shadow-lg flex flex-col gap-space-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm pb-2">
+<div>
+<span class="font-currency-caption text-currency-caption text-secondary uppercase">Statutory Audit Trail</span>
+<h2 class="font-headline-md text-headline-md text-on-surface font-semibold">Weekly Settlement Batches &amp; VAT Distribution</h2>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-base">filter_list</span>
+<input class="pl-9 pr-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface font-body-sm text-body-sm placeholder:text-on-surface-variant focus:outline-none" placeholder="Filter batch ID or TRN..." type="text"/>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high text-on-surface hover:text-primary font-label-sm text-label-sm flex items-center gap-1 transition-colors" type="button">
+<span>Sort By Date</span>
+<span class="material-symbols-outlined text-sm">arrow_drop_down</span>
+</button>
+</div>
+</div>
+<!-- Data Ledger Matrix Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="bg-surface-container-lowest/60 text-on-surface-variant font-currency-caption text-currency-caption uppercase">
+<th class="py-3 px-4 rounded-l-lg">Settlement Ref / Batch</th>
+<th class="py-3 px-4">Cycle Period</th>
+<th class="py-3 px-4">Gross Revenue</th>
+<th class="py-3 px-4">VAYORA Fee (8%)</th>
+<th class="py-3 px-4">UAE 5% VAT (FTA)</th>
+<th class="py-3 px-4">Net Payout</th>
+<th class="py-3 px-4">Bank Disbursement</th>
+<th class="py-3 px-4 text-right rounded-r-lg">Tax File</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high/40">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="py-4 px-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary font-bold">#SET-2024-W43</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">TRN-AE-1004829</span>
+</div>
+</td>
+<td class="py-4 px-4 font-body-md text-body-md text-on-surface">Oct 22 - Oct 28, 2024</td>
+<td class="py-4 px-4 font-currency-caption text-currency-caption text-on-surface font-bold">AED 94,120.00</td>
+<td class="py-4 px-4 font-body-sm text-body-sm text-on-surface-variant">-AED 7,529.60</td>
+<td class="py-4 px-4">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-sm text-label-sm font-semibold">AED 4,706.00</span>
+</td>
+<td class="py-4 px-4">
+<span class="font-title-md text-title-md text-primary font-bold">AED 81,884.40</span>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-on-surface">Emirates NBD • Settled</span>
+</div>
+</td>
+<td class="py-4 px-4 text-right">
+<button class="p-1.5 rounded-lg bg-surface-container-high hover:bg-secondary-container hover:text-on-secondary-container text-on-surface transition-all" title="Download Tax Invoice" type="button">
+<span class="material-symbols-outlined text-base">download</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="py-4 px-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary font-bold">#SET-2024-W42</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">TRN-AE-1004829</span>
+</div>
+</td>
+<td class="py-4 px-4 font-body-md text-body-md text-on-surface">Oct 15 - Oct 21, 2024</td>
+<td class="py-4 px-4 font-currency-caption text-currency-caption text-on-surface font-bold">AED 88,430.00</td>
+<td class="py-4 px-4 font-body-sm text-body-sm text-on-surface-variant">-AED 7,074.40</td>
+<td class="py-4 px-4">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-sm text-label-sm font-semibold">AED 4,421.50</span>
+</td>
+<td class="py-4 px-4">
+<span class="font-title-md text-title-md text-primary font-bold">AED 76,934.10</span>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-on-surface">Emirates NBD • Settled</span>
+</div>
+</td>
+<td class="py-4 px-4 text-right">
+<button class="p-1.5 rounded-lg bg-surface-container-high hover:bg-secondary-container hover:text-on-secondary-container text-on-surface transition-all" title="Download Tax Invoice" type="button">
+<span class="material-symbols-outlined text-base">download</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="py-4 px-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary font-bold">#SET-2024-W41</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">TRN-AE-1004829</span>
+</div>
+</td>
+<td class="py-4 px-4 font-body-md text-body-md text-on-surface">Oct 08 - Oct 14, 2024</td>
+<td class="py-4 px-4 font-currency-caption text-currency-caption text-on-surface font-bold">AED 82,100.00</td>
+<td class="py-4 px-4 font-body-sm text-body-sm text-on-surface-variant">-AED 6,568.00</td>
+<td class="py-4 px-4">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-sm text-label-sm font-semibold">AED 4,105.00</span>
+</td>
+<td class="py-4 px-4">
+<span class="font-title-md text-title-md text-primary font-bold">AED 71,427.00</span>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-on-surface">Emirates NBD • Settled</span>
+</div>
+</td>
+<td class="py-4 px-4 text-right">
+<button class="p-1.5 rounded-lg bg-surface-container-high hover:bg-secondary-container hover:text-on-secondary-container text-on-surface transition-all" title="Download Tax Invoice" type="button">
+<span class="material-symbols-outlined text-base">download</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="py-4 px-4">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary font-bold">#SET-2024-W40</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">TRN-AE-1004829</span>
+</div>
+</td>
+<td class="py-4 px-4 font-body-md text-body-md text-on-surface">Oct 01 - Oct 07, 2024</td>
+<td class="py-4 px-4 font-currency-caption text-currency-caption text-on-surface font-bold">AED 78,200.00</td>
+<td class="py-4 px-4 font-body-sm text-body-sm text-on-surface-variant">-AED 6,256.00</td>
+<td class="py-4 px-4">
+<span class="px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary font-label-sm text-label-sm font-semibold">AED 3,910.00</span>
+</td>
+<td class="py-4 px-4">
+<span class="font-title-md text-title-md text-primary font-bold">AED 68,034.00</span>
+</td>
+<td class="py-4 px-4">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-on-surface">Emirates NBD • Settled</span>
+</div>
+</td>
+<td class="py-4 px-4 text-right">
+<button class="p-1.5 rounded-lg bg-surface-container-high hover:bg-secondary-container hover:text-on-secondary-container text-on-surface transition-all" title="Download Tax Invoice" type="button">
+<span class="material-symbols-outlined text-base">download</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer Ledger Summarizer -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-space-sm pt-2 text-on-surface-variant font-label-sm text-label-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-base">lock</span>
+<span>Cryptographically signed with UAE FTA e-Invoicing standard XML/PDF-A3.</span>
+</div>
+<div class="flex items-center gap-4">
+<span>Showing 4 completed weekly cycles for Oct 2024</span>
+<button class="text-secondary hover:text-primary font-semibold transition-colors" type="button">View Prior Quarters →</button>
+</div>
+</div>
+</section>
+</div></main></div></body></html>
