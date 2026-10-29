@@ -13,7 +13,8 @@ if %ERRORLEVEL% neq 0 (
 )
 
 echo [1/4] Installing project dependencies...
-call npm install
+if exist package-lock.json del /f /q package-lock.json
+call npm install --legacy-peer-deps --no-package-lock
 
 echo [2/4] Building production web assets (connected to rbdsjgalxoehuwskzvit.supabase.co)...
 set VITE_SUPABASE_URL=https://rbdsjgalxoehuwskzvit.supabase.co

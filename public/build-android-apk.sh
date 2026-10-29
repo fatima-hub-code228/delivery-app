@@ -8,7 +8,8 @@ echo "==========================================================================
 echo ""
 
 echo "[1/4] Installing dependencies..."
-npm install
+rm -f package-lock.json
+npm install --legacy-peer-deps --no-package-lock
 
 echo "[2/4] Building production web bundle (rbdsjgalxoehuwskzvit.supabase.co)..."
 export VITE_SUPABASE_URL="https://rbdsjgalxoehuwskzvit.supabase.co"

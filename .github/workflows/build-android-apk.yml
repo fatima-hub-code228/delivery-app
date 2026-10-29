@@ -29,7 +29,8 @@ jobs:
 
       - name: Install Web Dependencies & Build Web Assets
         run: |
-          npm install
+          rm -f package-lock.json
+          npm install --legacy-peer-deps --no-package-lock
           npm run build
           npx cap sync android
 

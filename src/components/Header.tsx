@@ -1302,7 +1302,7 @@ export default function Header({
                         above, extract it, or run inside your project folder:
                       </p>
                       <pre className="p-2.5 rounded-lg bg-[#161311] border border-[#383432] font-mono text-[10px] text-[#ffecb9] overflow-x-auto">
-{`npm install && npm run build
+{`npm install --legacy-peer-deps && npm run build
 npx cap sync android
 cd android && ./gradlew assembleDebug`}
                       </pre>
