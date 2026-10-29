@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary": "#323126", "primary-container": "#facc15", "on-primary-container": "#6c5700", "primary": "#ffecb9", "on-primary-fixed": "#231b00", "secondary-container": "#ba880f", "surface-variant": "#383432", "on-tertiary-fixed-variant": "#48473c", "inverse-primary": "#735c00", "tertiary-fixed-dim": "#cac7b8", "background": "#161311", "tertiary": "#f1eddd", "surface-tint": "#eec200", "on-primary-fixed-variant": "#574500", "error-container": "#93000a", "on-primary": "#3c2f00", "tertiary-fixed": "#e6e3d3", "on-surface": "#e9e1dd", "tertiary-container": "#d4d1c2", "outline": "#9a9078", "surface-container-low": "#1e1b19", "inverse-surface": "#e9e1dd", "surface-dim": "#161311", "on-background": "#e9e1dd", "surface-container-lowest": "#100e0c", "on-secondary-fixed-variant": "#5d4200", "on-secondary": "#412d00", "surface-container": "#221f1d", "primary-fixed-dim": "#eec200", "secondary-fixed": "#ffdea6", "primary-fixed": "#ffe083", "surface-container-high": "#2d2927", "on-tertiary-container": "#5b5a4e", "surface-container-highest": "#383432", "on-tertiary-fixed": "#1c1c13", "surface-bright": "#3c3836", "on-surface-variant": "#d1c6ab", "on-error": "#690005", "on-secondary-fixed": "#271900", "secondary-fixed-dim": "#f7bd48", "on-secondary-container": "#392700", "surface": "#161311", "on-error-container": "#ffdad6", "secondary": "#f7bd48", "outline-variant": "#4d4632", "error": "#ffb4ab", "inverse-on-surface": "#33302d" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter-sm": "0.75rem", "margin-mobile": "1rem", "space-lg": "1.5rem", "space-xs": "0.25rem", "space-md": "1rem", "space-sm": "0.5rem", "margin": "2rem", "space-xl": "2.5rem", "gutter-lg": "2rem", "gutter": "1.5rem" }, "fontFamily": { "display-lg": [ "Plus Jakarta Sans" ], "title-md": [ "Plus Jakarta Sans" ], "body-sm": [ "Inter" ], "headline-md": [ "Plus Jakarta Sans" ], "body-lg": [ "Inter" ], "body-md": [ "Inter" ], "currency-display": [ "Plus Jakarta Sans" ], "currency-caption": [ "Inter" ], "headline-lg": [ "Plus Jakarta Sans" ], "headline-xl": [ "Plus Jakarta Sans" ], "label-sm": [ "Inter" ], "label-md": [ "Inter" ], "display-lg-mobile": [ "Plus Jakarta Sans" ] }, "fontSize": { "display-lg": [ "3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.03em", "fontWeight": "700" } ], "title-md": [ "1.125rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "body-sm": [ "0.8125rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "400" } ], "headline-md": [ "1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "body-lg": [ "1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "400" } ], "body-md": [ "0.9375rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "400" } ], "currency-display": [ "1.75rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "currency-caption": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.08em", "fontWeight": "600" } ], "headline-lg": [ "1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "headline-xl": [ "2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.025em", "fontWeight": "700" } ], "label-sm": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "600" } ], "label-md": [ "0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.02em", "fontWeight": "500" } ], "display-lg-mobile": [ "2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.02em", "fontWeight": "700" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="flex flex-col h-full overflow-hidden"><div class="h-20 px-space-md flex items-center gap-space-sm bg-surface-container-lowest/60 backdrop-blur-md"><img alt="VAYORA Partner Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Vu_ERvxM1TR_WtX3iJxrhFOEEmv5C686HsjH3CyVYBYC9u-V9_1S46iKEAom3NtM3XPY1HePkEOVmpyVKLJomFOb33Ws5hhdUubFia9Xhgy6fV2XvtjCnifOYwDwkhlM14zGcWEcuEbDzdpBaKLFpI_P7P7KFIYnOsE9DVapMFuAwGYiSc7gOIhDXksVBbLvrRWT7Cby0Mbd6WCfy8yHszed4qPAomY1GvqoS_DjpD9TlAGusetj7d"/><div class="flex flex-col"><span class="font-title-md text-title-md tracking-tight text-primary leading-none">VAYORA</span><span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold mt-0.5">Partner Portal</span></div></div><div class="px-space-md py-space-sm"><div class="p-space-sm rounded-lg bg-surface-container flex items-center justify-between shadow-[0_1px_4px_rgba(0,0,0,0.2)]"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-sm text-label-sm text-on-surface font-medium">Abu Dhabi Hub</span></div><span class="font-currency-caption text-currency-caption text-secondary font-semibold uppercase">UAE VIP</span></div></div><nav class="flex-1 px-space-md py-space-xs space-y-1 overflow-y-auto" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-[0_0_16px_rgba(250,204,21,0.2)]"><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="dashboard" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">dashboard</span><span class="font-label-md text-label-md">Dashboard</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="live-orders" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">room_service</span><span class="font-label-md text-label-md">Live Orders</span></div><span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold shadow-sm">4 New</span></a><a aria-current="page" class="flex items-center justify-between px-space-md py-2.5 transition-all group bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-[0_0_16px_rgba(250,204,21,0.2)]" data-path="order-details-&amp;-history" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">receipt_long</span><span class="font-label-md text-label-md">Order Details &amp; History</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="menu-&amp;-inventory-management" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">inventory_2</span><span class="font-label-md text-label-md">Menu &amp; Inventory</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="add-/-edit-dish" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">restaurant_menu</span><span class="font-label-md text-label-md">Add / Edit Dish</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="restaurant-profile-&amp;-delivery-zones" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">map</span><span class="font-label-md text-label-md">Profile &amp; Zones</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="analytics-&amp;-sales-reports" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">monitoring</span><span class="font-label-md text-label-md">Analytics &amp; Sales</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="partner-settings-&amp;-uae-tax" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">settings</span><span class="font-label-md text-label-md">Settings &amp; UAE Tax</span></div></a></nav><div class="p-space-md bg-surface-container-lowest/80 backdrop-blur-md space-y-space-sm"><div class="p-space-sm rounded-lg bg-surface-container-high flex flex-col gap-1"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm uppercase text-on-surface-variant font-medium">Today's Shift</span><span class="font-currency-caption text-currency-caption uppercase text-secondary font-bold">AED</span></div><div class="flex items-baseline justify-between"><span class="font-currency-display text-currency-display text-primary leading-tight">14,820</span><span class="font-label-sm text-label-sm text-secondary font-semibold">+18.4%</span></div></div><div class="p-space-sm rounded-lg bg-surface-container flex items-center justify-between"><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant">UAE Concierge Support</span><span class="font-label-md text-label-md text-primary font-semibold tracking-tight">+971 2 600 VAYORA</span></div><span class="material-symbols-outlined text-secondary text-lg">support_agent</span></div></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-20 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.3)] z-40 px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-lg flex-1"><div class="flex items-center gap-space-sm py-1.5 px-space-md rounded-xl bg-surface-container-low shadow-[0_1px_4px_rgba(0,0,0,0.15)]"><span class="material-symbols-outlined text-secondary text-xl">storefront</span><div class="flex flex-col"><div class="flex items-center gap-2"><span class="font-label-md text-label-md text-on-surface font-semibold">The Grand Pavilion</span><span class="font-label-sm text-label-sm text-on-surface-variant">• Al Maryah Island, Abu Dhabi</span></div><div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span><span class="font-label-sm text-label-sm text-secondary font-semibold tracking-wide uppercase">Open &amp; Accepting Orders</span></div></div><button class="ml-space-sm p-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button"><span class="material-symbols-outlined text-lg">expand_more</span></button></div><div class="relative max-w-md w-full hidden xl:block"><span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">search</span><input class="w-full pl-10 pr-4 py-2 bg-surface-container-low rounded-xl text-on-surface placeholder:text-on-surface-variant/50 font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-secondary-container transition-all" placeholder="Search orders, menu items, guests, or tables..." type="text"/></div></div><div class="flex items-center gap-space-md"><button class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" title="Live Sound Alerts Enabled" type="button"><span class="material-symbols-outlined text-secondary text-lg">volume_up</span><span class="font-label-sm text-label-sm hidden sm:inline text-on-surface-variant font-medium">Chime Live</span></button><button class="relative p-2 rounded-xl bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" type="button"><span class="material-symbols-outlined text-xl">notifications</span><span class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm flex items-center justify-center font-bold shadow-md">3</span></button><div class="flex items-center gap-space-sm pl-space-sm"><div class="flex flex-col text-right hidden lg:block"><span class="font-label-md text-label-md text-on-surface font-semibold leading-tight">Tariq Al Mansoori</span><span class="font-label-sm text-label-sm text-secondary uppercase font-medium">General Director</span></div><div class="relative flex items-center gap-1.5 p-1 rounded-full bg-surface-container-low"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrlF07D7rcBKVtzkU4_A51hJFZgKReEOtctmAqEotlcBypQJMRlHl26LyYOa3tIQeKb8NwFIldaLy6zW0Wd2XzOS11wWEOw05lX2MI0SdiWOEx_izf9ynUDaWYwRcFLYB4RGpDeWTEPWQufNxo_sOEK41nFzMT6DOrWzgAADsoew9EsCNK9bdA84yzmp8bdAMXwJ5Fckop26XoUT7Ct5C2UiF4rwhqCqTelxxp3cKop9R9gkMzFJw"/><span class="material-symbols-outlined text-on-surface-variant text-base pr-1">keyboard_arrow_down</span></div></div></div></header><main class="w-full pt-20 px-space-lg pb-space-xl bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Top Context Navigation & Meta Header -->
+<div class="flex flex-col gap-space-md mb-space-lg">
+<div class="flex items-center justify-between">
+<a class="inline-flex items-center gap-space-xs text-secondary hover:text-primary transition-colors group" data-path="live-orders" href="#">
+<span class="material-symbols-outlined text-base transition-transform group-hover:-translate-x-1">arrow_back</span>
+<span class="font-label-md text-label-md font-medium">Back to Live Orders</span>
+</a>
+<div class="flex items-center gap-space-sm">
+<span class="font-currency-caption text-currency-caption text-on-surface-variant uppercase tracking-wider">Kitchen Order Ticket ID</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm">KOT-88402-A</span>
+</div>
+</div>
+<!-- Header Surface with Order Identity -->
+<div class="p-space-lg rounded-xl bg-surface-container-low shadow-xl flex flex-col lg:flex-row lg:items-center justify-between gap-space-md relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-56 h-56 bg-primary-container/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex flex-col gap-space-xs min-w-0">
+<div class="flex flex-wrap items-center gap-space-sm">
+<h1 class="font-headline-xl text-headline-xl text-primary tracking-tight">Order #VY-9021</h1>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container/20 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wide">PREPARING (14 mins elapsed)</span>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container-highest text-tertiary font-label-sm text-label-sm uppercase tracking-wider font-semibold">Priority Dining</span>
+</div>
+<div class="flex flex-wrap items-center gap-y-1 gap-x-3 text-on-surface-variant font-body-sm text-body-sm">
+<span class="flex items-center gap-1 text-on-surface">
+<span class="material-symbols-outlined text-sm text-secondary">schedule</span>
+            Placed at 19:42 GST
+          </span>
+<span>•</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-secondary">location_on</span>
+            Delivery Zone: Saadiyat Cultural District, Abu Dhabi
+          </span>
+<span>•</span>
+<span class="text-tertiary">Target Kitchen Dispatch: 20:02 GST (6m left)</span>
+</div>
+</div>
+<!-- Quick Action Buttons -->
+<div class="flex flex-wrap items-center gap-space-sm shrink-0">
+<button class="px-space-md py-2.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md flex items-center gap-2 shadow-sm transition-all hover:scale-[1.02]" onclick="printKOT()" type="button">
+<span class="material-symbols-outlined text-lg text-secondary">print</span>
+<span>Print KOT</span>
+</button>
+<button class="px-space-lg py-2.5 rounded-lg bg-primary-container hover:bg-secondary-container text-on-primary-container font-label-md text-label-md font-semibold flex items-center gap-2 shadow-[0_4px_16px_rgba(250,204,21,0.25)] transition-all hover:scale-[1.02] active:scale-95" id="markReadyBtn" onclick="toggleReadyState()" type="button">
+<span class="material-symbols-outlined text-lg">check_circle</span>
+<span id="markReadyText">Mark Ready for Courier</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg">
+<!-- Left Column: Fulfillment, Timeline, Items & Financials (7 cols) -->
+<div class="xl:col-span-7 flex flex-col gap-space-lg">
+<!-- Stepper / Kitchen Pipeline Card -->
+<div class="p-space-lg rounded-xl bg-surface-container shadow-md flex flex-col gap-space-lg">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-xl">conversion_path</span>
+<h2 class="font-title-md text-title-md text-on-surface">Kitchen Fulfillment Pipeline</h2>
+</div>
+<div class="flex items-center gap-space-xs text-on-surface-variant font-label-sm text-label-sm">
+<span>Automated telemetry:</span>
+<span class="text-secondary font-semibold">Active</span>
+</div>
+</div>
+<!-- 6-Stage Timeline -->
+<div class="relative py-2">
+<!-- Baseline background track -->
+<div class="absolute top-5 left-4 right-4 h-1 bg-surface-container-highest -z-0 rounded-full"></div>
+<!-- Filled active progress track (up to stage 3) -->
+<div class="absolute top-5 left-4 w-5/12 h-1 bg-gradient-to-r from-secondary-container via-primary-container to-secondary -z-0 rounded-full shadow-[0_0_8px_rgba(250,204,21,0.5)]"></div>
+<div class="grid grid-cols-6 gap-1 relative z-10">
+<!-- Step 1: Received -->
+<div class="flex flex-col items-center text-center group cursor-default">
+<div class="w-9 h-9 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-label-sm text-label-sm font-bold shadow-md ring-4 ring-surface-container">
+<span class="material-symbols-outlined text-base">done</span>
+</div>
+<span class="mt-2 font-label-sm text-label-sm font-semibold text-on-surface">Received</span>
+<span class="font-currency-caption text-currency-caption text-on-surface-variant">19:42</span>
+</div>
+<!-- Step 2: Accepted -->
+<div class="flex flex-col items-center text-center group cursor-default">
+<div class="w-9 h-9 rounded-full bg-secondary text-on-secondary flex items-center justify-center font-label-sm text-label-sm font-bold shadow-md ring-4 ring-surface-container">
+<span class="material-symbols-outlined text-base">kitchen</span>
+</div>
+<span class="mt-2 font-label-sm text-label-sm font-semibold text-on-surface">Accepted</span>
+<span class="font-currency-caption text-currency-caption text-on-surface-variant">19:43</span>
+</div>
+<!-- Step 3: Cooking (Current) -->
+<div class="flex flex-col items-center text-center group cursor-default">
+<div class="w-9 h-9 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-sm text-label-sm font-bold shadow-[0_0_14px_rgba(250,204,21,0.6)] ring-4 ring-surface-container animate-pulse">
+<span class="material-symbols-outlined text-base">skillet</span>
+</div>
+<span class="mt-2 font-label-sm text-label-sm font-bold text-primary">Cooking</span>
+<span class="font-currency-caption text-currency-caption text-secondary font-bold">14m In Prep</span>
+</div>
+<!-- Step 4: Packed & Ready -->
+<div class="flex flex-col items-center text-center group cursor-default opacity-60">
+<div class="w-9 h-9 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-label-sm text-label-sm font-semibold ring-4 ring-surface-container">
+<span class="material-symbols-outlined text-base">inventory_2</span>
+</div>
+<span class="mt-2 font-label-sm text-label-sm text-on-surface-variant font-medium">Packed</span>
+<span class="font-currency-caption text-currency-caption text-on-surface-variant/70">Est 20:00</span>
+</div>
+<!-- Step 5: Handed to Courier -->
+<div class="flex flex-col items-center text-center group cursor-default opacity-60">
+<div class="w-9 h-9 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-label-sm text-label-sm font-semibold ring-4 ring-surface-container">
+<span class="material-symbols-outlined text-base">moped</span>
+</div>
+<span class="mt-2 font-label-sm text-label-sm text-on-surface-variant font-medium">Courier</span>
+<span class="font-currency-caption text-currency-caption text-on-surface-variant/70">Est 20:03</span>
+</div>
+<!-- Step 6: Delivered -->
+<div class="flex flex-col items-center text-center group cursor-default opacity-40">
+<div class="w-9 h-9 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-label-sm text-label-sm font-semibold ring-4 ring-surface-container">
+<span class="material-symbols-outlined text-base">check_circle_outline</span>
+</div>
+<span class="mt-2 font-label-sm text-label-sm text-on-surface-variant font-medium">Delivered</span>
+<span class="font-currency-caption text-currency-caption text-on-surface-variant/70">Est 20:22</span>
+</div>
+</div>
+</div>
+<!-- Delay Reporting Module -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex flex-col md:flex-row md:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-lg">alarm_on</span>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-medium">Need more kitchen time?</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Notifies courier and concierge automatically</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-3 py-1.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-tertiary hover:text-primary font-label-sm text-label-sm font-semibold transition-colors" onclick="reportDelay(5)" type="button">
+              +5 mins
+            </button>
+<button class="px-3 py-1.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-tertiary hover:text-primary font-label-sm text-label-sm font-semibold transition-colors" onclick="reportDelay(10)" type="button">
+              +10 mins
+            </button>
+<button class="px-3 py-1.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-secondary font-label-sm text-label-sm font-semibold transition-colors flex items-center gap-1" onclick="contactCourierModal()" type="button">
+<span class="material-symbols-outlined text-sm">call</span>
+<span>Contact Courier</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Itemized Order Dishes Card -->
+<div class="p-space-lg rounded-xl bg-surface-container shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-xl">restaurant</span>
+<h2 class="font-title-md text-title-md text-on-surface">Order Items (3 dishes • 4 portions)</h2>
+</div>
+<span class="px-2.5 py-1 rounded bg-surface-container-highest text-secondary font-currency-caption text-currency-caption uppercase font-bold">100% Halal Certified</span>
+</div>
+<!-- Dish List -->
+<div class="flex flex-col gap-space-sm">
+<!-- Dish 1 -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex items-start gap-space-md transition-all hover:bg-surface-container-high/60">
+<img class="w-16 h-16 rounded-lg object-cover shrink-0" data-alt="Exquisite charcoal grilled Chilean sea bass plated with micro greens and delicate lemon butter emulsion served on dark luxury ceramic dinnerware in dramatic ambient warm dining lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-bz7Kxf0zyJxDs6jGLP3Ln5GszK5T6kokX2ANYo_paLzwn5D7EMmAuyUs4WwbIOBZIgSARlvZC5vzdXBTfhh9XjxSAwJZFPmog6PdpCLfUjqHeBFI1SjiznbLcJ554fyERrhXCLC9aM5wfHP76zjhGV-lg1kmEeJFtpAAZMh_dMmSe17TbJXNEHarWPkfD2jyv_n9R4Eh5ccmksJHhwqkPsBUAalL90a1hb5jDfRTfb2-5FRdpSw"/>
+<div class="flex-1 min-w-0 flex flex-col gap-1">
+<div class="flex items-start justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-primary-container/20 text-secondary font-label-sm text-label-sm font-bold flex items-center justify-center">2x</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold truncate">Charcoal Grilled Chilean Sea Bass</h3>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Signature Patagonian catch, asparagus velouté, charred Meyer lemon</span>
+</div>
+<div class="text-right shrink-0">
+<span class="font-currency-display text-currency-display text-primary leading-tight">360.00</span>
+<span class="block font-currency-caption text-currency-caption text-secondary uppercase font-semibold">AED (180.00 ea)</span>
+</div>
+</div>
+<!-- Special Dietary Flag -->
+<div class="mt-1 inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-secondary-container/20 text-secondary self-start font-label-sm text-label-sm font-semibold">
+<span class="material-symbols-outlined text-sm">priority_high</span>
+<span>Guest Note: Gluten free lemon butter</span>
+</div>
+</div>
+</div>
+<!-- Dish 2 -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex items-start gap-space-md transition-all hover:bg-surface-container-high/60">
+<img class="w-16 h-16 rounded-lg object-cover shrink-0" data-alt="Gourmet Acquerello truffle risotto crowned with authentic edible 24K gold leaf and shaved black winter truffles in an opulent dark porcelain bowl with warm golden glow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdpehBjY2lpTEHbHjYDEwV_DVu932xrqvD3qqpzF1kH9R3BnihlIGAX049RLZubSJrSHTRQzZRQmthbQ4lJy6xbTggR386JxT08kzumckZg_yL80IN5TjDuBI3w0ykduNziwBCj1FvR_PDFjXpD9MtWEgeaSGX8Y7XhnimqePeGQ_2f_JEM9veyHakQatZtBCEzgQsgjW2eFS0jQytsTu_u28Lq8B82t6Pvvi0eL_lswqabuBZ3rw"/>
+<div class="flex-1 min-w-0 flex flex-col gap-1">
+<div class="flex items-start justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-primary-container/20 text-secondary font-label-sm text-label-sm font-bold flex items-center justify-center">1x</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold truncate">Acquerello Truffle Risotto with 24K Gold Leaf</h3>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">7-year aged carnaroli, Norcia black truffle, 24K edible gold sheets, Parmigiano Vacche Rosse</span>
+</div>
+<div class="text-right shrink-0">
+<span class="font-currency-display text-currency-display text-primary leading-tight">165.00</span>
+<span class="block font-currency-caption text-currency-caption text-secondary uppercase font-semibold">AED</span>
+</div>
+</div>
+<div class="mt-1 inline-flex items-center gap-1 px-2 py-0.5 rounded bg-surface-container-highest text-tertiary-fixed text-label-sm font-medium self-start">
+<span class="material-symbols-outlined text-xs text-secondary">verified</span>
+<span>VIP Presentation Standard</span>
+</div>
+</div>
+</div>
+<!-- Dish 3 -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex items-start gap-space-md transition-all hover:bg-surface-container-high/60">
+<img class="w-16 h-16 rounded-lg object-cover shrink-0" data-alt="Traditional Emirati saffron date pudding adorned with rich camel milk salted caramel drizzle and crushed pistachio dust in a contemporary luxury dessert presentation" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtUV9zTs0s1aDGHtP-1noKnohDexaduDbVkoUyl65p3SufL6CCEZG29sbypiedeSHccjc-3tJliq9Fn3A_BLBtpeMXxmljiclJHOFknp-oRZjb1tD7X2QJW-Vp1Il0mztDVGePEnid8ZewqSI1cLu9mIF1RYz5Dq5-YXFApRr6TsCeIUUUjxHcuSsPtlL82opONRDjvjJDkSjNNP8c-zp_DXS0lVTlB-HgEp_r2bpFzvqLm_oSQ5k"/>
+<div class="flex-1 min-w-0 flex flex-col gap-1">
+<div class="flex items-start justify-between gap-space-sm">
+<div>
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-primary-container/20 text-secondary font-label-sm text-label-sm font-bold flex items-center justify-center">1x</span>
+<h3 class="font-headline-md text-headline-md text-on-surface font-semibold truncate">Traditional Emirati Saffron Date Pudding</h3>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Organic Liwa dates, warm saffron cardamom caramel, crushed roasted pistachio</span>
+</div>
+<div class="text-right shrink-0">
+<span class="font-currency-display text-currency-display text-primary leading-tight">60.00</span>
+<span class="block font-currency-caption text-currency-caption text-secondary uppercase font-semibold">AED</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Financial Calculation & Payout Ledger -->
+<div class="p-space-lg rounded-xl bg-surface-container shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between pb-space-sm bg-surface-container">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-xl">account_balance_wallet</span>
+<h2 class="font-title-md text-title-md text-on-surface">Institutional Settlement Calculation</h2>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">FTA TRN 100294819400003</span>
+</div>
+<!-- Ledger Table Breakdown -->
+<div class="flex flex-col gap-space-xs font-body-md text-body-md text-on-surface">
+<div class="flex items-center justify-between py-1.5 px-space-sm rounded bg-surface-container-low/50">
+<span class="text-on-surface-variant">Food &amp; Beverage Gross Subtotal</span>
+<span class="font-medium text-on-surface">AED 585.00</span>
+</div>
+<div class="flex items-center justify-between py-1.5 px-space-sm rounded">
+<span class="text-on-surface-variant flex items-center gap-1.5">
+<span>Restaurant Packaging Eco-Fee</span>
+<span class="material-symbols-outlined text-xs text-secondary" title="Saadiyat Environmental Reserve Complying Packaging">eco</span>
+</span>
+<span class="font-medium text-on-surface">AED 10.00</span>
+</div>
+<div class="flex items-center justify-between py-1.5 px-space-sm rounded">
+<span class="text-on-surface-variant">UAE 5.0% Federal Value Added Tax (VAT)</span>
+<span class="font-medium text-on-surface">AED 29.75</span>
+</div>
+<div class="flex items-center justify-between py-1.5 px-space-sm rounded text-error">
+<span class="flex items-center gap-1">
+<span>VAYORA Platform Commission (12.0%)</span>
+<span class="font-label-sm text-label-sm opacity-80">- Tier 1 Partner Rate</span>
+</span>
+<span class="font-semibold">- AED 70.20</span>
+</div>
+</div>
+<!-- Net Settlement Highlight Module -->
+<div class="p-space-md rounded-xl bg-surface-container-highest shadow-inner flex flex-col md:flex-row md:items-center justify-between gap-space-md relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1.5 bg-primary-container"></div>
+<div class="flex flex-col pl-2">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-bold">Net Partner Payout (Today's Batch)</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Direct settlement to Emirates NBD Business Acc •••• 4019</span>
+</div>
+<div class="flex items-baseline gap-2 shrink-0">
+<span class="font-currency-caption text-currency-caption uppercase text-secondary font-bold">AED</span>
+<span class="font-display-lg text-display-lg text-primary tracking-tight leading-none">554.55</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Customer & Logistics Profile (5 cols) -->
+<div class="xl:col-span-5 flex flex-col gap-space-lg">
+<!-- Customer Card -->
+<div class="p-space-lg rounded-xl bg-surface-container shadow-md flex flex-col gap-space-md relative overflow-hidden">
+<div class="absolute right-0 top-0 w-32 h-32 bg-secondary-container/10 rounded-bl-full pointer-events-none"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-xl">star</span>
+<h2 class="font-title-md text-title-md text-on-surface">Customer Dossier</h2>
+</div>
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary font-label-sm text-label-sm font-bold uppercase tracking-wider shadow-sm">VIP Tier 1</span>
+</div>
+<div class="flex items-start gap-space-md pt-space-xs">
+<div class="relative shrink-0">
+<div class="w-14 h-14 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-headline-md text-headline-md font-bold shadow-md">
+              MA
+            </div>
+<span class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-sm text-label-sm font-bold shadow">
+              ★
+            </span>
+</div>
+<div class="flex-1 min-w-0">
+<h3 class="font-headline-md text-headline-md text-primary font-bold truncate">H.E. Dr. Mansoor Al-Ketbi</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">High-Value Patron • 48 fulfilled lifetime orders</p>
+<div class="mt-2 flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-tertiary font-label-sm text-label-sm">Average Check: AED 610</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-secondary font-label-sm text-label-sm">0 Complaints</span>
+</div>
+</div>
+</div>
+<!-- Masked Relay Phone Communication -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-9 h-9 rounded-lg bg-surface-container-high flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-lg">shield_person</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Masked VAYORA Relay</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold tracking-wide">+971 50 *** 9211</span>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-secondary hover:text-primary font-label-sm text-label-sm font-semibold flex items-center gap-1.5 transition-colors shadow-sm" onclick="initiateRelayCall()" type="button">
+<span class="material-symbols-outlined text-base">phone_in_talk</span>
+<span>Relay Call</span>
+</button>
+</div>
+</div>
+<!-- Delivery Destination & Map Preview Card -->
+<div class="p-space-lg rounded-xl bg-surface-container shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-xl">map</span>
+<h2 class="font-title-md text-title-md text-on-surface">Delivery Location</h2>
+</div>
+<span class="font-currency-caption text-currency-caption text-secondary uppercase font-bold">Saadiyat Zone A</span>
+</div>
+<!-- Location Details -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="font-label-md text-label-md text-primary font-bold">Saadiyat Beach Villas, Gate 4</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface font-label-sm text-label-sm font-semibold">Villa 18-B</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Al Saadiyat Island, Cultural District, Abu Dhabi, United Arab Emirates</span>
+</div>
+<!-- Special Gate Pass Instruction -->
+<div class="p-space-md rounded-lg bg-surface-container-low flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-lg mt-0.5">vpn_key</span>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-secondary font-bold uppercase tracking-wider">Gate Clearance Verified</span>
+<p class="font-body-sm text-body-sm text-on-surface mt-0.5">
+              “Security pre-cleared for VAYORA courier. Drive through Gate 4 express lane and drop at primary foyer.”
+            </p>
+</div>
+</div>
+<!-- Delivery Destination Map Preview (data-location pipeline) -->
+<div class="relative w-full h-48 rounded-xl overflow-hidden shadow-inner group">
+<div class="w-full h-full bg-cover bg-center rounded-xl transition-transform duration-500 group-hover:scale-105" data-location="Saadiyat Beach Villas, Abu Dhabi" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuATfXF_oPUWa9scJM3aScJ_lPYIZ7BCUXQ4ARfzTapa_NQ03Y8V3zLclKo2BFULyshA5JLZ3tELo_OREXmIdg7MsL7sCzio5PEIujJiYm-_pYkZg7fjAdS14BYkviojzh0cCfsU4iE2RsxMonQdVpUM8Fq9O2yCOwlSmvm9XITZUCfokdoa4CmFJBE__AbhgPvP9Nw0OtFKh4dKP5A9AOq-2S3VChnKjvZ8LI3ZbmcUm9kvW80MdP8')"></div>
+<!-- Gradient Map Scrim & Route Indicator Overlay -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/90 via-surface-container-lowest/30 to-transparent flex flex-col justify-end p-space-md pointer-events-none">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2 px-2.5 py-1 rounded-full bg-surface-container/90 backdrop-blur-md shadow-md">
+<span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Destination: 6.4 km (11 min drive)</span>
+</div>
+<a class="px-2.5 py-1 rounded-full bg-surface-container/90 hover:bg-surface-container-high text-secondary font-label-sm text-label-sm font-medium backdrop-blur-md transition-colors pointer-events-auto flex items-center gap-1" href="https://maps.google.com" rel="noopener noreferrer" target="_blank">
+<span>Expand Map</span>
+<span class="material-symbols-outlined text-xs">open_in_new</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Courier Assignment Card -->
+<div class="p-space-lg rounded-xl bg-surface-container shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-xl">two_wheeler</span>
+<h2 class="font-title-md text-title-md text-on-surface">Assigned VAYORA Courier</h2>
+</div>
+<div class="flex items-center gap-1 text-secondary font-label-sm text-label-sm font-semibold">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Approaching Venue</span>
+</div>
+</div>
+<div class="flex items-center justify-between gap-space-md p-space-md rounded-lg bg-surface-container-low">
+<div class="flex items-center gap-space-md">
+<div class="relative">
+<img class="w-14 h-14 rounded-full object-cover shadow-md" data-alt="Professional logistics courier in premium black and gold trimmed delivery uniform with helmet under arm, clean executive studio lighting against dark slate background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6jzEAsZdkIFWm2sLBIx7WuoHC5tzsbfRQuLJDRIZDY67t3HueTSGCS07QGiKC4opzJ9JziminpGLOm4KifjQQjK3-JqD6d1MGxyE-gjwP7v0mxKgQD7CADthG91nztQs576R_SZWTBV1xi7JTECUr8uAA33-Mnl2g9Tz5ChBiHnNnblSf8EfTgSxDzny214MFX_CSQhMbPyABhsCx2A2TU42DC93u2nqd54S_yt_7PgV4t9UpMCY"/>
+<span class="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-secondary ring-2 ring-surface-container-low"></span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md text-on-surface font-bold">Ahmed R.</span>
+<span class="flex items-center text-secondary font-label-sm text-label-sm font-bold">
+                  ★ 4.98
+                </span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">VAYORA Premier Fleet #284</span>
+<span class="font-label-sm text-label-sm text-tertiary mt-0.5">Yamaha AD-8831 (Thermal Heated Box)</span>
+</div>
+</div>
+<div class="flex flex-col items-end shrink-0">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">ETA To Kitchen</span>
+<span class="font-display-lg-mobile text-display-lg-mobile text-secondary font-bold leading-none mt-1">4 min</span>
+<span class="font-currency-caption text-currency-caption text-on-surface-variant mt-0.5">0.8 km away</span>
+</div>
+</div>
+<!-- Courier Contact & Dispatch Protocol -->
+<div class="grid grid-cols-2 gap-space-sm">
+<button class="py-2.5 px-space-sm rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md font-semibold flex items-center justify-center gap-2 transition-all shadow-sm" onclick="contactCourierModal()" type="button">
+<span class="material-symbols-outlined text-secondary text-lg">chat</span>
+<span>Live Chat</span>
+</button>
+<button class="py-2.5 px-space-sm rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-secondary hover:text-primary font-label-md text-label-md font-semibold flex items-center justify-center gap-2 transition-all shadow-sm" onclick="initiateCourierDirectCall()" type="button">
+<span class="material-symbols-outlined text-lg">call</span>
+<span>Direct Call</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Notification Toast Container -->
+<div class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none" id="actionToast">
+<div class="px-5 py-3 rounded-xl bg-surface-container-highest text-on-surface shadow-2xl flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" id="toastIcon">check_circle</span>
+<span class="font-label-md text-label-md font-semibold" id="toastMessage">Action confirmed</span>
+</div>
+</div>
+</div>
+<script>
+  function showToast(message, icon = 'check_circle') {
+    const toast = document.getElementById('actionToast');
+    const toastMessage = document.getElementById('toastMessage');
+    const toastIcon = document.getElementById('toastIcon');
+    if (!toast) return;
+
+    toastMessage.textContent = message;
+    toastIcon.textContent = icon;
+    toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+    toast.classList.add('translate-y-0', 'opacity-100');
+
+    setTimeout(() => {
+      toast.classList.remove('translate-y-0', 'opacity-100');
+      toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+    }, 3200);
+  }
+
+  let isReady = false;
+  function toggleReadyState() {
+    isReady = !isReady;
+    const btn = document.getElementById('markReadyBtn');
+    const text = document.getElementById('markReadyText');
+    if (isReady) {
+      text.textContent = 'Ready for Courier (Notified)';
+      btn.classList.remove('bg-primary-container', 'text-on-primary-container');
+      btn.classList.add('bg-secondary', 'text-on-secondary');
+      showToast('Ahmed R. signaled: Order #VY-9021 ready at pickup station', 'moped');
+    } else {
+      text.textContent = 'Mark Ready for Courier';
+      btn.classList.add('bg-primary-container', 'text-on-primary-container');
+      btn.classList.remove('bg-secondary', 'text-on-secondary');
+      showToast('Order status reverted to Cooking in Progress', 'history');
+    }
+  }
+
+  function reportDelay(minutes) {
+    showToast(`Delay recorded (+${minutes}m). Dispatch & patron notified.`, 'schedule');
+  }
+
+  function printKOT() {
+    showToast('Kitchen Order Ticket sent to Hot Line Printer 1', 'print');
+  }
+
+  function initiateRelayCall() {
+    showToast('Connecting encrypted relay line to H.E. Dr. Mansoor Al-Ketbi...', 'ring_volume');
+  }
+
+  function contactCourierModal() {
+    showToast('Connecting to Courier Ahmed R. dispatch terminal...', 'forum');
+  }
+
+  function initiateCourierDirectCall() {
+    showToast('Calling courier mobile +971 52 *** 4402...', 'call');
+  }
+</script></main></div></body></html>

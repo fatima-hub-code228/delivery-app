@@ -1,9 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ScreenId, MenuItem } from '../types';
-import { syncMenuStockToSupabase, logPartnerAction } from '../lib/supabase';
+import {
+  syncMenuStockToSupabase,
+  fetchMenuInventoryFromSupabase,
+  getPartnerSession,
+  onPartnerSessionChange,
+} from '../lib/supabase';
 
 interface MenuInventoryScreenProps {
   onNavigate: (screen: ScreenId) => void;
+}
+
+function mapCategoryBucket(cat: string): 'starters' | 'mains' | 'grill' | 'desserts' {
+  const c = (cat || '').toLowerCase();
+  if (c === 'grill' || c.includes('grill')) return 'grill';
+  if (
+    c === 'desserts' ||
+    c.includes('sweet') ||
+    c.includes('pastry') ||
+    c.includes('kunafa') ||
+    c.includes('date') ||
+    c.includes('drink') ||
+    c.includes('beverage') ||
+    c.includes('coffee')
+  ) {
+    return 'desserts';
+  }
+  if (
+    c === 'starters' ||
+    c.includes('mezze') ||
+    c.includes('snack') ||
+    c.includes('nut') ||
+    c.includes('kernel') ||
+    c.includes('fruit')
+  ) {
+    return 'starters';
+  }
+  return 'mains';
 }
 
 export default function MenuInventoryScreen({ onNavigate }: MenuInventoryScreenProps) {
@@ -13,106 +46,37 @@ export default function MenuInventoryScreen({ onNavigate }: MenuInventoryScreenP
   const [activeDietary, setActiveDietary] = useState<string[]>([]);
   const [emergency86Mode, setEmergency86Mode] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [dishes, setDishes] = useState<MenuItem[]>([]);
 
-  const [dishes, setDishes] = useState<MenuItem[]>([
-    {
-      id: 'DSH-01',
-      title: 'Chilean Sea Bass',
-      category: 'mains',
-      categoryLabel: "Chef's Signature Mains",
-      description: 'Saffron emulsion, roasted baby fennel, citrus beurre blanc, hand-harvested Salicornia.',
-      price: 180.0,
-      sku: 'VAY-SB01',
-      stock: 18,
-      badge: "Chef's Signature",
-      prepTime: '18-22 min',
-      calories: '540 kcal • Halal Certified',
+  const loadSharedMenu = useCallback(async () => {
+    const storeId = getPartnerSession().storeId;
+    const sharedItems = await fetchMenuInventoryFromSupabase(storeId);
+    const mapped: MenuItem[] = sharedItems.map((p) => ({
+      id: p.id,
+      title: p.nameEn,
+      category: mapCategoryBucket(p.category),
+      categoryLabel: `${p.storeName} • ${p.category}`,
+      description: `${p.description} (${p.nameAr} • ${p.weightOrPortion})`,
+      price: p.priceAed,
+      sku: p.sku,
+      stock: p.isAvailable ? p.stock : 0,
+      badge: p.storeName,
+      prepTime: '15-25 min',
+      calories: `${p.weightOrPortion} • Halal Certified`,
       dietary: ['halal'],
-      image:
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuA-ga8JLCZID3H46XFVdrhpdnS43kUHGMBM5h5GUh3460jYzuLg2PCLOszOR3zLoSltsnEAfylgywYGde8qv7dYdfxadFAw1AP02MBbWP5JnQbWmVs9Kb30ORtmCtRZE_2SA2-f0BYhu_emBI7Sx2VVmj7BJTEfuG-iCt4qfzYrfl4iOihEs420vKRQBqYARYl6fj71Ugov-kF1aAdbLSFmz-HA6Dsfbpx9RJO5-HV3lT1xZgXOtd4',
-      isChefSignature: true,
-    },
-    {
-      id: 'DSH-02',
-      title: 'Wagyu Ribeye MB9+ (300g)',
-      category: 'grill',
-      categoryLabel: 'Woodfire Grill',
-      description: 'Charred shallots, Périgord black truffle jus, marrow butter, wild morel mushrooms.',
-      price: 340.0,
-      sku: 'VAY-WG02',
-      stock: 3,
-      badge: 'Woodfire Grill',
-      prepTime: '22-26 min',
-      calories: '820 kcal • Gluten-Free',
-      dietary: ['gluten-free'],
-      image:
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuAs8WyTvu0l60ERcVqbtIDYUXrUqsoQbx0uPNVwbvTVZYsEhM4qRu93kPXdHOQjwSD30g_BSB9VzRpFxJioSKYkZ29Qll93rcPVywnZO5ANZwy82YelgsirUq5H2YlmEBOJFAUGqZlISQAe7tsD_AOxE_7aVVwpHYsF6k5ACA5SOFABrrBcv0Oh0rtdNwepppf81U1cfK428EQnjOAesCSbJ9eA8yhc_mccMM2PY5pt8jlf0r5U2iw',
-    },
-    {
-      id: 'DSH-03',
-      title: 'Acquerello Truffle Risotto',
-      category: 'mains',
-      categoryLabel: "Chef's Signature Mains",
-      description: 'Aged carnaroli rice, 24K edible gold, winter truffle carpaccio, 36-month Vacche Rosse parmesan.',
-      price: 165.0,
-      sku: 'VAY-RS03',
-      stock: 25,
-      badge: '24K Gold Plated',
-      prepTime: '16-20 min',
-      calories: '610 kcal • Halal Certified',
-      dietary: ['halal'],
-      image:
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuD8szzv4EA-xFJXTJh9_uQO-ffkBwRfg7cwKscFGDq-UXn4duQXDELTdcJ1bYKTwEiPbNObYHDLjZGxW6Kcpcfa1cx4NK1sMyfBjzEoq0W1LvmPNRG8XzHsfGKTXmyTNTR39XN-Kji0ItjFegn_hdtC4VTCNpFY8RpKqDOrWNGwexUezwIpJ2aAOLJ8HOcgXss_A6KKd2XechwprufsW2vGpLaoHgAm70oncq0O08EVlE5fjxkRnXo',
-    },
-    {
-      id: 'DSH-04',
-      title: 'Lobster Thermidor Emirati',
-      category: 'mains',
-      categoryLabel: "Chef's Signature Mains",
-      description: 'Whole Maine lobster, Emirati baharat blend, Dijon cream, aged gruyère glaze.',
-      price: 290.0,
-      sku: 'VAY-LT04',
-      stock: 0,
-      badge: 'Signature Mains',
-      prepTime: '25 min avg',
-      calories: '710 kcal',
-      dietary: [],
-      image:
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuAcLIrkBAVIcTL1Jh01fs5cIXDE-woFis29Xn5AWJI5eM28wznCmR0zd13eSb-PdVeBdJlSSJujan1bUOCl-TOJBCMwVlt1YG1uhbr-28tZNcijqnJdwwFrDDNIXHSxbzI5BljJLsKmuI3BSWWXfiyLtWqkei543it-yj9iGs703KD9V67P93c2Hics5_tbtlc35tDzkFUaU244J4joYsu4U_tn3lfUh7Qu0UHcCDZqGBmYiF8yuBw',
-    },
-    {
-      id: 'DSH-05',
-      title: 'Saffron & Cardamom Milk Cake',
-      category: 'desserts',
-      categoryLabel: 'Artisan Desserts & Mocktails',
-      description: 'Vanilla-cardamom sponge, saffron soaked milk reduction, whipped pistachio chantilly.',
-      price: 65.0,
-      sku: 'VAY-MC05',
-      stock: 30,
-      badge: 'Artisan Dessert',
-      prepTime: '8-10 min',
-      calories: '420 kcal • Vegetarian',
-      dietary: ['vegetarian', 'halal'],
-      image:
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuBo8xNtGH5b6L2WycxFdjA3yFEG07Sju7qMlfrqUeeVzooYzlTZ4jFEoD2js0TJsCcdwufiL1oO2texYYgrnH3wtr7TCo2gw6LV3EO30EvTIEc6MVHqSue5lRS3EFydQDkwo-cq2vypZv2xiy8lznaa30jRm9lDEcmHNbQWc7IheFwqogEyRayOqk1_TgnRFvmVB3wphmDwT1023nNHOxEVSNQHw7dXETgrVFqb9TadzPZ4dDegUsE',
-    },
-    {
-      id: 'DSH-06',
-      title: 'Royal Gold Mocktail',
-      category: 'desserts',
-      categoryLabel: 'Artisan Desserts & Mocktails',
-      description: 'Fresh passionfruit, yuzu essence, cold-pressed mint syrup, sparkling elderflower, 24K gold flakes.',
-      price: 55.0,
-      sku: 'VAY-RG06',
-      stock: 45,
-      badge: 'Signature Mixology',
-      prepTime: '5 min',
-      calories: '160 kcal • Halal Certified',
-      dietary: ['halal', 'vegan', 'gluten-free'],
-      image:
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuAMkRg6S-5N1wWIqMGtC0et1nidrt82sUAhTqfVrmMDYbNy7iafETR05Kyq1eO0EKy5_rHXXu-mk_-BoC5nT-yrE8rCrSJSgN8tGaWqD4vO5SAHLJj_gSh03JazihFYwotSUH7CbWbzp6Z-jf1wFg_aBAoi-Gzu5wFuikv6N6IRw27g20lml1SG2ydPmdEXCHiJ4L8Yw_e2ZKFEKBFRbEG3eXnBa-UjvSGkReD_U2Ai6sOW-mYO4tI',
-    },
-  ]);
+      image: p.image,
+      isChefSignature: p.id.startsWith('DSH-01') || p.id === 'prod_ms_mixed_grill',
+    }));
+    setDishes(mapped);
+  }, []);
+
+  useEffect(() => {
+    loadSharedMenu();
+    const unsub = onPartnerSessionChange(() => {
+      loadSharedMenu();
+    });
+    return unsub;
+  }, [loadSharedMenu]);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -124,7 +88,10 @@ export default function MenuInventoryScreen({ onNavigate }: MenuInventoryScreenP
       prev.map((d) => {
         if (d.id === dishId) {
           const nextStock = Math.max(0, d.stock + delta);
-          syncMenuStockToSupabase(d.id, d.title, nextStock, nextStock === 0);
+          syncMenuStockToSupabase(d.id, d.title, nextStock, nextStock === 0, {
+            price: d.price,
+            sku: d.sku,
+          });
           return { ...d, stock: nextStock };
         }
         return d;
@@ -138,11 +105,14 @@ export default function MenuInventoryScreen({ onNavigate }: MenuInventoryScreenP
         if (d.id === dishId) {
           const nextStock = d.stock > 0 ? 0 : 15;
           const is86 = nextStock === 0;
-          syncMenuStockToSupabase(d.id, d.title, nextStock, is86);
+          syncMenuStockToSupabase(d.id, d.title, nextStock, is86, {
+            price: d.price,
+            sku: d.sku,
+          });
           showToast(
             is86
-              ? `Item "${d.title}" 86'd and synced to Supabase.`
-              : `Item "${d.title}" restocked (15 portions) and live in Supabase.`
+              ? `Item "${d.title}" 86'd and synced to shared Supabase catalog.`
+              : `Item "${d.title}" restocked (15 portions) and live in Customer App & Supabase.`
           );
           return { ...d, stock: nextStock };
         }
@@ -163,7 +133,8 @@ export default function MenuInventoryScreen({ onNavigate }: MenuInventoryScreenP
     const matchesQuery =
       !searchQuery ||
       dish.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      dish.description.toLowerCase().includes(searchQuery.toLowerCase());
+      dish.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      dish.categoryLabel.toLowerCase().includes(searchQuery.toLowerCase());
     let matchesStock = true;
     if (stockFilter === 'in_stock') matchesStock = dish.stock > 5;
     else if (stockFilter === 'low_stock') matchesStock = dish.stock > 0 && dish.stock <= 5;

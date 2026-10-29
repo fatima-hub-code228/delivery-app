@@ -5,12 +5,16 @@ interface SidebarProps {
   currentScreen: ScreenId;
   onNavigate: (screen: ScreenId) => void;
   pendingOrdersCount?: number;
+  mobileOpen?: boolean;
+  onCloseMobile?: () => void;
 }
 
 export default function Sidebar({
   currentScreen,
   onNavigate,
   pendingOrdersCount = 4,
+  mobileOpen = false,
+  onCloseMobile,
 }: SidebarProps) {
   const navItems = [
     {
@@ -57,52 +61,76 @@ export default function Sidebar({
   ];
 
   return (
-    <aside className="fixed left-0 top-0 h-full w-72 bg-[#1e1b19] z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.4)] border-r border-[#383432]/40">
-      <div className="flex flex-col h-full overflow-hidden">
-        {/* Brand Header */}
-        <div className="h-20 px-4 flex items-center gap-2 bg-[#100e0c]/60 backdrop-blur-md border-b border-[#383432]/30">
-          <img
-            alt="VAYORA Partner Logo"
-            className="h-8 w-auto object-contain"
-            src="https://lh3.googleusercontent.com/aida/AEtjO1Vu_ERvxM1TR_WtX3iJxrhFOEEmv5C686HsjH3CyVYBYC9u-V9_1S46iKEAom3NtM3XPY1HePkEOVmpyVKLJomFOb33Ws5hhdUubFia9Xhgy6fV2XvtjCnifOYwDwkhlM14zGcWEcuEbDzdpBaKLFpI_P7P7KFIYnOsE9DVapMFuAwGYiSc7gOIhDXksVBbLvrRWT7Cby0Mbd6WCfy8yHszed4qPAomY1GvqoS_DjpD9TlAGusetj7d"
-          />
-          <div className="flex flex-col">
-            <span className="font-['Plus_Jakarta_Sans'] text-lg font-bold tracking-tight text-[#ffecb9] leading-none">
-              VAYORA
-            </span>
-            <span className="font-['Inter'] text-[11px] uppercase tracking-wider text-[#f7bd48] font-semibold mt-0.5">
-              Partner Portal
-            </span>
-          </div>
-        </div>
-
-        {/* Hub Status Banner */}
-        <div className="px-4 py-2">
-          <div className="p-2 rounded-lg bg-[#221f1d] flex items-center justify-between shadow-[0_1px_4px_rgba(0,0,0,0.2)] border border-[#383432]/40">
-            <div className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-[#f7bd48] animate-pulse" />
-              <span className="text-xs text-[#e9e1dd] font-medium">Abu Dhabi Hub</span>
+    <>
+      {mobileOpen && (
+        <div
+          onClick={onCloseMobile}
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 lg:hidden"
+        />
+      )}
+      <aside
+        className={`fixed left-0 top-0 h-full w-72 bg-[#1e1b19] z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.4)] border-r border-[#383432]/40 transition-transform duration-300 ${
+          mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+        }`}
+      >
+        <div className="flex flex-col h-full overflow-hidden">
+          {/* Brand Header */}
+          <div className="h-20 px-4 flex items-center justify-between gap-2 bg-[#100e0c]/60 backdrop-blur-md border-b border-[#383432]/30">
+            <div className="flex items-center gap-2">
+              <img
+                alt="VAYORA Partner Logo"
+                className="h-8 w-auto object-contain"
+                src="https://lh3.googleusercontent.com/aida/AEtjO1Vu_ERvxM1TR_WtX3iJxrhFOEEmv5C686HsjH3CyVYBYC9u-V9_1S46iKEAom3NtM3XPY1HePkEOVmpyVKLJomFOb33Ws5hhdUubFia9Xhgy6fV2XvtjCnifOYwDwkhlM14zGcWEcuEbDzdpBaKLFpI_P7P7KFIYnOsE9DVapMFuAwGYiSc7gOIhDXksVBbLvrRWT7Cby0Mbd6WCfy8yHszed4qPAomY1GvqoS_DjpD9TlAGusetj7d"
+              />
+              <div className="flex flex-col">
+                <span className="font-['Plus_Jakarta_Sans'] text-lg font-bold tracking-tight text-[#ffecb9] leading-none">
+                  VAYORA
+                </span>
+                <span className="font-['Inter'] text-[11px] uppercase tracking-wider text-[#f7bd48] font-semibold mt-0.5">
+                  Quick Shop Partner
+                </span>
+              </div>
             </div>
-            <span className="text-[11px] text-[#f7bd48] font-semibold uppercase tracking-wider">
-              UAE VIP
-            </span>
-          </div>
-        </div>
-
-        {/* Navigation List */}
-        <nav className="flex-1 px-4 py-1 space-y-1 overflow-y-auto">
-          {navItems.map((item) => {
-            const isActive = currentScreen === item.id;
-            return (
+            {onCloseMobile && (
               <button
-                key={item.id}
-                onClick={() => onNavigate(item.id)}
-                className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg transition-all text-left group ${
-                  isActive
-                    ? 'bg-[#facc15] text-[#6c5700] font-semibold shadow-[0_0_16px_rgba(250,204,21,0.2)]'
-                    : 'text-[#d1c6ab] hover:bg-[#2d2927] hover:text-[#e9e1dd]'
-                }`}
+                onClick={onCloseMobile}
+                className="lg:hidden p-1.5 rounded-lg bg-[#2d2927] text-[#d1c6ab] hover:text-[#e9e1dd]"
               >
+                <span className="material-symbols-outlined text-lg">close</span>
+              </button>
+            )}
+          </div>
+
+          {/* Hub Status Banner */}
+          <div className="px-4 py-2">
+            <div className="p-2 rounded-lg bg-[#221f1d] flex items-center justify-between shadow-[0_1px_4px_rgba(0,0,0,0.2)] border border-[#383432]/40">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2 h-2 rounded-full bg-[#f7bd48] animate-pulse" />
+                <span className="text-xs text-[#e9e1dd] font-medium">Abu Dhabi Hub</span>
+              </div>
+              <span className="text-[11px] text-[#f7bd48] font-semibold uppercase tracking-wider">
+                UAE VIP
+              </span>
+            </div>
+          </div>
+
+          {/* Navigation List */}
+          <nav className="flex-1 px-4 py-1 space-y-1 overflow-y-auto">
+            {navItems.map((item) => {
+              const isActive = currentScreen === item.id;
+              return (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    onNavigate(item.id);
+                    onCloseMobile?.();
+                  }}
+                  className={`w-full flex items-center justify-between px-4 py-2.5 rounded-lg transition-all text-left group ${
+                    isActive
+                      ? 'bg-[#facc15] text-[#6c5700] font-semibold shadow-[0_0_16px_rgba(250,204,21,0.2)]'
+                      : 'text-[#d1c6ab] hover:bg-[#2d2927] hover:text-[#e9e1dd]'
+                  }`}
+                >
                 <div className="flex items-center gap-3">
                   <span
                     className={`material-symbols-outlined text-xl transition-transform group-hover:scale-105 ${
@@ -161,7 +189,10 @@ export default function Sidebar({
 
           {/* Quick Terminal Switcher Link */}
           <button
-            onClick={() => onNavigate('login')}
+            onClick={() => {
+              onNavigate('login');
+              onCloseMobile?.();
+            }}
             className="w-full flex items-center justify-center gap-1.5 py-1.5 text-xs text-[#d1c6ab]/70 hover:text-[#f7bd48] transition-colors"
           >
             <span className="material-symbols-outlined text-sm">lock_reset</span>
@@ -170,5 +201,6 @@ export default function Sidebar({
         </div>
       </div>
     </aside>
+    </>
   );
 }

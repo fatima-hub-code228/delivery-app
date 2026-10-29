@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import ThreeGoldenCloche from '../components/ThreeGoldenCloche';
 import { ScreenId } from '../types';
 import { playOrderChime } from '../components/AudioChime';
-import { syncOrderToSupabase, logPartnerAction } from '../lib/supabase';
+import {
+  acceptOrderInSupabase,
+  fetchOrdersFromSupabase,
+  getLastSupabaseError,
+  getPartnerSession,
+  onPartnerSessionChange,
+  onSupabaseAction,
+  subscribeToOrdersRealtime,
+} from '../lib/supabase';
 
 interface DashboardScreenProps {
   onNavigate: (screen: ScreenId) => void;
@@ -13,42 +21,101 @@ export default function DashboardScreen({ onNavigate, onOpenOrder }: DashboardSc
   const [velocityFilter, setVelocityFilter] = useState<'today' | 'yesterday' | '7days' | 'month'>('today');
   const [alertDismissed, setAlertDismissed] = useState(false);
   const [soundMuted, setSoundMuted] = useState(false);
+  const [acceptingOrderId, setAcceptingOrderId] = useState<string | null>(null);
+  const [toastMsg, setToastMsg] = useState<string | null>(null);
+  const [activeStoreId, setActiveStoreId] = useState<string>(() => getPartnerSession().storeId);
 
-  const incomingOrders = [
-    {
-      id: '#VY-8841',
-      rawId: 'VY-9021',
-      badge: 'VIP',
-      badgeColor: 'bg-[#ffe083] text-[#231b00]',
-      dest: 'Al Bateen Waterfront Villa',
-      selection: '2x Wagyu A5 Tenderloin, 1x Truffle Risotto',
-      note: 'Note: Medium-rare, gluten-free sauce separate',
-      total: '1,820.00',
-      slaRemaining: '01:45',
-    },
-    {
-      id: '#VY-8842',
-      rawId: 'VY-9022',
-      badge: 'REGULAR',
-      badgeColor: 'bg-[#2d2927] text-[#e9e1dd]',
-      dest: 'Saadiyat Cultural District',
-      selection: '1x Osetra Caviar Service, 2x Gold Flake Brioche',
-      note: 'Delivered with ice presentation case',
-      total: '2,450.00',
-      slaRemaining: '02:15',
-    },
-    {
-      id: '#VY-8843',
-      rawId: 'VY-9018',
-      badge: 'YACHT VIP',
-      badgeColor: 'bg-[#ba880f]/30 text-[#f7bd48]',
-      dest: 'Yas Marina Berth 42',
-      selection: '4x Mediterranean Sea Bass, 2x Saffron Risotto',
-      note: 'Yacht crew pickup at marina gate',
-      total: '1,180.00',
-      slaRemaining: '03:10',
-    },
-  ];
+  const showToast = (msg: string) => {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(null), 3800);
+  };
+
+  const [ordersList, setOrdersList] = useState<
+    Array<{
+      id: string;
+      rawId: string;
+      badge: string;
+      badgeColor: string;
+      dest: string;
+      selection: string;
+      note: string;
+      total: string;
+      slaRemaining: string;
+    }>
+  >([]);
+  const [dbError, setDbError] = useState<string | null>(null);
+
+  const loadOrders = useCallback(async () => {
+    const currentStoreId = getPartnerSession().storeId;
+    setActiveStoreId(currentStoreId);
+    const data = await fetchOrdersFromSupabase(currentStoreId);
+    if (data) {
+      setDbError(null);
+      const incoming = data.filter((o) => o.status === 'incoming');
+      setOrdersList(
+        incoming.map((o) => ({
+          id: o.id.startsWith('#') ? o.id : `#${o.id}`,
+          rawId: o.id,
+          badge: o.storeName || o.vip_tier || 'VIP',
+          badgeColor: o.vip_tier?.includes('Platinum')
+            ? 'bg-[#ffe083] text-[#231b00]'
+            : 'bg-[#2d2927] text-[#f7bd48]',
+          dest: `${o.delivery_zone || 'Abu Dhabi Enclave'} (${o.customer_name || 'Guest'})`,
+          selection:
+            Array.isArray(o.items) && o.items.length > 0
+              ? o.items.map((i: any) => `${i.qty || i.quantity || 1}x ${i.name || i.name_en}`).join(', ')
+              : 'Order Items',
+          note: `${o.notes || 'Standard preparation'} • Customer App: ${o.customerStatus.code}`,
+          total: Number(o.total_aed || 0).toFixed(2),
+          slaRemaining: '02:00',
+        }))
+      );
+    } else {
+      setOrdersList([]);
+      setDbError(getLastSupabaseError());
+    }
+  }, []);
+
+  useEffect(() => {
+    loadOrders();
+    const unsubSession = onPartnerSessionChange(() => {
+      loadOrders();
+    });
+    const unsubAction = onSupabaseAction((act) => {
+      if (act.action_type.startsWith('order_') || act.action_type === 'customer_order_placed') {
+        loadOrders();
+      }
+    });
+    const unsubRealtime = subscribeToOrdersRealtime(() => {
+      loadOrders();
+    });
+    return () => {
+      unsubSession();
+      unsubAction();
+      unsubRealtime();
+    };
+  }, [loadOrders]);
+
+  const handleAccept = async (orderId: string) => {
+    setAcceptingOrderId(orderId);
+    try {
+      const res = await acceptOrderInSupabase(orderId);
+      if (res.success) {
+        playOrderChime();
+        showToast(
+          `Order #${res.orderId} accepted! Partner status: '${res.newStatus}' → Customer App: '${res.customerStatus}'.`
+        );
+        setOrdersList((prev) => prev.filter((o) => o.rawId !== orderId && o.rawId !== res.orderId));
+        await loadOrders();
+      } else {
+        showToast(`Failed to accept order #${orderId}: ${res.error}`);
+      }
+    } catch (err: any) {
+      showToast(`Error accepting order #${orderId}: ${err?.message || 'Database error'}`);
+    } finally {
+      setAcceptingOrderId(null);
+    }
+  };
 
   const handleMute = () => {
     setSoundMuted(!soundMuted);
@@ -427,9 +494,9 @@ export default function DashboardScreen({ onNavigate, onOpenOrder }: DashboardSc
           <button
             onClick={() => {
               playOrderChime();
-              alert('Kitchen Stations successfully rebalanced. Orders routed dynamically across stations 1-4.');
+              showToast('Kitchen Stations rebalanced across stations 1-4.');
             }}
-            className="w-full mt-4 py-2.5 rounded-lg bg-[#2d2927] hover:bg-[#383432] text-xs font-semibold text-[#ffecb9] transition-colors flex items-center justify-center gap-1.5"
+            className="w-full mt-4 py-2.5 rounded-lg bg-[#2d2927] hover:bg-[#383432] text-xs font-semibold text-[#ffecb9] transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
           >
             <span className="material-symbols-outlined text-sm text-[#f7bd48]">tune</span>
             <span>Rebalance Kitchen Stations</span>
@@ -471,61 +538,78 @@ export default function DashboardScreen({ onNavigate, onOpenOrder }: DashboardSc
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[#383432]/30 text-xs">
-                  {incomingOrders.map((ord) => (
-                    <tr
-                      key={ord.id}
-                      onClick={() => onOpenOrder(ord.rawId)}
-                      className="hover:bg-[#221f1d] cursor-pointer transition-colors"
-                    >
-                      <td className="py-3 px-2">
-                        <div className="flex items-center gap-1.5">
-                          <span className="font-bold text-[#ffecb9]">{ord.id}</span>
-                          <span className={`px-1.5 py-0.5 rounded text-[9px] font-bold ${ord.badgeColor}`}>
-                            {ord.badge}
-                          </span>
-                        </div>
-                        <span className="text-[11px] text-[#d1c6ab] block mt-0.5 truncate max-w-[160px]">
-                          {ord.dest}
-                        </span>
-                      </td>
-                      <td className="py-3 px-2">
-                        <span className="font-medium text-[#e9e1dd] block">{ord.selection}</span>
-                        <span className="text-[11px] text-[#d1c6ab]/80 block italic">{ord.note}</span>
-                      </td>
-                      <td className="py-3 px-2">
-                        <span className="font-['Plus_Jakarta_Sans'] font-bold text-[#ffecb9] text-sm">
-                          {ord.total}
-                        </span>
-                      </td>
-                      <td className="py-3 px-2 text-right">
-                        <div className="flex items-center justify-end gap-1.5">
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              playOrderChime();
-                              syncOrderToSupabase(ord.rawId, 'accepted', {
-                                total_aed: ord.total,
-                                selection: ord.selection,
-                              });
-                            }}
-                            className="px-2 py-1 rounded bg-[#facc15] hover:bg-[#ba880f] text-[#6c5700] hover:text-[#ffecb9] font-bold text-[10px] transition-colors cursor-pointer"
-                            title="Quick Accept & Save to Supabase"
-                          >
-                            Accept
-                          </button>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              onOpenOrder(ord.rawId);
-                            }}
-                            className="px-2.5 py-1 rounded bg-[#2d2927] hover:bg-[#ba880f] hover:text-[#392700] text-[#f7bd48] font-bold text-[11px] transition-colors cursor-pointer"
-                          >
-                            Review
-                          </button>
-                        </div>
+                  {ordersList.length === 0 ? (
+                    <tr>
+                      <td colSpan={4} className="py-6 px-3 text-center text-[#d1c6ab]">
+                        {dbError ? (
+                          <div className="p-3 rounded-lg bg-[#93000a]/20 border border-[#ffb4ab]/30 text-[#ffdad6] text-left">
+                            <span className="font-bold block mb-1">
+                              Shared Supabase Database Setup Pending (rbdsjgalxoehuwskzvit):
+                            </span>
+                            <span>{dbError}</span>
+                          </div>
+                        ) : (
+                          'No live incoming orders in public."order" for the selected vendor.'
+                        )}
                       </td>
                     </tr>
-                  ))}
+                  ) : (
+                    ordersList.map((ord) => (
+                      <tr
+                        key={ord.id}
+                        onClick={() => onOpenOrder(ord.rawId)}
+                        className="hover:bg-[#221f1d] cursor-pointer transition-colors"
+                      >
+                        <td className="py-3 px-2">
+                          <div className="flex items-center gap-1.5">
+                            <span className="font-bold text-[#ffecb9]">{ord.id}</span>
+                            <span className={`px-1.5 py-0.5 rounded text-[9px] font-bold ${ord.badgeColor}`}>
+                              {ord.badge}
+                            </span>
+                          </div>
+                          <span className="text-[11px] text-[#d1c6ab] block mt-0.5 truncate max-w-[160px]">
+                            {ord.dest}
+                          </span>
+                        </td>
+                        <td className="py-3 px-2">
+                          <span className="font-medium text-[#e9e1dd] block">{ord.selection}</span>
+                          <span className="text-[11px] text-[#d1c6ab]/80 block italic">{ord.note}</span>
+                        </td>
+                        <td className="py-3 px-2">
+                          <span className="font-['Plus_Jakarta_Sans'] font-bold text-[#ffecb9] text-sm">
+                            {ord.total}
+                          </span>
+                        </td>
+                        <td className="py-3 px-2 text-right">
+                          <div className="flex items-center justify-end gap-1.5">
+                            <button
+                              disabled={acceptingOrderId === ord.rawId}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleAccept(ord.rawId);
+                              }}
+                              className="px-2.5 py-1 rounded bg-[#facc15] hover:bg-[#ba880f] text-[#6c5700] hover:text-[#ffecb9] font-bold text-[10px] transition-colors cursor-pointer disabled:opacity-50 flex items-center gap-1"
+                              title="Accept Order & Update Supabase Status"
+                            >
+                              {acceptingOrderId === ord.rawId && (
+                                <span className="material-symbols-outlined text-xs animate-spin">progress_activity</span>
+                              )}
+                              <span>{acceptingOrderId === ord.rawId ? 'Accepting...' : 'Accept'}</span>
+                            </button>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                onOpenOrder(ord.rawId);
+                              }}
+                              className="px-2.5 py-1 rounded bg-[#2d2927] hover:bg-[#ba880f] hover:text-[#392700] text-[#f7bd48] font-bold text-[11px] transition-colors cursor-pointer"
+                            >
+                              Review
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))
+                  )}
                 </tbody>
               </table>
             </div>
@@ -616,6 +700,16 @@ export default function DashboardScreen({ onNavigate, onOpenOrder }: DashboardSc
           </button>
         </div>
       </section>
+
+      {/* Toast Notification */}
+      {toastMsg && (
+        <div className="fixed bottom-6 right-6 z-50 animate-in fade-in slide-in-from-bottom-5 duration-300">
+          <div className="px-5 py-3 rounded-xl bg-[#2d2927] border border-[#f7bd48]/40 text-[#e9e1dd] shadow-2xl flex items-center gap-3">
+            <span className="material-symbols-outlined text-[#f7bd48]">check_circle</span>
+            <span className="text-xs font-semibold">{toastMsg}</span>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

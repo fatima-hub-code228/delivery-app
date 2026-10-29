@@ -1,7 +1,16 @@
 import React, { useState } from 'react';
 import { playOrderChime } from '../components/AudioChime';
 import { ScreenId } from '../types';
-import { logPartnerAction, testSupabaseConnection } from '../lib/supabase';
+import {
+  logPartnerAction,
+  testSupabaseConnection,
+  ACTIVE_ORDER_TABLE,
+  SUPABASE_PROJECT_ID,
+  SUPABASE_URL,
+  IS_CUSTOMER_SHARED_BACKEND,
+  CUSTOMER_SUPABASE_URL,
+  getLastSupabaseError,
+} from '../lib/supabase';
 
 interface SettingsTaxScreenProps {
   onNavigate: (screen: ScreenId) => void;
@@ -388,29 +397,49 @@ export default function SettingsTaxScreen({
                   Supabase Backend
                 </h3>
               </div>
-              <span className="text-[10px] uppercase font-bold text-[#10b981] bg-[#10b981]/20 px-2 py-0.5 rounded-full flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
-                Live Sync
-              </span>
+              {getLastSupabaseError() ? (
+                <span className="text-[10px] uppercase font-bold text-[#ffb4ab] bg-[#93000a]/30 px-2 py-0.5 rounded-full flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#ffb4ab]" />
+                  Setup Needed
+                </span>
+              ) : (
+                <span className="text-[10px] uppercase font-bold text-[#10b981] bg-[#10b981]/20 px-2 py-0.5 rounded-full flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse" />
+                  Target Configured
+                </span>
+              )}
             </div>
 
             <div className="space-y-2.5 text-xs">
               <div className="p-3 rounded-lg bg-[#1e1b19] border border-[#383432]/30 space-y-1">
                 <span className="text-[10px] uppercase text-[#d1c6ab] block font-semibold">
-                  Project Reference
+                  Active Project Reference (public."{ACTIVE_ORDER_TABLE}" table)
                 </span>
                 <span className="font-mono text-xs text-[#ffecb9] font-bold block">
-                  xwbfblwigouidecdukef
+                  {SUPABASE_PROJECT_ID}
                 </span>
                 <span className="text-[10px] text-[#d1c6ab] truncate block font-mono">
-                  https://xwbfblwigouidecdukef.supabase.co
+                  {SUPABASE_URL}
                 </span>
+                {!IS_CUSTOMER_SHARED_BACKEND && (
+                  <span className="text-[10px] text-[#f7bd48] block font-mono pt-1 border-t border-[#383432]/40 mt-1">
+                    Staged Shared Target: {CUSTOMER_SUPABASE_URL}
+                  </span>
+                )}
               </div>
 
-              {connResult && (
-                <div className="p-2.5 rounded-lg bg-[#10b981]/15 border border-[#10b981]/30 text-[11px] text-[#10b981] font-semibold flex items-center gap-2">
-                  <span className="material-symbols-outlined text-sm">verified</span>
-                  <span>{connResult}</span>
+              {(connResult || getLastSupabaseError()) && (
+                <div
+                  className={`p-2.5 rounded-lg border text-[11px] font-semibold flex items-start gap-2 ${
+                    getLastSupabaseError()
+                      ? 'bg-[#93000a]/25 border-[#ffb4ab]/30 text-[#ffdad6]'
+                      : 'bg-[#10b981]/15 border-[#10b981]/30 text-[#10b981]'
+                  }`}
+                >
+                  <span className="material-symbols-outlined text-sm shrink-0">
+                    {getLastSupabaseError() ? 'warning' : 'verified'}
+                  </span>
+                  <span>{connResult || getLastSupabaseError()}</span>
                 </div>
               )}
 

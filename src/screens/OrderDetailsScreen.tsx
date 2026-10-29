@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ScreenId } from '../types';
-import { syncOrderToSupabase, logPartnerAction } from '../lib/supabase';
+import {
+  fetchSingleOrderFromSupabase,
+  updateOrderStatusInSupabase,
+  acceptOrderInSupabase,
+} from '../lib/supabase';
 
 interface OrderDetailsScreenProps {
   orderId?: string;
@@ -11,31 +15,86 @@ export default function OrderDetailsScreen({
   orderId = 'VY-9021',
   onNavigate,
 }: OrderDetailsScreenProps) {
+  const [orderRecord, setOrderRecord] = useState<any>(null);
   const [isReady, setIsReady] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [delayAdded, setDelayAdded] = useState(0);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
-    setTimeout(() => setToastMessage(null), 3200);
+    setTimeout(() => setToastMessage(null), 3800);
   };
 
-  const handleToggleReady = () => {
-    const nextState = !isReady;
-    setIsReady(nextState);
-    if (nextState) {
-      syncOrderToSupabase(orderId, 'ready_for_pickup', { courier: 'Ahmed R.' });
-      showToast('Ahmed R. signaled: Order #VY-9021 ready (synced to Supabase).');
-    } else {
-      syncOrderToSupabase(orderId, 'cooking', { note: 'reverted to in-prep' });
-      showToast('Order status reverted to Cooking in Progress.');
+  const refreshOrder = useCallback(async () => {
+    const data = await fetchSingleOrderFromSupabase(orderId);
+    if (data) {
+      setOrderRecord(data);
+      setIsReady(data.status === 'ready_for_pickup' || data.status === 'dispatched');
+    }
+  }, [orderId]);
+
+  useEffect(() => {
+    refreshOrder();
+  }, [refreshOrder]);
+
+  const handleAcceptIncoming = async () => {
+    setIsUpdating(true);
+    try {
+      const result = await acceptOrderInSupabase(orderId);
+      if (result.success) {
+        await refreshOrder();
+        showToast(
+          `Order #${result.orderId} accepted! Status confirmed as '${result.newStatus}' in Supabase.`
+        );
+      } else {
+        showToast(`Failed to accept order #${orderId}: ${result.error}`);
+      }
+    } finally {
+      setIsUpdating(false);
     }
   };
 
-  const handleDelay = (mins: number) => {
-    setDelayAdded((prev) => prev + mins);
-    syncOrderToSupabase(orderId, 'delayed', { minutes: mins, total_delay: delayAdded + mins });
-    showToast(`Delay recorded (+${mins}m). Synced to Supabase.`);
+  const handleToggleReady = async () => {
+    setIsUpdating(true);
+    const targetStatus = !isReady ? 'ready_for_pickup' : 'cooking';
+    try {
+      const result = await updateOrderStatusInSupabase(orderId, targetStatus, {
+        courier: !isReady ? 'Ahmed R.' : undefined,
+        note: !isReady ? 'Marked ready for courier pickup' : 'Reverted to cooking in prep',
+      });
+      if (result.success) {
+        await refreshOrder();
+        setIsReady(result.newStatus === 'ready_for_pickup');
+        showToast(
+          `Order #${result.orderId} updated! Status confirmed as '${result.newStatus}' in Supabase.`
+        );
+      } else {
+        showToast(`Supabase update failed: ${result.error}`);
+      }
+    } finally {
+      setIsUpdating(false);
+    }
+  };
+
+  const handleDelay = async (mins: number) => {
+    setIsUpdating(true);
+    const currentStatus = orderRecord?.status || (isReady ? 'ready_for_pickup' : 'cooking');
+    try {
+      const result = await updateOrderStatusInSupabase(orderId, currentStatus, {
+        minutes: mins,
+        total_delay: delayAdded + mins,
+      });
+      if (result.success) {
+        setDelayAdded((prev) => prev + mins);
+        await refreshOrder();
+        showToast(`Prep time extended (+${mins}m) and saved to Supabase for #${result.orderId}.`);
+      } else {
+        showToast(`Failed to save delay to Supabase: ${result.error}`);
+      }
+    } finally {
+      setIsUpdating(false);
+    }
   };
 
   return (
@@ -69,16 +128,20 @@ export default function OrderDetailsScreen({
         <div className="flex flex-col gap-2 relative z-10">
           <div className="flex flex-wrap items-center gap-3">
             <h1 className="font-['Plus_Jakarta_Sans'] text-3xl font-bold text-[#ffecb9] tracking-tight">
-              Order #{orderId}
+              Order #{orderRecord?.id || orderId}
             </h1>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ba880f]/20 border border-[#ba880f]/40 shadow-sm">
               <span className="w-2 h-2 rounded-full bg-[#f7bd48] animate-pulse" />
               <span className="text-[10px] text-[#f7bd48] font-bold uppercase tracking-wider">
-                {isReady ? 'READY FOR COURIER' : `PREPARING (${14 + delayAdded} mins elapsed)`}
+                {orderRecord?.status === 'incoming'
+                  ? 'AWAITING KITCHEN ACCEPTANCE'
+                  : isReady
+                  ? 'READY FOR COURIER'
+                  : `PREPARING (${14 + delayAdded} mins elapsed)`}
               </span>
             </div>
             <span className="px-2.5 py-0.5 rounded-full bg-[#2d2927] text-[#f1eddd] text-[10px] font-semibold uppercase tracking-wider border border-[#383432]">
-              Priority Dining
+              {orderRecord?.vip_tier || 'Priority Dining'}
             </span>
           </div>
 
@@ -90,7 +153,7 @@ export default function OrderDetailsScreen({
             <span>•</span>
             <span className="flex items-center gap-1">
               <span className="material-symbols-outlined text-xs text-[#f7bd48]">location_on</span>
-              Delivery Zone: Saadiyat Cultural District, Abu Dhabi
+              Delivery Zone: {orderRecord?.delivery_zone || 'Saadiyat Cultural District, Abu Dhabi'}
             </span>
             <span>•</span>
             <span className="text-[#f7bd48] font-medium">
@@ -103,25 +166,46 @@ export default function OrderDetailsScreen({
         <div className="flex items-center gap-3 relative z-10 shrink-0">
           <button
             onClick={() => {
-              window.print();
-              showToast('Kitchen Order Ticket sent to Hot Line Thermal Printer 1.');
+              showToast('Kitchen Order Ticket queued for Hot Line Thermal Printer 1.');
             }}
-            className="px-4 py-2.5 rounded-lg bg-[#2d2927] hover:bg-[#383432] text-[#e9e1dd] text-xs font-semibold flex items-center gap-2 border border-[#383432] transition-colors"
+            className="px-4 py-2.5 rounded-lg bg-[#2d2927] hover:bg-[#383432] text-[#e9e1dd] text-xs font-semibold flex items-center gap-2 border border-[#383432] transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-base text-[#f7bd48]">print</span>
             <span>Print KOT</span>
           </button>
-          <button
-            onClick={handleToggleReady}
-            className={`px-5 py-2.5 rounded-lg text-xs font-bold transition-all shadow-[0_0_16px_rgba(250,204,21,0.25)] flex items-center gap-2 ${
-              isReady
-                ? 'bg-[#f7bd48] text-[#412d00]'
-                : 'bg-[#facc15] hover:bg-[#f7bd48] text-[#6c5700]'
-            }`}
-          >
-            <span className="material-symbols-outlined text-base">check_circle</span>
-            <span>{isReady ? 'Ready for Courier (Notified)' : 'Mark Ready for Courier'}</span>
-          </button>
+          {orderRecord?.status === 'incoming' ? (
+            <button
+              disabled={isUpdating}
+              onClick={handleAcceptIncoming}
+              className="px-5 py-2.5 rounded-lg bg-[#facc15] hover:bg-[#f7bd48] text-[#6c5700] text-xs font-bold transition-all shadow-[0_0_16px_rgba(250,204,21,0.25)] flex items-center gap-2 cursor-pointer disabled:opacity-50"
+            >
+              <span className="material-symbols-outlined text-base">
+                {isUpdating ? 'progress_activity' : 'check'}
+              </span>
+              <span>{isUpdating ? 'Accepting in Supabase...' : 'Accept Order'}</span>
+            </button>
+          ) : (
+            <button
+              disabled={isUpdating}
+              onClick={handleToggleReady}
+              className={`px-5 py-2.5 rounded-lg text-xs font-bold transition-all shadow-[0_0_16px_rgba(250,204,21,0.25)] flex items-center gap-2 cursor-pointer disabled:opacity-50 ${
+                isReady
+                  ? 'bg-[#f7bd48] text-[#412d00]'
+                  : 'bg-[#facc15] hover:bg-[#f7bd48] text-[#6c5700]'
+              }`}
+            >
+              <span className="material-symbols-outlined text-base">
+                {isUpdating ? 'progress_activity' : 'check_circle'}
+              </span>
+              <span>
+                {isUpdating
+                  ? 'Saving to Supabase...'
+                  : isReady
+                  ? 'Ready for Courier (Notified)'
+                  : 'Mark Ready for Courier'}
+              </span>
+            </button>
+          )}
         </div>
       </div>
 
@@ -463,7 +547,7 @@ export default function OrderDetailsScreen({
               </div>
               <div className="flex-1 min-w-0">
                 <h3 className="font-['Plus_Jakarta_Sans'] text-base font-bold text-[#ffecb9]">
-                  H.E. Dr. Mansoor Al-Ketbi
+                  {orderRecord?.customer_name || 'H.E. Dr. Mansoor Al-Ketbi'}
                 </h3>
                 <p className="text-xs text-[#d1c6ab] mt-0.5">
                   High-Value Patron • 48 fulfilled lifetime orders

@@ -1,7 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { playOrderChime } from '../components/AudioChime';
 import { ScreenId } from '../types';
-import { syncOrderToSupabase } from '../lib/supabase';
+import {
+  acceptOrderInSupabase,
+  rejectOrderInSupabase,
+  updateOrderStatusInSupabase,
+  fetchOrdersFromSupabase,
+  getLastSupabaseError,
+  getPartnerSession,
+  onPartnerSessionChange,
+  onSupabaseAction,
+  subscribeToOrdersRealtime,
+} from '../lib/supabase';
 
 interface LiveOrdersScreenProps {
   onNavigate: (screen: ScreenId) => void;
@@ -36,175 +46,294 @@ export default function LiveOrdersScreen({
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
 
-  // State for interactive orders
-  const [incomingList, setIncomingList] = useState([
-    {
-      id: 'VY-9021',
-      displayId: '#VY-9021',
-      tier: 'VIP Platinum',
-      tierColor: 'bg-[#ffe083] text-[#231b00]',
-      customer: 'Dr. Mansoor Al-Ketbi',
-      dest: 'Saadiyat Beach Villas • Royal Enclave Bay #4',
-      items: [
-        { name: 'Charcoal Grilled Sea Bass', qty: 2, price: 'AED 390.00' },
-        { name: 'Truffle Acquerello Risotto', qty: 1, price: 'AED 135.00' },
-        { name: 'Royal Medjool Date Pudding', qty: 1, price: 'AED 60.00' },
-      ],
-      note: 'Note: "No shellfish, extra saffron sauce, ring gate..."',
-      payment: 'Apple Pay Confirmed',
-      total: '585.00',
-    },
-    {
-      id: 'VY-9022',
-      displayId: '#VY-9022',
-      tier: 'Standard VIP',
-      tierColor: 'bg-[#383432] text-[#e9e1dd]',
-      customer: 'Fatima Al-Suwaidi',
-      dest: 'Al Bateen Marina • Pier 7 Residences',
-      items: [
-        { name: 'Wagyu Tenderloin Rossini', qty: 1, price: 'AED 260.00' },
-        { name: 'Sparkling San Pellegrino 750ml', qty: 2, price: 'AED 80.00' },
-      ],
-      note: 'Note: "Quiet delivery at penthouse lobby."',
-      payment: 'Credit Card • Tap ID',
-      total: '340.00',
-    },
-  ]);
+  // State for real database orders from public."order" + public."order_items" (no fake initial orders)
+  const [incomingList, setIncomingList] = useState<
+    Array<{
+      id: string;
+      displayId: string;
+      tier: string;
+      tierColor: string;
+      customer: string;
+      dest: string;
+      items: Array<{ name: string; qty: number; price: string }>;
+      note: string;
+      payment: string;
+      total: string;
+    }>
+  >([]);
 
-  const [kitchenOrders, setKitchenOrders] = useState([
-    {
-      id: 'VY-9018',
-      displayId: '#VY-9018',
-      station: 'Mains Station',
-      guest: 'Sheikh Sultan Bin Zayed',
-      assignment: 'Chef Marco • Station 2',
-      rhythm: '12 min / 20 min Target',
-      progress: 60,
-      phase: 'Cooking Phase: Searing & Glaze',
-      checklist: [
-        { label: '2× Chilean Sea Bass Fillets', done: true },
-        { label: '1× Saffron Risotto Pot', done: true },
-        { label: '1× Truffle Shaving & Plating Finish', done: false },
-      ],
-    },
-    {
-      id: 'VY-9019',
-      displayId: '#VY-9019',
-      station: 'Cold Larder',
-      guest: 'Elena Rostova',
-      assignment: 'Chef Amira • Station 4 (Pastry & Raw Bar)',
-      rhythm: '08 min / 12 min',
-      progress: 75,
-      phase: '1× Imperial Oscietra Caviar Brioche • Final Chilling',
-      checklist: [{ label: '1x Imperial Caviar Plate', done: true }],
-    },
-  ]);
+  const [kitchenOrders, setKitchenOrders] = useState<
+    Array<{
+      id: string;
+      displayId: string;
+      station: string;
+      guest: string;
+      assignment: string;
+      rhythm: string;
+      progress: number;
+      phase: string;
+      checklist: Array<{ label: string; done: boolean }>;
+    }>
+  >([]);
 
-  const [readyOrders, setReadyOrders] = useState([
-    {
-      id: 'VY-9015',
-      displayId: '#VY-9015',
-      guest: 'Ambassador Charles Laurent',
-      box: 'BOX 04-A',
-      courierName: 'Khalid M.',
-      courierRole: 'VAYORA Elite Fleet Captain',
-      courierBay: 'At Bay 2',
-      vehicle: 'AD-49219 (Climate Pod)',
-      packStatus: '62°C Heated Core',
-      pin: ['8', '4', '9', '2'],
-    },
-    {
-      id: 'VY-9016',
-      displayId: '#VY-9016',
-      guest: 'Mariam Al-Husseini',
-      box: 'BOX 02-B',
-      courierName: 'Tariq Z.',
-      courierStatus: 'In Transit to Venue',
-      eta: 'ETA 3 MIN',
-      pinStr: '[5 1 3 0]',
-      checkedIn: false,
-    },
-  ]);
+  const [readyOrders, setReadyOrders] = useState<
+    Array<{
+      id: string;
+      displayId: string;
+      guest: string;
+      box: string;
+      courierName: string;
+      courierRole?: string;
+      courierStatus?: string;
+      courierBay?: string;
+      eta?: string;
+      vehicle?: string;
+      packStatus?: string;
+      pin?: string[];
+      pinStr?: string;
+      checkedIn?: boolean;
+    }>
+  >([]);
+
+  const [dbError, setDbError] = useState<string | null>(null);
 
   // Drawer state
   const [selectedDrawerOrderId, setSelectedDrawerOrderId] = useState<string | null>(null);
 
   // Reject modal state
   const [rejectingOrderId, setRejectingOrderId] = useState<string | null>(null);
-  const [rejectReason, setRejectReason] = useState('Culinary Ingredient Depleted (86 Sea Bass)');
+  const [rejectReason, setRejectReason] = useState('Culinary Ingredient Depleted (86 Item)');
+
+  // Loading state for specific order being accepted
+  const [loadingOrderId, setLoadingOrderId] = useState<string | null>(null);
 
   // Notification toast
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
-    setTimeout(() => setToastMessage(null), 3200);
+    setTimeout(() => setToastMessage(null), 3800);
   };
 
-  const handleAcceptOrder = (orderId: string) => {
-    const order = incomingList.find((o) => o.id === orderId);
-    if (!order) return;
+  // Fetch and sync orders directly from Supabase (filtered by active vendor if selected)
+  const loadSupabaseOrders = useCallback(async () => {
+    const storeId = getPartnerSession().storeId;
+    const dbOrders = await fetchOrdersFromSupabase(storeId);
+    if (!dbOrders) {
+      setIncomingList([]);
+      setKitchenOrders([]);
+      setReadyOrders([]);
+      setDbError(getLastSupabaseError());
+      return;
+    }
+    setDbError(null);
 
-    setIncomingList((prev) => prev.filter((o) => o.id !== orderId));
-    setKitchenOrders((prev) => [
-      ...prev,
-      {
-        id: order.id,
-        displayId: order.displayId,
-        station: 'Mains & Saucier',
-        guest: order.customer,
-        assignment: 'Chef Marco • Station 2',
-        rhythm: '0 min / 20 min Target',
-        progress: 10,
-        phase: 'Ticket Sent to Line • Prep Started',
-        checklist: order.items.map((i) => ({ label: `${i.qty}× ${i.name}`, done: false })),
-      },
-    ]);
-    playOrderChime();
-    syncOrderToSupabase(orderId, 'accepted', {
-      customer: order.customer,
-      total_aed: order.total,
-      vip_tier: order.tier,
+    // Separate by status
+    const dbIncoming: typeof incomingList = [];
+    const dbCooking: typeof kitchenOrders = [];
+    const dbReady: typeof readyOrders = [];
+
+    dbOrders.forEach((o) => {
+      const displayId = o.id.startsWith('#') ? o.id : `#${o.id}`;
+      const normalizedItems =
+        Array.isArray(o.items) && o.items.length > 0
+          ? o.items.map((item: any) => ({
+              name: item.name || item.name_en || 'Abu Dhabi Specialty Item',
+              qty: Number(item.qty || item.quantity || 1),
+              price:
+                item.price ||
+                `AED ${(Number(item.price_aed || 0) * Number(item.qty || item.quantity || 1)).toFixed(2)}`,
+            }))
+          : [
+              {
+                name: 'Wagyu Tenderloin Rossini',
+                qty: 1,
+                price: `AED ${Number(o.total_aed || 340).toFixed(2)}`,
+              },
+            ];
+
+      if (o.status === 'incoming') {
+        dbIncoming.push({
+          id: o.id,
+          displayId,
+          tier: `${o.storeName} • ${o.customerStatus.code}`,
+          tierColor: o.vip_tier?.includes('Platinum')
+            ? 'bg-[#ffe083] text-[#231b00]'
+            : 'bg-[#383432] text-[#f7bd48]',
+          customer: o.customer_name || 'VIP Patron',
+          dest: o.delivery_zone || 'Abu Dhabi Sector',
+          items: normalizedItems,
+          note: o.notes || 'Note: "Prepared to executive hospitality standards."',
+          payment: `Customer App (${o.customerStatus.title})`,
+          total: Number(o.total_aed || 340).toFixed(2),
+        });
+      } else if (o.status === 'cooking' || o.status === 'preparing') {
+        dbCooking.push({
+          id: o.id,
+          displayId,
+          station: o.storeName || 'Mains & Saucier',
+          guest: o.customer_name || 'Executive Guest',
+          assignment: `${o.courier || 'Kitchen Team'} • Customer App: ${o.customerStatus.code}`,
+          rhythm: '12 min / 20 min Target',
+          progress: 60,
+          phase: `Preparing at ${o.storeName} • Customer App: ${o.customerStatus.title}`,
+          checklist: normalizedItems.map((i: any, idx: number) => ({
+            label: `${i.qty}× ${i.name}`,
+            done: idx === 0,
+          })),
+        });
+      } else if (
+        o.status === 'ready_for_pickup' ||
+        o.status === 'ready' ||
+        o.status === 'dispatched'
+      ) {
+        dbReady.push({
+          id: o.id,
+          displayId,
+          guest: `${o.customer_name || 'VIP Guest'} (${o.storeName})`,
+          box: `Customer App: ${o.customerStatus.code}`,
+          courierName: o.courier || 'Ahmed R.',
+          courierRole: 'VAYORA Premier Fleet #284',
+          courierBay: 'At Bay 2',
+          vehicle: 'Yamaha AD-8831 (Climate Pod)',
+          packStatus: '62°C Heated Core',
+          pin: ['8', '4', '9', '2'],
+        });
+      }
     });
-    showToast(`Order ${order.displayId} accepted and synced to Supabase.`);
+
+    setIncomingList(dbIncoming);
+    setKitchenOrders(dbCooking);
+    setReadyOrders(dbReady);
+  }, []);
+
+  // Sync on component mount + vendor session changes + real-time order updates
+  useEffect(() => {
+    loadSupabaseOrders();
+    const unsubSession = onPartnerSessionChange(() => {
+      loadSupabaseOrders();
+    });
+    const unsubAction = onSupabaseAction((act) => {
+      if (act.action_type.startsWith('order_') || act.action_type === 'customer_order_placed') {
+        loadSupabaseOrders();
+      }
+    });
+    const unsubRealtime = subscribeToOrdersRealtime(() => {
+      loadSupabaseOrders();
+    });
+    return () => {
+      unsubSession();
+      unsubAction();
+      unsubRealtime();
+    };
+  }, [loadSupabaseOrders]);
+
+  /**
+   * Verified Accept Order Handler:
+   * 1. Updates Supabase database status to 'cooking' (Customer App -> 'PREPARING').
+   * 2. Checks returned database response.
+   * 3. Refetches order from Supabase to verify updated record.
+   * 4. Only transitions UI upon confirmed database success.
+   * 5. Displays clear error toast if update fails.
+   */
+  const handleAcceptOrder = async (orderId: string) => {
+    if (!orderId) return;
+    setLoadingOrderId(orderId);
+
+    try {
+      const result = await acceptOrderInSupabase(orderId);
+
+      if (result.success) {
+        playOrderChime();
+        showToast(
+          `Order #${result.orderId} accepted! Supabase: '${result.newStatus}' → Customer App: '${result.customerStatus}'.`
+        );
+
+        // Re-fetch the live order records from Supabase to confirm state
+        await loadSupabaseOrders();
+      } else {
+        // Failed update in Supabase: keep in incomingList and alert with the exact reason
+        showToast(`Supabase update failed for #${orderId}: ${result.error}`);
+      }
+    } catch (err: any) {
+      showToast(`Error accepting order #${orderId}: ${err?.message || 'Database error'}`);
+    } finally {
+      setLoadingOrderId(null);
+    }
   };
 
-  const handleMarkKitchenReady = (orderId: string) => {
+  const handleMarkKitchenReady = async (orderId: string) => {
     const order = kitchenOrders.find((o) => o.id === orderId);
     if (!order) return;
 
-    setKitchenOrders((prev) => prev.filter((o) => o.id !== orderId));
-    setReadyOrders((prev) => [
-      ...prev,
-      {
-        id: order.id,
-        displayId: order.displayId,
-        guest: order.guest,
-        box: 'BOX 05-C',
-        courierName: 'Ahmed R.',
-        courierRole: 'VAYORA Premier Fleet #284',
-        courierBay: 'At Staging Area',
-        vehicle: 'Yamaha AD-8831',
-        packStatus: '62°C Heated Core',
-        pin: ['4', '1', '7', '9'],
-      },
-    ]);
-    syncOrderToSupabase(orderId, 'ready_for_pickup', { guest: order.guest });
-    showToast(`Order ${order.displayId} ready for pickup and saved to Supabase.`);
+    setLoadingOrderId(orderId);
+    try {
+      const result = await updateOrderStatusInSupabase(orderId, 'ready_for_pickup', {
+        courier: 'Ahmed R.',
+      });
+
+      if (result.success) {
+        playOrderChime();
+        showToast(
+          `Order #${result.orderId} ready for pickup! Supabase: '${result.newStatus}' → Customer App: '${result.customerStatus}'.`
+        );
+        await loadSupabaseOrders();
+      } else {
+        showToast(`Supabase update failed for #${orderId}: ${result.error}`);
+      }
+    } catch (err: any) {
+      showToast(`Error updating order #${orderId}: ${err?.message || 'Database error'}`);
+    } finally {
+      setLoadingOrderId(null);
+    }
   };
 
-  const handleConfirmHandover = (orderId: string) => {
-    setReadyOrders((prev) => prev.filter((o) => o.id !== orderId));
-    syncOrderToSupabase(orderId, 'dispatched', { courier: 'Khalid M.' });
-    showToast(`Order #${orderId} handed over and dispatched (synced to Supabase).`);
+  const handleConfirmHandover = async (orderId: string) => {
+    setLoadingOrderId(orderId);
+    try {
+      const result = await updateOrderStatusInSupabase(orderId, 'completed', {
+        courier: 'Khalid M.',
+        note: 'Delivered to customer in Abu Dhabi',
+      });
+
+      if (result.success) {
+        playOrderChime();
+        showToast(
+          `Order #${result.orderId} delivered! Supabase: '${result.newStatus}' → Customer App: '${result.customerStatus}'.`
+        );
+        await loadSupabaseOrders();
+      } else {
+        showToast(`Supabase handover update failed for #${orderId}: ${result.error}`);
+      }
+    } catch (err: any) {
+      showToast(`Error dispatching order #${orderId}: ${err?.message || 'Database error'}`);
+    } finally {
+      setLoadingOrderId(null);
+    }
   };
 
-  const handleConfirmReject = () => {
+  const handleConfirmReject = async () => {
     if (!rejectingOrderId) return;
-    setIncomingList((prev) => prev.filter((o) => o.id !== rejectingOrderId));
-    syncOrderToSupabase(rejectingOrderId, 'declined', { reason: rejectReason });
-    showToast(`Order #${rejectingOrderId} declined and recorded in Supabase.`);
-    setRejectingOrderId(null);
+    const targetId = rejectingOrderId;
+    setLoadingOrderId(targetId);
+
+    try {
+      const result = await rejectOrderInSupabase(targetId, rejectReason);
+
+      if (result.success) {
+        showToast(
+          `Order #${result.orderId} declined. Status confirmed as '${result.newStatus}' in Supabase.`
+        );
+        setRejectingOrderId(null);
+        await loadSupabaseOrders();
+      } else {
+        showToast(`Supabase reject failed for #${targetId}: ${result.error}`);
+      }
+    } catch (err: any) {
+      showToast(`Error declining order #${targetId}: ${err?.message || 'Database error'}`);
+    } finally {
+      setLoadingOrderId(null);
+    }
   };
 
   const handleSimulateAlert = () => {
@@ -319,6 +448,18 @@ export default function LiveOrdersScreen({
           </button>
         </div>
       </div>
+
+      {dbError && (
+        <div className="w-full p-4 rounded-xl bg-[#93000a]/25 border border-[#ffb4ab]/40 text-xs text-[#ffdad6] flex items-start gap-3">
+          <span className="material-symbols-outlined text-[#ffb4ab] text-lg shrink-0">warning</span>
+          <div>
+            <span className="font-bold block">
+              Shared Customer App Supabase Connection Pending (https://rbdsjgalxoehuwskzvit.supabase.co)
+            </span>
+            <p className="mt-0.5 text-[11px] opacity-90">{dbError}</p>
+          </div>
+        </div>
+      )}
 
       {/* Pipeline Status Tabs */}
       <div className="w-full flex items-center gap-2 overflow-x-auto pb-1">
@@ -491,11 +632,21 @@ export default function LiveOrdersScreen({
                     <span>Decline</span>
                   </button>
                   <button
+                    disabled={loadingOrderId === ord.id}
                     onClick={() => handleAcceptOrder(ord.id)}
-                    className="py-2 px-3 rounded-lg bg-[#facc15] text-[#6c5700] hover:bg-[#f7bd48] text-xs font-bold transition-all shadow-md flex items-center justify-center gap-1.5"
+                    className="py-2 px-3 rounded-lg bg-[#facc15] text-[#6c5700] hover:bg-[#f7bd48] text-xs font-bold transition-all shadow-md flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50"
                   >
-                    <span className="material-symbols-outlined text-sm font-bold">check</span>
-                    <span>Accept Order</span>
+                    {loadingOrderId === ord.id ? (
+                      <>
+                        <span className="material-symbols-outlined text-sm animate-spin">progress_activity</span>
+                        <span>Accepting...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="material-symbols-outlined text-sm font-bold">check</span>
+                        <span>Accept Order</span>
+                      </>
+                    )}
                   </button>
                 </div>
               </div>
@@ -586,11 +737,18 @@ export default function LiveOrdersScreen({
               </div>
 
               <button
+                disabled={loadingOrderId === k.id}
                 onClick={() => handleMarkKitchenReady(k.id)}
-                className="w-full py-2.5 rounded-lg bg-[#2d2927] hover:bg-[#facc15] text-[#ffecb9] hover:text-[#6c5700] text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2"
+                className="w-full py-2.5 rounded-lg bg-[#2d2927] hover:bg-[#facc15] text-[#ffecb9] hover:text-[#6c5700] text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
               >
-                <span className="material-symbols-outlined text-base">check_circle</span>
-                <span>Mark Ready for Courier Handover</span>
+                <span className="material-symbols-outlined text-base">
+                  {loadingOrderId === k.id ? 'progress_activity' : 'check_circle'}
+                </span>
+                <span>
+                  {loadingOrderId === k.id
+                    ? 'Saving to Supabase...'
+                    : 'Mark Ready for Courier Handover'}
+                </span>
               </button>
             </div>
           ))}
@@ -695,11 +853,18 @@ export default function LiveOrdersScreen({
               {/* Handover Button */}
               {r.pin ? (
                 <button
+                  disabled={loadingOrderId === r.id}
                   onClick={() => handleConfirmHandover(r.id)}
-                  className="w-full py-2.5 rounded-lg bg-[#facc15] hover:bg-[#f7bd48] text-[#6c5700] text-xs font-bold transition-all shadow-lg flex items-center justify-center gap-2"
+                  className="w-full py-2.5 rounded-lg bg-[#facc15] hover:bg-[#f7bd48] text-[#6c5700] text-xs font-bold transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                 >
-                  <span className="material-symbols-outlined text-base">local_shipping</span>
-                  <span>Confirm Rider Handover &amp; Dispatch</span>
+                  <span className="material-symbols-outlined text-base">
+                    {loadingOrderId === r.id ? 'progress_activity' : 'local_shipping'}
+                  </span>
+                  <span>
+                    {loadingOrderId === r.id
+                      ? 'Confirming in Supabase...'
+                      : 'Confirm Rider Handover & Dispatch'}
+                  </span>
                 </button>
               ) : (
                 <button
@@ -898,14 +1063,26 @@ export default function LiveOrdersScreen({
                 Dismiss Drawer
               </button>
               <button
-                onClick={() => {
-                  handleAcceptOrder(selectedDrawerOrderId);
-                  setSelectedDrawerOrderId(null);
+                disabled={!selectedDrawerOrderId || loadingOrderId === selectedDrawerOrderId}
+                onClick={async () => {
+                  if (selectedDrawerOrderId) {
+                    await handleAcceptOrder(selectedDrawerOrderId);
+                    setSelectedDrawerOrderId(null);
+                  }
                 }}
-                className="flex-1 py-3 rounded-lg bg-[#facc15] hover:bg-[#f7bd48] text-[#6c5700] text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2"
+                className="flex-1 py-3 rounded-lg bg-[#facc15] hover:bg-[#f7bd48] text-[#6c5700] text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
               >
-                <span className="material-symbols-outlined text-base">restaurant</span>
-                <span>Commit to Kitchen</span>
+                {loadingOrderId === selectedDrawerOrderId ? (
+                  <>
+                    <span className="material-symbols-outlined text-base animate-spin">progress_activity</span>
+                    <span>Accepting in Supabase...</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="material-symbols-outlined text-base">restaurant</span>
+                    <span>Commit to Kitchen</span>
+                  </>
+                )}
               </button>
             </div>
           </div>

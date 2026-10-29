@@ -1,0 +1,52 @@
+name: Build Quick Shop Partner Android APK & AAB
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+env:
+  VITE_SUPABASE_URL: https://rbdsjgalxoehuwskzvit.supabase.co
+  VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJiZHNqZ2FseG9laHV3c2t6dml0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTI5NDk4MjEsImV4cCI6MjEwODUyNTgyMX0.rWVGoz323VwEXvWqw5XpsDER54z-E69gLWMAFZJjPSA' }}
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup Java JDK 21 (Required for Capacitor 8 & Gradle)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Install Web Dependencies & Build Web Assets
+        run: |
+          npm install
+          npm run build
+          npx cap sync android
+
+      - name: Build Installable Android APK (Debug) & Play Store Bundle (AAB)
+        working-directory: ./android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug bundleRelease
+
+      - name: Upload QuickShopPartner Debug APK (Install on Phone to Test)
+        uses: actions/upload-artifact@v4
+        with:
+          name: QuickShopPartner-Android-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Upload QuickShopPartner Release AAB (Google Play Store)
+        uses: actions/upload-artifact@v4
+        with:
+          name: QuickShopPartner-PlayStore-AAB
+          path: android/app/build/outputs/bundle/release/*.aab

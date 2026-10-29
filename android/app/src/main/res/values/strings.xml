@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Quick Shop Partner</string>
+    <string name="title_activity_main">Quick Shop Partner</string>
+    <string name="package_name">com.quickshop.partner</string>
+    <string name="custom_url_scheme">com.quickshop.partner</string>
+</resources>

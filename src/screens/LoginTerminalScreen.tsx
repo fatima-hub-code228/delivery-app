@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ThreeGoldenCloche from '../components/ThreeGoldenCloche';
 import { ScreenId } from '../types';
+import { authenticatePartnerSession } from '../lib/supabase';
 
 interface LoginTerminalScreenProps {
   onLoginSuccess: () => void;
@@ -20,21 +21,31 @@ export default function LoginTerminalScreen({
   const [password, setPassword] = useState('VayoraReserve2025!');
   const [showPassword, setShowPassword] = useState(false);
   const [keepLoggedIn, setKeepLoggedIn] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
 
-  // Simulator states
-  const [simState, setSimState] = useState<'normal' | 'loading' | 'error'>('normal');
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (simState === 'error') {
-      return;
+    setAuthError(null);
+    setIsLoading(true);
+    try {
+      const res = await authenticatePartnerSession(email, password, selectedBranch, keepLoggedIn);
+      if (res.success && res.session) {
+        showToast(
+          `Authenticated as ${res.session.operator} (${res.session.branch}). Connected to Supabase.`,
+          'verified'
+        );
+        onLoginSuccess();
+      } else {
+        setAuthError(
+          res.error || 'Authentication failed. Please check your credentials and network connection.'
+        );
+      }
+    } catch (err: any) {
+      setAuthError(err?.message || 'Unexpected error during partner authentication.');
+    } finally {
+      setIsLoading(false);
     }
-    setSimState('loading');
-    setTimeout(() => {
-      setSimState('normal');
-      showToast('Franchise license verified. Terminal activated.', 'verified');
-      onLoginSuccess();
-    }, 1200);
   };
 
   return (
@@ -149,8 +160,8 @@ export default function LoginTerminalScreen({
                 </p>
               </div>
 
-              {/* Alert Container for Interactive Simulation */}
-              {simState === 'error' && (
+              {/* Alert Container for Authentication Errors */}
+              {authError && (
                 <div className="mb-6 p-4 rounded-xl bg-[#93000a]/30 border border-[#ffb4ab]/40 transition-all duration-300 animate-in fade-in">
                   <div className="flex items-start space-x-3">
                     <span className="material-symbols-outlined text-[#ffb4ab] text-xl mt-0.5">
@@ -160,9 +171,7 @@ export default function LoginTerminalScreen({
                       <h4 className="font-['Plus_Jakarta_Sans'] text-sm font-bold text-[#ffb4ab]">
                         Authentication Failed
                       </h4>
-                      <p className="text-xs text-[#ffdad6] mt-0.5">
-                        Invalid restaurant franchise license key or password for Abu Dhabi branch.
-                      </p>
+                      <p className="text-xs text-[#ffdad6] mt-0.5">{authError}</p>
                     </div>
                   </div>
                 </div>
@@ -186,10 +195,34 @@ export default function LoginTerminalScreen({
                       onChange={(e) => setSelectedBranch(e.target.value)}
                       className="w-full pl-10 pr-10 py-3 rounded-lg bg-[#1e1b19] text-[#e9e1dd] text-xs border border-[#383432]/50 focus:outline-none focus:border-[#f7bd48] transition-all appearance-none cursor-pointer"
                     >
-                      <option>The Grand Pavilion • Al Maryah Island (Terminal #01)</option>
-                      <option>L'Orangerie Privée • Saadiyat Beach Club (Terminal #02)</option>
-                      <option>Maison Qasr • Corniche Reserve (Terminal #03)</option>
-                      <option>Cipriani Executive Lounge • Yas Marina (Terminal #04)</option>
+                      <option value="ALL">All Connected Vendors (Abu Dhabi Hub)</option>
+                      <option value="store_grand_pavilion">
+                        The Grand Pavilion • Al Maryah Island (Terminal #01)
+                      </option>
+                      <option value="store_mosaic">
+                        Mosaic Lebanese Restaurant • Al Danah (Terminal #02)
+                      </option>
+                      <option value="store_lebanese_roaster">
+                        Lebanese Roaster • Al Danah (Terminal #03)
+                      </option>
+                      <option value="store_al_rifai">
+                        Al Rifai Roastery • Al Zahiyah (Terminal #04)
+                      </option>
+                      <option value="store_shay_madhboot">
+                        Shay Madhboot • Al Muroor &amp; Al Hadbat (Terminal #05)
+                      </option>
+                      <option value="store_bateel">
+                        Bateel Boutique • Al Maryah Island (Terminal #06)
+                      </option>
+                      <option value="store_al_sultan">
+                        Al Sultan Sweets • Al Danah (Terminal #07)
+                      </option>
+                      <option value="store_waitrose">
+                        Waitrose &amp; Partners • Al Reem Island (Terminal #08)
+                      </option>
+                      <option value="store_lulu">
+                        Lulu Hypermarket • Al Nahyan &amp; Al Wahda (Terminal #09)
+                      </option>
                     </select>
                     <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
                       <span className="material-symbols-outlined text-[#d1c6ab] text-lg">
@@ -282,11 +315,11 @@ export default function LoginTerminalScreen({
                 {/* Primary Submission CTA */}
                 <div className="pt-2">
                   <button
-                    disabled={simState === 'loading'}
+                    disabled={isLoading}
                     className="relative w-full py-3.5 px-6 rounded-lg bg-[#facc15] hover:bg-[#ba880f] text-[#6c5700] hover:text-[#ffecb9] font-['Plus_Jakarta_Sans'] font-bold text-sm flex items-center justify-center space-x-2 shadow-lg shadow-[#facc15]/20 transition-all duration-200 cursor-pointer disabled:opacity-50"
                     type="submit"
                   >
-                    {simState === 'loading' ? (
+                    {isLoading ? (
                       <>
                         <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-current" fill="none" viewBox="0 0 24 24">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
@@ -349,54 +382,6 @@ export default function LoginTerminalScreen({
                 </span>
               </div>
               <span className="text-xs text-[#d1c6ab]/70">UAE Central Bank Regulatory Standard</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Developer & Reviewer Interactive State Simulator Bar */}
-        <div className="mt-6 p-4 rounded-xl bg-[#1e1b19] border border-[#383432]/50 shadow-md">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center space-x-2">
-              <span className="material-symbols-outlined text-[#f7bd48] text-base">tune</span>
-              <span className="text-xs text-[#e9e1dd] tracking-wider uppercase font-bold">
-                Terminal Simulator
-              </span>
-              <span className="text-[#d1c6ab] text-xs">(Preview UI States)</span>
-            </div>
-            <div className="flex flex-wrap items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setSimState('normal')}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                  simState === 'normal'
-                    ? 'bg-[#facc15] text-[#6c5700] shadow-sm'
-                    : 'bg-[#2d2927] hover:bg-[#383432] text-[#e9e1dd]'
-                }`}
-              >
-                Normal State
-              </button>
-              <button
-                type="button"
-                onClick={() => setSimState('loading')}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                  simState === 'loading'
-                    ? 'bg-[#facc15] text-[#6c5700] shadow-sm'
-                    : 'bg-[#2d2927] hover:bg-[#383432] text-[#f7bd48]'
-                }`}
-              >
-                Loading State
-              </button>
-              <button
-                type="button"
-                onClick={() => setSimState('error')}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
-                  simState === 'error'
-                    ? 'bg-[#93000a] text-[#ffdad6] shadow-sm'
-                    : 'bg-[#2d2927] hover:bg-[#383432] text-[#ffb4ab]'
-                }`}
-              >
-                Invalid Credentials Alert
-              </button>
             </div>
           </div>
         </div>

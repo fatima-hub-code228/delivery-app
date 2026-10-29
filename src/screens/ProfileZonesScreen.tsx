@@ -1,6 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScreenId } from '../types';
-import { syncZoneToSupabase, logPartnerAction } from '../lib/supabase';
+import {
+  syncZoneToSupabase,
+  logPartnerAction,
+  fetchDeliveryZonesFromSupabase,
+} from '../lib/supabase';
 
 interface ProfileZonesScreenProps {
   onNavigate: (screen: ScreenId) => void;
@@ -66,6 +70,28 @@ export default function ProfileZonesScreen({ onNavigate, showToast }: ProfileZon
       color: 'bg-[#93000a]/20',
     },
   ]);
+
+  useEffect(() => {
+    fetchDeliveryZonesFromSupabase().then((dbZones) => {
+      if (dbZones && dbZones.length > 0) {
+        setZones(
+          dbZones.map((z: any, idx: number) => ({
+            id: z.id,
+            name: z.name || z.id,
+            badge: z.id.startsWith('ad_') ? 'Customer App Zone' : `Zone ${idx + 1}`,
+            subBadge: z.id.startsWith('ad_') ? 'Abu Dhabi Geofence' : 'Executive Fleet',
+            radius: z.radius || 'Abu Dhabi Service Sector',
+            fee: z.fee || 'AED 7',
+            feeSub: '',
+            minOrder: z.min_order || 'AED 35',
+            window: '25-35m',
+            active: Boolean(z.is_active),
+            color: z.is_active ? 'bg-[#ba880f]' : 'bg-[#93000a]/20',
+          }))
+        );
+      }
+    });
+  }, []);
 
   const [cuisineTags, setCuisineTags] = useState([
     'Contemporary Emirati',

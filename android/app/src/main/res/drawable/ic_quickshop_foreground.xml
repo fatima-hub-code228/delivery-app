@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Outer Golden Ring -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#BA880F"
+        android:strokeWidth="2.2"
+        android:pathData="M54,22 A32,32 0 1,1 53.99,22 Z" />
+    <!-- Cloche Top Handle -->
+    <path
+        android:fillColor="#FFECB9"
+        android:pathData="M54,31 C56.5,31 58.5,33 58.5,35.5 C58.5,37.4 57.3,39 55.5,39.7 L55.5,41.5 L52.5,41.5 L52.5,39.7 C50.7,39 49.5,37.4 49.5,35.5 C49.5,33 51.5,31 54,31 Z" />
+    <!-- Golden Cloche Dome -->
+    <path
+        android:fillColor="#FACC15"
+        android:pathData="M31,63 C31,49.5 41.3,41 54,41 C66.7,41 77,49.5 77,63 L31,63 Z" />
+    <!-- Cloche Rim Highlight -->
+    <path
+        android:fillColor="#F7BD48"
+        android:pathData="M28,65 L80,65 C81.4,65 82.5,66.1 82.5,67.5 C82.5,68.9 81.4,70 80,70 L28,70 C26.6,70 25.5,68.9 25.5,67.5 C25.5,66.1 26.6,65 28,65 Z" />
+    <!-- Platter Base -->
+    <path
+        android:fillColor="#BA880F"
+        android:pathData="M33,72.5 L75,72.5 C76.1,72.5 77,73.4 77,74.5 C77,75.6 76.1,76.5 75,76.5 L33,76.5 C31.9,76.5 31,75.6 31,74.5 C31,73.4 31.9,72.5 33,72.5 Z" />
+</vector>

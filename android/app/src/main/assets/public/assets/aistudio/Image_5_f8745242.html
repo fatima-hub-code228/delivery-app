@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-tertiary": "#323126", "primary-container": "#facc15", "on-primary-container": "#6c5700", "primary": "#ffecb9", "on-primary-fixed": "#231b00", "secondary-container": "#ba880f", "surface-variant": "#383432", "on-tertiary-fixed-variant": "#48473c", "inverse-primary": "#735c00", "tertiary-fixed-dim": "#cac7b8", "background": "#161311", "tertiary": "#f1eddd", "surface-tint": "#eec200", "on-primary-fixed-variant": "#574500", "error-container": "#93000a", "on-primary": "#3c2f00", "tertiary-fixed": "#e6e3d3", "on-surface": "#e9e1dd", "tertiary-container": "#d4d1c2", "outline": "#9a9078", "surface-container-low": "#1e1b19", "inverse-surface": "#e9e1dd", "surface-dim": "#161311", "on-background": "#e9e1dd", "surface-container-lowest": "#100e0c", "on-secondary-fixed-variant": "#5d4200", "on-secondary": "#412d00", "surface-container": "#221f1d", "primary-fixed-dim": "#eec200", "secondary-fixed": "#ffdea6", "primary-fixed": "#ffe083", "surface-container-high": "#2d2927", "on-tertiary-container": "#5b5a4e", "surface-container-highest": "#383432", "on-tertiary-fixed": "#1c1c13", "surface-bright": "#3c3836", "on-surface-variant": "#d1c6ab", "on-error": "#690005", "on-secondary-fixed": "#271900", "secondary-fixed-dim": "#f7bd48", "on-secondary-container": "#392700", "surface": "#161311", "on-error-container": "#ffdad6", "secondary": "#f7bd48", "outline-variant": "#4d4632", "error": "#ffb4ab", "inverse-on-surface": "#33302d" }, "borderRadius": { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, "spacing": { "gutter-sm": "0.75rem", "margin-mobile": "1rem", "space-lg": "1.5rem", "space-xs": "0.25rem", "space-md": "1rem", "space-sm": "0.5rem", "margin": "2rem", "space-xl": "2.5rem", "gutter-lg": "2rem", "gutter": "1.5rem" }, "fontFamily": { "display-lg": [ "Plus Jakarta Sans" ], "title-md": [ "Plus Jakarta Sans" ], "body-sm": [ "Inter" ], "headline-md": [ "Plus Jakarta Sans" ], "body-lg": [ "Inter" ], "body-md": [ "Inter" ], "currency-display": [ "Plus Jakarta Sans" ], "currency-caption": [ "Inter" ], "headline-lg": [ "Plus Jakarta Sans" ], "headline-xl": [ "Plus Jakarta Sans" ], "label-sm": [ "Inter" ], "label-md": [ "Inter" ], "display-lg-mobile": [ "Plus Jakarta Sans" ] }, "fontSize": { "display-lg": [ "3rem", { "lineHeight": "3.5rem", "letterSpacing": "-0.03em", "fontWeight": "700" } ], "title-md": [ "1.125rem", { "lineHeight": "1.625rem", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "body-sm": [ "0.8125rem", { "lineHeight": "1.25rem", "letterSpacing": "0.01em", "fontWeight": "400" } ], "headline-md": [ "1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.015em", "fontWeight": "600" } ], "body-lg": [ "1.125rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.01em", "fontWeight": "400" } ], "body-md": [ "0.9375rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "400" } ], "currency-display": [ "1.75rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "currency-caption": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.08em", "fontWeight": "600" } ], "headline-lg": [ "1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "headline-xl": [ "2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.025em", "fontWeight": "700" } ], "label-sm": [ "0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "600" } ], "label-md": [ "0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.02em", "fontWeight": "500" } ], "display-lg-mobile": [ "2.25rem", { "lineHeight": "2.75rem", "letterSpacing": "-0.02em", "fontWeight": "700" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="flex flex-col h-full overflow-hidden"><div class="h-20 px-space-md flex items-center gap-space-sm bg-surface-container-lowest/60 backdrop-blur-md"><img alt="VAYORA Partner Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1Vu_ERvxM1TR_WtX3iJxrhFOEEmv5C686HsjH3CyVYBYC9u-V9_1S46iKEAom3NtM3XPY1HePkEOVmpyVKLJomFOb33Ws5hhdUubFia9Xhgy6fV2XvtjCnifOYwDwkhlM14zGcWEcuEbDzdpBaKLFpI_P7P7KFIYnOsE9DVapMFuAwGYiSc7gOIhDXksVBbLvrRWT7Cby0Mbd6WCfy8yHszed4qPAomY1GvqoS_DjpD9TlAGusetj7d"/><div class="flex flex-col"><span class="font-title-md text-title-md tracking-tight text-primary leading-none">VAYORA</span><span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold mt-0.5">Partner Portal</span></div></div><div class="px-space-md py-space-sm"><div class="p-space-sm rounded-lg bg-surface-container flex items-center justify-between shadow-[0_1px_4px_rgba(0,0,0,0.2)]"><div class="flex items-center gap-space-xs"><span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span><span class="font-label-sm text-label-sm text-on-surface font-medium">Abu Dhabi Hub</span></div><span class="font-currency-caption text-currency-caption text-secondary font-semibold uppercase">UAE VIP</span></div></div><nav class="flex-1 px-space-md py-space-xs space-y-1 overflow-y-auto" data-active-classes="bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-[0_0_16px_rgba(250,204,21,0.2)]"><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="dashboard" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">dashboard</span><span class="font-label-md text-label-md">Dashboard</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="live-orders" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">room_service</span><span class="font-label-md text-label-md">Live Orders</span></div><span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold shadow-sm">4 New</span></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="order-details-&amp;-history" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">receipt_long</span><span class="font-label-md text-label-md">Order Details &amp; History</span></div></a><a aria-current="page" class="flex items-center justify-between px-space-md py-2.5 transition-all group bg-primary-container text-on-primary-container font-semibold rounded-lg shadow-[0_0_16px_rgba(250,204,21,0.2)]" data-path="menu-&amp;-inventory-management" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">inventory_2</span><span class="font-label-md text-label-md">Menu &amp; Inventory</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="add-/-edit-dish" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">restaurant_menu</span><span class="font-label-md text-label-md">Add / Edit Dish</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="restaurant-profile-&amp;-delivery-zones" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">map</span><span class="font-label-md text-label-md">Profile &amp; Zones</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="analytics-&amp;-sales-reports" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">monitoring</span><span class="font-label-md text-label-md">Analytics &amp; Sales</span></div></a><a class="flex items-center justify-between px-space-md py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all group" data-path="partner-settings-&amp;-uae-tax" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-xl transition-transform group-hover:scale-105">settings</span><span class="font-label-md text-label-md">Settings &amp; UAE Tax</span></div></a></nav><div class="p-space-md bg-surface-container-lowest/80 backdrop-blur-md space-y-space-sm"><div class="p-space-sm rounded-lg bg-surface-container-high flex flex-col gap-1"><div class="flex items-center justify-between"><span class="font-label-sm text-label-sm uppercase text-on-surface-variant font-medium">Today's Shift</span><span class="font-currency-caption text-currency-caption uppercase text-secondary font-bold">AED</span></div><div class="flex items-baseline justify-between"><span class="font-currency-display text-currency-display text-primary leading-tight">14,820</span><span class="font-label-sm text-label-sm text-secondary font-semibold">+18.4%</span></div></div><div class="p-space-sm rounded-lg bg-surface-container flex items-center justify-between"><div class="flex flex-col"><span class="font-label-sm text-label-sm text-on-surface-variant">UAE Concierge Support</span><span class="font-label-md text-label-md text-primary font-semibold tracking-tight">+971 2 600 VAYORA</span></div><span class="material-symbols-outlined text-secondary text-lg">support_agent</span></div></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-20 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.3)] z-40 px-space-lg flex items-center justify-between"><div class="flex items-center gap-space-lg flex-1"><div class="flex items-center gap-space-sm py-1.5 px-space-md rounded-xl bg-surface-container-low shadow-[0_1px_4px_rgba(0,0,0,0.15)]"><span class="material-symbols-outlined text-secondary text-xl">storefront</span><div class="flex flex-col"><div class="flex items-center gap-2"><span class="font-label-md text-label-md text-on-surface font-semibold">The Grand Pavilion</span><span class="font-label-sm text-label-sm text-on-surface-variant">• Al Maryah Island, Abu Dhabi</span></div><div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span><span class="font-label-sm text-label-sm text-secondary font-semibold tracking-wide uppercase">Open &amp; Accepting Orders</span></div></div><button class="ml-space-sm p-1 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" type="button"><span class="material-symbols-outlined text-lg">expand_more</span></button></div><div class="relative max-w-md w-full hidden xl:block"><span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">search</span><input class="w-full pl-10 pr-4 py-2 bg-surface-container-low rounded-xl text-on-surface placeholder:text-on-surface-variant/50 font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-secondary-container transition-all" placeholder="Search orders, menu items, guests, or tables..." type="text"/></div></div><div class="flex items-center gap-space-md"><button class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" title="Live Sound Alerts Enabled" type="button"><span class="material-symbols-outlined text-secondary text-lg">volume_up</span><span class="font-label-sm text-label-sm hidden sm:inline text-on-surface-variant font-medium">Chime Live</span></button><button class="relative p-2 rounded-xl bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" type="button"><span class="material-symbols-outlined text-xl">notifications</span><span class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm flex items-center justify-center font-bold shadow-md">3</span></button><div class="flex items-center gap-space-sm pl-space-sm"><div class="flex flex-col text-right hidden lg:block"><span class="font-label-md text-label-md text-on-surface font-semibold leading-tight">Tariq Al Mansoori</span><span class="font-label-sm text-label-sm text-secondary uppercase font-medium">General Director</span></div><div class="relative flex items-center gap-1.5 p-1 rounded-full bg-surface-container-low"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrlF07D7rcBKVtzkU4_A51hJFZgKReEOtctmAqEotlcBypQJMRlHl26LyYOa3tIQeKb8NwFIldaLy6zW0Wd2XzOS11wWEOw05lX2MI0SdiWOEx_izf9ynUDaWYwRcFLYB4RGpDeWTEPWQufNxo_sOEK41nFzMT6DOrWzgAADsoew9EsCNK9bdA84yzmp8bdAMXwJ5Fckop26XoUT7Ct5C2UiF4rwhqCqTelxxp3cKop9R9gkMzFJw"/><span class="material-symbols-outlined text-on-surface-variant text-base pr-1">keyboard_arrow_down</span></div></div></div></header><main class="w-full pt-20 px-space-lg pb-space-xl bg-surface min-h-screen"><div class="flex flex-col w-full">
+<!-- Dynamic Operational Status & Summary Section -->
+<section class="mb-space-lg">
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-xl relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-80 h-80 rounded-full bg-primary-container/5 blur-3xl pointer-events-none"></div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md relative z-10">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary animate-ping"></span>
+<span class="font-currency-caption text-currency-caption uppercase tracking-widest text-secondary font-bold">VAYORA Core Registry • POS Sync Active</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-primary font-bold tracking-tight">Menu &amp; Inventory Management</h1>
+<div class="flex flex-wrap items-center gap-space-sm mt-2 text-on-surface-variant font-label-md text-label-md">
+<span class="text-on-surface font-semibold">58 Active Items</span>
+<span>/</span>
+<span>4 Categories</span>
+<span>/</span>
+<span class="text-secondary font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-base">warning</span>
+              3 Low Stock Alerts
+            </span>
+<span>/</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-primary text-label-sm font-label-sm font-semibold shadow-sm">
+              Live on Abu Dhabi App
+            </span>
+</div>
+</div>
+<!-- Action Bar -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<button class="flex items-center gap-2 px-space-md py-2.5 rounded-xl bg-surface-container-high text-on-surface font-label-md text-label-md font-semibold hover:bg-surface-variant transition-all shadow-md active:scale-95" id="quick-86-toggle-btn">
+<span class="material-symbols-outlined text-error text-lg">block</span>
+<span>86 Emergency Mode</span>
+</button>
+<button class="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-md text-label-md font-medium transition-all shadow-sm">
+<span class="material-symbols-outlined text-base">file_upload</span>
+<span>Import CSV</span>
+</button>
+<button class="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-md text-label-md font-medium transition-all shadow-sm">
+<span class="material-symbols-outlined text-base">file_download</span>
+<span>Export Pricing</span>
+</button>
+<button class="flex items-center gap-2 px-space-md py-2.5 rounded-xl bg-primary-container text-on-primary-container font-label-md text-label-md font-bold hover:brightness-105 transition-all shadow-[0_0_18px_rgba(250,204,21,0.25)] active:scale-95">
+<span class="material-symbols-outlined text-lg">add</span>
+<span>Add New Dish</span>
+</button>
+</div>
+</div>
+<!-- Quick Metrics Ribbon -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-space-md mt-space-lg pt-space-md bg-surface-container-lowest/50 rounded-lg p-space-md">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Gross Inventory Valuation</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-currency-display text-currency-display text-primary font-bold">142,850</span>
+<span class="font-currency-caption text-currency-caption text-secondary font-bold">AED</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Average Check Item</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-currency-display text-currency-display text-primary font-bold">182.50</span>
+<span class="font-currency-caption text-currency-caption text-secondary font-bold">AED</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Kitchen Yield Rate</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-currency-display text-currency-display text-secondary font-bold">96.8%</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Optimal</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Stock Depletion Velocity</span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="font-currency-display text-currency-display text-tertiary font-bold">4.2</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">orders / min</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Filter & Categories Navigation Section -->
+<section class="space-y-space-md mb-space-lg">
+<!-- Category Pills -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1">
+<button class="category-pill active flex items-center gap-2 px-space-md py-2 rounded-full bg-primary-container text-on-primary-container font-label-md text-label-md font-bold shadow-md transition-all whitespace-nowrap">
+<span>All Dishes</span>
+<span class="px-1.5 py-0.5 rounded-full bg-on-primary-container/20 text-on-primary-container text-label-sm font-label-sm">58</span>
+</button>
+<button class="category-pill flex items-center gap-2 px-space-md py-2 rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md font-medium hover:bg-surface-variant transition-all whitespace-nowrap">
+<span>Starters &amp; Cold Mezze</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant text-label-sm font-label-sm">14</span>
+</button>
+<button class="category-pill flex items-center gap-2 px-space-md py-2 rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md font-medium hover:bg-surface-variant transition-all whitespace-nowrap">
+<span>Chef's Signature Mains</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant text-label-sm font-label-sm">22</span>
+</button>
+<button class="category-pill flex items-center gap-2 px-space-md py-2 rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md font-medium hover:bg-surface-variant transition-all whitespace-nowrap">
+<span>Woodfire Grill</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant text-label-sm font-label-sm">12</span>
+</button>
+<button class="category-pill flex items-center gap-2 px-space-md py-2 rounded-full bg-surface-container-high text-on-surface font-label-md text-label-md font-medium hover:bg-surface-variant transition-all whitespace-nowrap">
+<span>Artisan Desserts &amp; Mocktails</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant text-label-sm font-label-sm">10</span>
+</button>
+</div>
+<!-- Live Filters & Search Bar -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex flex-col lg:flex-row items-center justify-between gap-space-md shadow-md">
+<div class="relative w-full lg:max-w-md">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">search</span>
+<input class="w-full pl-10 pr-10 py-2.5 bg-surface-container rounded-xl text-on-surface placeholder:text-on-surface-variant/40 font-body-sm text-body-sm focus:outline-none focus:bg-surface-container-high transition-all" id="dish-search-input" placeholder="Search dish name, gold flakes, saffron, wagyu..." type="text"/>
+<button class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-on-surface" id="clear-search-btn">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<!-- Tag Filters -->
+<div class="flex flex-wrap items-center gap-space-sm w-full lg:w-auto">
+<!-- Stock Filter Select -->
+<div class="flex items-center gap-1.5 bg-surface-container px-3 py-1.5 rounded-xl">
+<span class="material-symbols-outlined text-secondary text-base">inventory</span>
+<select class="bg-transparent font-label-md text-label-md text-on-surface focus:outline-none cursor-pointer pr-2" id="stock-filter">
+<option class="bg-surface-container-high text-on-surface" value="all">All Availability</option>
+<option class="bg-surface-container-high text-on-surface" value="in_stock">In Stock Only</option>
+<option class="bg-surface-container-high text-on-surface" value="low_stock">Low Stock Alert (3)</option>
+<option class="bg-surface-container-high text-on-surface" value="sold_out">86'd / Sold Out</option>
+</select>
+</div>
+<!-- Dietary Chips -->
+<div class="flex items-center gap-1.5">
+<button class="dietary-filter flex items-center gap-1 px-3 py-1.5 rounded-xl bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm font-semibold transition-all" data-tag="halal">
+<span class="material-symbols-outlined text-sm text-secondary">verified</span>
+<span>Halal Certified</span>
+</button>
+<button class="dietary-filter flex items-center gap-1 px-3 py-1.5 rounded-xl bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm font-semibold transition-all" data-tag="gluten-free">
+<span class="material-symbols-outlined text-sm text-primary">eco</span>
+<span>Gluten-Free</span>
+</button>
+<button class="dietary-filter flex items-center gap-1 px-3 py-1.5 rounded-xl bg-surface-container text-on-surface-variant hover:text-on-surface font-label-sm text-label-sm font-semibold transition-all" data-tag="vegan">
+<span class="material-symbols-outlined text-sm text-primary">psychiatry</span>
+<span>Vegan</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Emergency 86 Banner (Stateful micro-display) -->
+<div class="hidden mb-space-md p-space-md rounded-xl bg-error-container text-on-error-container flex items-center justify-between shadow-xl" id="bulk-86-banner">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-2xl animate-pulse">crisis_alert</span>
+<div>
+<h2 class="font-title-md text-title-md font-bold leading-tight">Emergency 86 Batch Mode Activated</h2>
+<p class="font-body-sm text-body-sm opacity-90">Clicking any dish card's stock indicator immediately pulls it from live UAE delivery tablets and guest menus.</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="px-3.5 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface font-label-md text-label-md font-semibold hover:bg-surface transition-all" id="exit-86-btn">
+        Exit Mode
+      </button>
+</div>
+</div>
+<!-- Luxury Menu Items Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-space-lg mb-space-xl" id="menu-items-grid">
+<!-- Dish Card 1: Chilean Sea Bass -->
+<article class="dish-card bg-surface-container-low rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group" data-category="mains" data-dish-id="DSH-01" data-stock="18">
+<div>
+<!-- Card Visual Media Container -->
+<div class="relative h-56 w-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Exquisite pan-seared Chilean Sea Bass placed delicately over a velvety saffron emulsion sauce, topped with micro-herbs and gold leaf flakes on a charcoal stoneware plate, photographed with cinematic moody restaurant lighting and deep warm highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-ga8JLCZID3H46XFVdrhpdnS43kUHGMBM5h5GUh3460jYzuLg2PCLOszOR3zLoSltsnEAfylgywYGde8qv7dYdfxadFAw1AP02MBbWP5JnQbWmVs9Kb30ORtmCtRZE_2SA2-f0BYhu_emBI7Sx2VVmj7BJTEfuG-iCt4qfzYrfl4iOihEs420vKRQBqYARYl6fj71Ugov-kF1aAdbLSFmz-HA6Dsfbpx9RJO5-HV3lT1xZgXOtd4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-black/40"></div>
+<!-- Top Badges -->
+<div class="absolute top-3 left-3 right-3 flex items-center justify-between">
+<span class="px-2.5 py-1 rounded-full bg-surface-container-lowest/80 backdrop-blur-md text-secondary font-label-sm text-label-sm font-semibold uppercase tracking-wider flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-xs">hotel_class</span> Chef's Signature
+            </span>
+<div class="dish-status-indicator px-2.5 py-0.5 rounded-full bg-surface-container-highest text-secondary font-label-sm text-label-sm font-semibold flex items-center gap-1.5 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Available</span>
+</div>
+</div>
+<!-- Bottom Visual Metas -->
+<div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-on-surface font-label-sm text-label-sm">
+<span class="flex items-center gap-1 bg-surface-container-lowest/70 backdrop-blur-sm px-2 py-0.5 rounded-md">
+<span class="material-symbols-outlined text-sm text-secondary">timer</span> 18-22 min
+            </span>
+<span class="flex items-center gap-1 bg-surface-container-lowest/70 backdrop-blur-sm px-2 py-0.5 rounded-md text-on-surface-variant">
+              540 kcal • Halal Certified
+            </span>
+</div>
+</div>
+<!-- Content Body -->
+<div class="p-space-md">
+<div class="flex items-start justify-between gap-space-sm mb-2">
+<div>
+<h2 class="dish-title font-headline-md text-headline-md text-on-surface font-bold leading-tight group-hover:text-primary transition-colors">Chilean Sea Bass</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-2">Saffron emulsion, roasted baby fennel, citrus beurre blanc, hand-harvested Salicornia.</p>
+</div>
+</div>
+<!-- Price & VAT -->
+<div class="flex items-baseline justify-between py-2 border-b border-surface-variant/40">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg text-headline-lg text-primary font-bold">180.00</span>
+<span class="font-currency-caption text-currency-caption text-secondary font-bold">AED</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant ml-1">(5% VAT incl.)</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">SKU: VAY-SB01</span>
+</div>
+<!-- Inventory Stepper & Live Stock -->
+<div class="flex items-center justify-between mt-3 py-1">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Portions Left:</span>
+<span class="stock-display font-title-md text-title-md text-primary font-bold">18</span>
+</div>
+<!-- Instant Stepper -->
+<div class="flex items-center bg-surface-container rounded-lg p-0.5">
+<button class="decrement-stock p-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" title="Decrement Stock">
+<span class="material-symbols-outlined text-base">remove</span>
+</button>
+<span class="w-8 text-center font-label-md text-label-md font-semibold text-on-surface">18</span>
+<button class="increment-stock p-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors" title="Increment Stock">
+<span class="material-symbols-outlined text-base">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Footer -->
+<div class="p-space-md pt-0 flex items-center justify-between gap-space-xs mt-2">
+<button class="flex-1 py-2 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md font-semibold flex items-center justify-center gap-1 transition-all">
+<span class="material-symbols-outlined text-base">edit</span>
+<span>Edit</span>
+</button>
+<button class="p-2 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all" title="Duplicate Dish">
+<span class="material-symbols-outlined text-base">content_copy</span>
+</button>
+<button class="toggle-86-btn px-3 py-2 rounded-lg bg-surface-container text-on-surface-variant hover:text-error hover:bg-error-container/20 font-label-md text-label-md font-medium transition-all" title="Instantly 86 Dish">
+<span>86 Item</span>
+</button>
+</div>
+</article>
+<!-- Dish Card 2: Wagyu Ribeye MB9+ (Low Stock) -->
+<article class="dish-card bg-surface-container-low rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group" data-category="grill" data-dish-id="DSH-02" data-stock="3">
+<div>
+<div class="relative h-56 w-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Prime Australian Wagyu Ribeye MB9+ 300 grams grilled to medium-rare perfection, sliced neatly with glistening truffle jus and smoked Maldon salt flakes on a dark slate board beside charred morel mushrooms." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAs8WyTvu0l60ERcVqbtIDYUXrUqsoQbx0uPNVwbvTVZYsEhM4qRu93kPXdHOQjwSD30g_BSB9VzRpFxJioSKYkZ29Qll93rcPVywnZO5ANZwy82YelgsirUq5H2YlmEBOJFAUGqZlISQAe7tsD_AOxE_7aVVwpHYsF6k5ACA5SOFABrrBcv0Oh0rtdNwepppf81U1cfK428EQnjOAesCSbJ9eA8yhc_mccMM2PY5pt8jlf0r5U2iw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-black/40"></div>
+<div class="absolute top-3 left-3 right-3 flex items-center justify-between">
+<span class="px-2.5 py-1 rounded-full bg-surface-container-lowest/80 backdrop-blur-md text-secondary font-label-sm text-label-sm font-semibold uppercase tracking-wider flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-xs">local_fire_department</span> Woodfire Grill
+            </span>
+<!-- Amber Low Stock Badge -->
+<div class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold flex items-center gap-1.5 shadow-md">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span>LOW STOCK</span>
+</div>
+</div>
+<div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-on-surface font-label-sm text-label-sm">
+<span class="flex items-center gap-1 bg-surface-container-lowest/70 backdrop-blur-sm px-2 py-0.5 rounded-md">
+<span class="material-symbols-outlined text-sm text-secondary">timer</span> 22-26 min
+            </span>
+<span class="flex items-center gap-1 bg-surface-container-lowest/70 backdrop-blur-sm px-2 py-0.5 rounded-md text-on-surface-variant">
+              820 kcal • Gluten-Free
+            </span>
+</div>
+</div>
+<div class="p-space-md">
+<div class="flex items-start justify-between gap-space-sm mb-2">
+<div>
+<h2 class="dish-title font-headline-md text-headline-md text-on-surface font-bold leading-tight group-hover:text-primary transition-colors">Wagyu Ribeye MB9+ (300g)</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-2">Charred shallots, Périgord black truffle jus, marrow butter, wild morel mushrooms.</p>
+</div>
+</div>
+<div class="flex items-baseline justify-between py-2 border-b border-surface-variant/40">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg text-headline-lg text-primary font-bold">340.00</span>
+<span class="font-currency-caption text-currency-caption text-secondary font-bold">AED</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant ml-1">(5% VAT incl.)</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">SKU: VAY-WG02</span>
+</div>
+<div class="flex items-center justify-between mt-3 py-1">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Remaining Cuts:</span>
+<span class="stock-display font-title-md text-title-md text-secondary font-bold">3 Left</span>
+</div>
+<div class="flex items-center bg-surface-container rounded-lg p-0.5">
+<button class="decrement-stock p-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-base">remove</span>
+</button>
+<span class="w-8 text-center font-label-md text-label-md font-semibold text-on-surface">3</span>
+<button class="increment-stock p-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-base">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="p-space-md pt-0 flex items-center justify-between gap-space-xs mt-2">
+<button class="flex-1 py-2 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md font-semibold flex items-center justify-center gap-1 transition-all">
+<span class="material-symbols-outlined text-base">edit</span>
+<span>Edit</span>
+</button>
+<button class="px-3 py-2 rounded-lg bg-secondary-container text-on-secondary-container hover:brightness-110 font-label-md text-label-md font-bold flex items-center gap-1 shadow-sm transition-all">
+<span class="material-symbols-outlined text-base">add_box</span>
+<span>Replenish</span>
+</button>
+</div>
+</article>
+<!-- Dish Card 3: Acquerello Truffle Risotto -->
+<article class="dish-card bg-surface-container-low rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group" data-category="mains" data-dish-id="DSH-03" data-stock="25">
+<div>
+<div class="relative h-56 w-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Acquerello carnaroli aged rice risotto finished with 24K edible gold leaf, freshly shaved black truffles, and rich parmigiano reggiano foam in a shallow matte black ceramic bowl." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8szzv4EA-xFJXTJh9_uQO-ffkBwRfg7cwKscFGDq-UXn4duQXDELTdcJ1bYKTwEiPbNObYHDLjZGxW6Kcpcfa1cx4NK1sMyfBjzEoq0W1LvmPNRG8XzHsfGKTXmyTNTR39XN-Kji0ItjFegn_hdtC4VTCNpFY8RpKqDOrWNGwexUezwIpJ2aAOLJ8HOcgXss_A6KKd2XechwprufsW2vGpLaoHgAm70oncq0O08EVlE5fjxkRnXo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-black/40"></div>
+<div class="absolute top-3 left-3 right-3 flex items-center justify-between">
+<span class="px-2.5 py-1 rounded-full bg-surface-container-lowest/80 backdrop-blur-md text-secondary font-label-sm text-label-sm font-semibold uppercase tracking-wider flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-xs">auto_awesome</span> 24K Gold Plated
+            </span>
+<div class="dish-status-indicator px-2.5 py-0.5 rounded-full bg-surface-container-highest text-secondary font-label-sm text-label-sm font-semibold flex items-center gap-1.5 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Available</span>
+</div>
+</div>
+<div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-on-surface font-label-sm text-label-sm">
+<span class="flex items-center gap-1 bg-surface-container-lowest/70 backdrop-blur-sm px-2 py-0.5 rounded-md">
+<span class="material-symbols-outlined text-sm text-secondary">timer</span> 16-20 min
+            </span>
+<span class="flex items-center gap-1 bg-surface-container-lowest/70 backdrop-blur-sm px-2 py-0.5 rounded-md text-on-surface-variant">
+              610 kcal • Halal Certified
+            </span>
+</div>
+</div>
+<div class="p-space-md">
+<div class="flex items-start justify-between gap-space-sm mb-2">
+<div>
+<h2 class="dish-title font-headline-md text-headline-md text-on-surface font-bold leading-tight group-hover:text-primary transition-colors">Acquerello Truffle Risotto</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-2">Aged carnaroli rice, 24K edible gold, winter truffle carpaccio, 36-month Vacche Rosse parmesan.</p>
+</div>
+</div>
+<div class="flex items-baseline justify-between py-2 border-b border-surface-variant/40">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg text-headline-lg text-primary font-bold">165.00</span>
+<span class="font-currency-caption text-currency-caption text-secondary font-bold">AED</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant ml-1">(5% VAT incl.)</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">SKU: VAY-RS03</span>
+</div>
+<div class="flex items-center justify-between mt-3 py-1">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Portions Left:</span>
+<span class="stock-display font-title-md text-title-md text-primary font-bold">25</span>
+</div>
+<div class="flex items-center bg-surface-container rounded-lg p-0.5">
+<button class="decrement-stock p-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-base">remove</span>
+</button>
+<span class="w-8 text-center font-label-md text-label-md font-semibold text-on-surface">25</span>
+<button class="increment-stock p-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-base">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="p-space-md pt-0 flex items-center justify-between gap-space-xs mt-2">
+<button class="flex-1 py-2 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md font-semibold flex items-center justify-center gap-1 transition-all">
+<span class="material-symbols-outlined text-base">edit</span>
+<span>Edit</span>
+</button>
+<button class="p-2 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-base">content_copy</span>
+</button>
+<button class="toggle-86-btn px-3 py-2 rounded-lg bg-surface-container text-on-surface-variant hover:text-error font-label-md text-label-md font-medium transition-all">
+<span>86 Item</span>
+</button>
+</div>
+</article>
+<!-- Dish Card 4: Lobster Thermidor (86'd / Sold Out State) -->
+<article class="dish-card opacity-85 bg-surface-container-low rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group" data-category="mains" data-dish-id="DSH-04" data-stock="0">
+<div>
+<div class="relative h-56 w-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover filter grayscale contrast-125" data-alt="Exquisite roasted Canadian Lobster Thermidor accented with Emirati aromatic spices, gruyere gratin crust, served in its shell with tarragon emulsion on crushed sea salt." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcLIrkBAVIcTL1Jh01fs5cIXDE-woFis29Xn5AWJI5eM28wznCmR0zd13eSb-PdVeBdJlSSJujan1bUOCl-TOJBCMwVlt1YG1uhbr-28tZNcijqnJdwwFrDDNIXHSxbzI5BljJLsKmuI3BSWWXfiyLtWqkei543it-yj9iGs703KD9V67P93c2Hics5_tbtlc35tDzkFUaU244J4joYsu4U_tn3lfUh7Qu0UHcCDZqGBmYiF8yuBw"/>
+<div class="absolute inset-0 bg-surface-container-lowest/60 backdrop-blur-[2px]"></div>
+<div class="absolute top-3 left-3 right-3 flex items-center justify-between">
+<span class="px-2.5 py-1 rounded-full bg-surface-container-lowest/80 text-on-surface-variant font-label-sm text-label-sm font-semibold uppercase tracking-wider">
+              Signature Mains
+            </span>
+<!-- Red 86'd Badge -->
+<div class="px-2.5 py-0.5 rounded-full bg-error-container text-on-error-container font-label-sm text-label-sm font-bold flex items-center gap-1.5 shadow-md">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span>86'd / SOLD OUT</span>
+</div>
+</div>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="px-4 py-1.5 rounded-xl bg-surface-container-lowest/90 text-error font-headline-md text-headline-md font-bold tracking-wider uppercase shadow-2xl">
+              Kitchen 86'd
+            </span>
+</div>
+<div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm">
+<span class="bg-surface-container-lowest/70 px-2 py-0.5 rounded-md">25 min avg</span>
+<span class="bg-surface-container-lowest/70 px-2 py-0.5 rounded-md">710 kcal</span>
+</div>
+</div>
+<div class="p-space-md">
+<div class="flex items-start justify-between gap-space-sm mb-2">
+<div>
+<h2 class="dish-title font-headline-md text-headline-md text-on-surface-variant font-bold leading-tight line-through">Lobster Thermidor Emirati</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant/70 mt-1 line-clamp-2">Whole Maine lobster, Emirati baharat blend, Dijon cream, aged gruyère glaze.</p>
+</div>
+</div>
+<div class="flex items-baseline justify-between py-2 border-b border-surface-variant/40">
+<div class="flex items-baseline gap-1 opacity-70">
+<span class="font-headline-lg text-headline-lg text-on-surface font-bold">290.00</span>
+<span class="font-currency-caption text-currency-caption text-secondary font-bold">AED</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant ml-1">(5% VAT incl.)</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-semibold">SKU: VAY-LT04</span>
+</div>
+<div class="flex items-center justify-between mt-3 py-1">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-error font-semibold">Kitchen Status:</span>
+<span class="stock-display font-title-md text-title-md text-error font-bold">0 In Stock</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant italic">Next delivery 08:00 AM</span>
+</div>
+</div>
+</div>
+<div class="p-space-md pt-0 flex items-center justify-between gap-space-xs mt-2">
+<button class="flex-1 py-2 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-md text-label-md font-semibold transition-all">
+<span>Edit Details</span>
+</button>
+<button class="re-enable-stock-btn flex-1 py-2 rounded-lg bg-primary-container text-on-primary-container font-label-md text-label-md font-bold hover:brightness-105 flex items-center justify-center gap-1 shadow-md transition-all">
+<span class="material-symbols-outlined text-base">check_circle</span>
+<span>Restock &amp; Go Live</span>
+</button>
+</div>
+</article>
+<!-- Dish Card 5: Saffron & Cardamom Milk Cake -->
+<article class="dish-card bg-surface-container-low rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group" data-category="desserts" data-dish-id="DSH-05" data-stock="30">
+<div>
+<div class="relative h-56 w-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Artisanal Saffron and green cardamom tres leches sponge cake saturated with golden infused cream, garnished with crushed pistachios, Persian rose petals, and edible spun sugar on a dark textured plate." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBo8xNtGH5b6L2WycxFdjA3yFEG07Sju7qMlfrqUeeVzooYzlTZ4jFEoD2js0TJsCcdwufiL1oO2texYYgrnH3wtr7TCo2gw6LV3EO30EvTIEc6MVHqSue5lRS3EFydQDkwo-cq2vypZv2xiy8lznaa30jRm9lDEcmHNbQWc7IheFwqogEyRayOqk1_TgnRFvmVB3wphmDwT1023nNHOxEVSNQHw7dXETgrVFqb9TadzPZ4dDegUsE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-black/40"></div>
+<div class="absolute top-3 left-3 right-3 flex items-center justify-between">
+<span class="px-2.5 py-1 rounded-full bg-surface-container-lowest/80 backdrop-blur-md text-secondary font-label-sm text-label-sm font-semibold uppercase tracking-wider flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-xs">bakery_dining</span> Artisan Dessert
+            </span>
+<div class="dish-status-indicator px-2.5 py-0.5 rounded-full bg-surface-container-highest text-secondary font-label-sm text-label-sm font-semibold flex items-center gap-1.5 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Available</span>
+</div>
+</div>
+<div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-on-surface font-label-sm text-label-sm">
+<span class="flex items-center gap-1 bg-surface-container-lowest/70 backdrop-blur-sm px-2 py-0.5 rounded-md">
+<span class="material-symbols-outlined text-sm text-secondary">timer</span> 8-10 min
+            </span>
+<span class="flex items-center gap-1 bg-surface-container-lowest/70 backdrop-blur-sm px-2 py-0.5 rounded-md text-on-surface-variant">
+              420 kcal • Vegetarian
+            </span>
+</div>
+</div>
+<div class="p-space-md">
+<div class="flex items-start justify-between gap-space-sm mb-2">
+<div>
+<h2 class="dish-title font-headline-md text-headline-md text-on-surface font-bold leading-tight group-hover:text-primary transition-colors">Saffron &amp; Cardamom Milk Cake</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-2">Vanilla-cardamom sponge, saffron soaked milk reduction, whipped pistachio chantilly.</p>
+</div>
+</div>
+<div class="flex items-baseline justify-between py-2 border-b border-surface-variant/40">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg text-headline-lg text-primary font-bold">65.00</span>
+<span class="font-currency-caption text-currency-caption text-secondary font-bold">AED</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant ml-1">(5% VAT incl.)</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">SKU: VAY-MC05</span>
+</div>
+<div class="flex items-center justify-between mt-3 py-1">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Portions Left:</span>
+<span class="stock-display font-title-md text-title-md text-primary font-bold">30</span>
+</div>
+<div class="flex items-center bg-surface-container rounded-lg p-0.5">
+<button class="decrement-stock p-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-base">remove</span>
+</button>
+<span class="w-8 text-center font-label-md text-label-md font-semibold text-on-surface">30</span>
+<button class="increment-stock p-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-base">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="p-space-md pt-0 flex items-center justify-between gap-space-xs mt-2">
+<button class="flex-1 py-2 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md font-semibold flex items-center justify-center gap-1 transition-all">
+<span class="material-symbols-outlined text-base">edit</span>
+<span>Edit</span>
+</button>
+<button class="p-2 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-base">content_copy</span>
+</button>
+<button class="toggle-86-btn px-3 py-2 rounded-lg bg-surface-container text-on-surface-variant hover:text-error font-label-md text-label-md font-medium transition-all">
+<span>86 Item</span>
+</button>
+</div>
+</article>
+<!-- Dish Card 6: Royal Gold Mocktail -->
+<article class="dish-card bg-surface-container-low rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group" data-category="desserts" data-dish-id="DSH-06" data-stock="45">
+<div>
+<div class="relative h-56 w-full overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="High-end craft non-alcoholic cocktail in a cut-crystal highball glass with passionfruit purée, yuzu bubbles, floating 24K edible gold dust, garnished with dehydrated dragon fruit wheel and rosemary sprig in luxury bar lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMkRg6S-5N1wWIqMGtC0et1nidrt82sUAhTqfVrmMDYbNy7iafETR05Kyq1eO0EKy5_rHXXu-mk_-BoC5nT-yrE8rCrSJSgN8tGaWqD4vO5SAHLJj_gSh03JazihFYwotSUH7CbWbzp6Z-jf1wFg_aBAoi-Gzu5wFuikv6N6IRw27g20lml1SG2ydPmdEXCHiJ4L8Yw_e2ZKFEKBFRbEG3eXnBa-UjvSGkReD_U2Ai6sOW-mYO4tI"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low via-transparent to-black/40"></div>
+<div class="absolute top-3 left-3 right-3 flex items-center justify-between">
+<span class="px-2.5 py-1 rounded-full bg-surface-container-lowest/80 backdrop-blur-md text-secondary font-label-sm text-label-sm font-semibold uppercase tracking-wider flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-xs">local_bar</span> Signature Mixology
+            </span>
+<div class="dish-status-indicator px-2.5 py-0.5 rounded-full bg-surface-container-highest text-secondary font-label-sm text-label-sm font-semibold flex items-center gap-1.5 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Available</span>
+</div>
+</div>
+<div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-on-surface font-label-sm text-label-sm">
+<span class="flex items-center gap-1 bg-surface-container-lowest/70 backdrop-blur-sm px-2 py-0.5 rounded-md">
+<span class="material-symbols-outlined text-sm text-secondary">timer</span> 5 min
+            </span>
+<span class="flex items-center gap-1 bg-surface-container-lowest/70 backdrop-blur-sm px-2 py-0.5 rounded-md text-on-surface-variant">
+              160 kcal • Halal Certified
+            </span>
+</div>
+</div>
+<div class="p-space-md">
+<div class="flex items-start justify-between gap-space-sm mb-2">
+<div>
+<h2 class="dish-title font-headline-md text-headline-md text-on-surface font-bold leading-tight group-hover:text-primary transition-colors">Royal Gold Mocktail</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1 line-clamp-2">Fresh passionfruit, yuzu essence, cold-pressed mint syrup, sparkling elderflower, 24K gold flakes.</p>
+</div>
+</div>
+<div class="flex items-baseline justify-between py-2 border-b border-surface-variant/40">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-lg text-headline-lg text-primary font-bold">55.00</span>
+<span class="font-currency-caption text-currency-caption text-secondary font-bold">AED</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant ml-1">(5% VAT incl.)</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary font-semibold">SKU: VAY-RG06</span>
+</div>
+<div class="flex items-center justify-between mt-3 py-1">
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Portions Left:</span>
+<span class="stock-display font-title-md text-title-md text-primary font-bold">45</span>
+</div>
+<div class="flex items-center bg-surface-container rounded-lg p-0.5">
+<button class="decrement-stock p-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-base">remove</span>
+</button>
+<span class="w-8 text-center font-label-md text-label-md font-semibold text-on-surface">45</span>
+<button class="increment-stock p-1 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-base">add</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="p-space-md pt-0 flex items-center justify-between gap-space-xs mt-2">
+<button class="flex-1 py-2 rounded-lg bg-surface-container text-on-surface hover:bg-surface-container-high font-label-md text-label-md font-semibold flex items-center justify-center gap-1 transition-all">
+<span class="material-symbols-outlined text-base">edit</span>
+<span>Edit</span>
+</button>
+<button class="p-2 rounded-lg bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined text-base">content_copy</span>
+</button>
+<button class="toggle-86-btn px-3 py-2 rounded-lg bg-surface-container text-on-surface-variant hover:text-error font-label-md text-label-md font-medium transition-all">
+<span>86 Item</span>
+</button>
+</div>
+</article>
+</section>
+<!-- Empty Search & Filter State Container -->
+<div class="hidden bg-surface-container-low rounded-xl p-space-xl text-center flex-col items-center justify-center my-space-lg shadow-inner" id="empty-state">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center mb-space-md text-secondary">
+<span class="material-symbols-outlined text-3xl">dinner_dining</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-on-surface font-bold">No Menu Items Found</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mt-2">
+      No items match the query "<span class="text-primary font-semibold" id="empty-search-term"></span>". Check your spelling or reset the applied filters.
+    </p>
+<button class="mt-space-md px-space-md py-2.5 rounded-xl bg-primary-container text-on-primary-container font-label-md text-label-md font-bold shadow-md hover:brightness-105 transition-all" id="reset-filters-btn">
+      Clear All Filters &amp; Search
+    </button>
+</div>
+<!-- Out-of-Stock Bulk Action Bar & UAE Regulatory Disclaimers -->
+<section class="bg-surface-container-low rounded-xl p-space-lg shadow-lg flex flex-col md:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="p-3 rounded-xl bg-surface-container text-secondary">
+<span class="material-symbols-outlined text-2xl">verified_user</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md text-on-surface font-semibold">Abu Dhabi Food Control Authority (ADFCA) Compliant</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">All item allergens, Halal disclosures, and 5% UAE Federal VAT calculations are synchronized automatically across consumer terminals.</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm w-full md:w-auto justify-end">
+<button class="px-4 py-2 rounded-xl bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-label-md text-label-md font-semibold transition-all">
+        Audit Log
+      </button>
+<button class="px-4 py-2 rounded-xl bg-secondary-container text-on-secondary-container font-label-md text-label-md font-bold hover:brightness-105 transition-all shadow-md">
+        Batch Sync to POS
+      </button>
+</div>
+</section>
+</div>
+<!-- Inline Interaction Logic -->
+<script>
+  (function initMenuManagement() {
+    const searchInput = document.getElementById('dish-search-input');
+    const clearBtn = document.getElementById('clear-search-btn');
+    const stockFilter = document.getElementById('stock-filter');
+    const cards = Array.from(document.querySelectorAll('.dish-card'));
+    const emptyState = document.getElementById('empty-state');
+    const emptyTerm = document.getElementById('empty-search-term');
+    const resetBtn = document.getElementById('reset-filters-btn');
+    const quick86ToggleBtn = document.getElementById('quick-86-toggle-btn');
+    const bulk86Banner = document.getElementById('bulk-86-banner');
+    const exit86Btn = document.getElementById('exit-86-btn');
+    let quick86Mode = false;
+
+    // Filter Trigger Function
+    function applyFilters() {
+      const term = (searchInput.value || '').trim().toLowerCase();
+      const stockVal = stockFilter.value;
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const title = card.querySelector('.dish-title').textContent.toLowerCase();
+        const desc = card.querySelector('p').textContent.toLowerCase();
+        const stock = parseInt(card.getAttribute('data-stock') || '0', 10);
+        
+        let matchesQuery = !term || title.includes(term) || desc.includes(term);
+        let matchesStock = true;
+
+        if (stockVal === 'in_stock') {
+          matchesStock = stock > 5;
+        } else if (stockVal === 'low_stock') {
+          matchesStock = stock > 0 && stock <= 5;
+        } else if (stockVal === 'sold_out') {
+          matchesStock = stock === 0;
+        }
+
+        if (matchesQuery && matchesStock) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      if (term.length > 0) {
+        clearBtn.classList.remove('hidden');
+      } else {
+        clearBtn.classList.add('hidden');
+      }
+
+      if (visibleCount === 0) {
+        emptyTerm.textContent = term || stockVal;
+        emptyState.classList.remove('hidden');
+        emptyState.classList.add('flex');
+      } else {
+        emptyState.classList.add('hidden');
+        emptyState.classList.remove('flex');
+      }
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+    stockFilter.addEventListener('change', applyFilters);
+
+    clearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      applyFilters();
+      searchInput.focus();
+    });
+
+    resetBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      stockFilter.value = 'all';
+      applyFilters();
+    });
+
+    // Quantity Stepper Handlers
+    document.querySelectorAll('.dish-card').forEach(card => {
+      const decBtn = card.querySelector('.decrement-stock');
+      const incBtn = card.querySelector('.increment-stock');
+      const stepperNum = card.querySelector('.decrement-stock + span');
+      const displayStock = card.querySelector('.stock-display');
+      
+      if (decBtn && incBtn && stepperNum) {
+        decBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          let current = parseInt(stepperNum.textContent, 10);
+          if (current > 0) {
+            current--;
+            stepperNum.textContent = current;
+            if (displayStock) {
+              displayStock.textContent = current <= 0 ? '0 In Stock' : (current <= 5 ? current + ' Left' : current);
+            }
+            card.setAttribute('data-stock', current);
+          }
+        });
+
+        incBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          let current = parseInt(stepperNum.textContent, 10);
+          current++;
+          stepperNum.textContent = current;
+          if (displayStock) {
+            displayStock.textContent = current <= 5 ? current + ' Left' : current;
+          }
+          card.setAttribute('data-stock', current);
+        });
+      }
+
+      // Quick 86 Button within Card
+      const btn86 = card.querySelector('.toggle-86-btn');
+      if (btn86) {
+        btn86.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (confirm('Instantly 86 this item across all live ordering channels?')) {
+            card.setAttribute('data-stock', '0');
+            card.classList.add('opacity-80');
+            if (stepperNum) stepperNum.textContent = '0';
+            if (displayStock) {
+              displayStock.textContent = '0 In Stock';
+              displayStock.classList.remove('text-primary', 'text-secondary');
+              displayStock.classList.add('text-error');
+            }
+            const statusInd = card.querySelector('.dish-status-indicator');
+            if (statusInd) {
+              statusInd.innerHTML = '<span class="w-2 h-2 rounded-full bg-error"></span><span>86\'d</span>';
+              statusInd.classList.replace('bg-surface-container-highest', 'bg-error-container');
+              statusInd.classList.replace('text-secondary', 'text-on-error-container');
+            }
+          }
+        });
+      }
+
+      // Re-enable / Restock Button
+      const restockBtn = card.querySelector('.re-enable-stock-btn');
+      if (restockBtn) {
+        restockBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          card.setAttribute('data-stock', '15');
+          card.classList.remove('opacity-85');
+          const title = card.querySelector('.dish-title');
+          if (title) title.classList.remove('line-through');
+          if (displayStock) {
+            displayStock.textContent = '15';
+            displayStock.classList.replace('text-error', 'text-primary');
+          }
+          restockBtn.textContent = 'Active on Menu';
+          restockBtn.classList.replace('bg-primary-container', 'bg-surface-container');
+          restockBtn.classList.replace('text-on-primary-container', 'text-on-surface-variant');
+        });
+      }
+    });
+
+    // 86 Emergency Mode Toggle
+    function toggle86EmergencyMode(enabled) {
+      quick86Mode = enabled;
+      if (quick86Mode) {
+        bulk86Banner.classList.remove('hidden');
+        quick86ToggleBtn.classList.add('ring-2', 'ring-error');
+      } else {
+        bulk86Banner.classList.add('hidden');
+        quick86ToggleBtn.classList.remove('ring-2', 'ring-error');
+      }
+    }
+
+    quick86ToggleBtn.addEventListener('click', () => {
+      toggle86EmergencyMode(!quick86Mode);
+    });
+
+    exit86Btn.addEventListener('click', () => {
+      toggle86EmergencyMode(false);
+    });
+
+    // Category Filter Pills Toggle
+    document.querySelectorAll('.category-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.category-pill').forEach(p => {
+          p.classList.remove('bg-primary-container', 'text-on-primary-container', 'font-bold');
+          p.classList.add('bg-surface-container-high', 'text-on-surface', 'font-medium');
+        });
+        pill.classList.remove('bg-surface-container-high', 'text-on-surface', 'font-medium');
+        pill.classList.add('bg-primary-container', 'text-on-primary-container', 'font-bold');
+      });
+    });
+  })();
+</script></main></div></body></html>

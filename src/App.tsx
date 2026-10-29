@@ -3,7 +3,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Capacitor } from '@capacitor/core';
+import { App as CapApp } from '@capacitor/app';
+import { StatusBar, Style } from '@capacitor/status-bar';
+import { SplashScreen } from '@capacitor/splash-screen';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import DashboardScreen from './screens/DashboardScreen';
@@ -16,12 +20,22 @@ import AnalyticsSalesScreen from './screens/AnalyticsSalesScreen';
 import SettingsTaxScreen from './screens/SettingsTaxScreen';
 import LoginTerminalScreen from './screens/LoginTerminalScreen';
 import { ScreenId } from './types';
+import {
+  fetchOrdersFromSupabase,
+  ensureSharedCatalogSyncedToSupabase,
+  getPartnerSession,
+  onPartnerSessionChange,
+  onSupabaseAction,
+  subscribeToOrdersRealtime,
+} from './lib/supabase';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<ScreenId>('dashboard');
   const [selectedOrderId, setSelectedOrderId] = useState<string>('VY-9021');
   const [chimeActive, setChimeActive] = useState<boolean>(true);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
+  const [pendingOrdersCount, setPendingOrdersCount] = useState<number>(0);
   const [toast, setToast] = useState<{ message: string; icon: string } | null>(null);
 
   const showToast = (message: string, icon = 'check_circle') => {
@@ -30,6 +44,60 @@ export default function App() {
       setToast(null);
     }, 3200);
   };
+
+  // Configure Capacitor Android native status bar, splash screen, and hardware back button
+  useEffect(() => {
+    if (Capacitor.isNativePlatform()) {
+      StatusBar.setStyle({ style: Style.Dark }).catch(() => {});
+      StatusBar.setBackgroundColor({ color: '#161311' }).catch(() => {});
+      SplashScreen.hide().catch(() => {});
+
+      const backListener = CapApp.addListener('backButton', ({ canGoBack }) => {
+        if (mobileMenuOpen) {
+          setMobileMenuOpen(false);
+        } else if (currentScreen !== 'dashboard' && currentScreen !== 'login') {
+          setCurrentScreen('dashboard');
+        } else if (!canGoBack) {
+          CapApp.exitApp();
+        }
+      });
+
+      return () => {
+        backListener.then((h) => h.remove());
+      };
+    }
+  }, [currentScreen, mobileMenuOpen]);
+
+  // Ensure shared Customer App + Partner Portal catalog & zones are synced on startup
+  useEffect(() => {
+    ensureSharedCatalogSyncedToSupabase();
+  }, []);
+
+  // Fetch live incoming order count from Supabase (filtered by active vendor session)
+  useEffect(() => {
+    const refreshPendingCount = () => {
+      const storeId = getPartnerSession().storeId;
+      fetchOrdersFromSupabase(storeId).then((orders) => {
+        if (orders) {
+          const incomingCount = orders.filter((o) => o.status === 'incoming').length;
+          setPendingOrdersCount(incomingCount);
+        } else {
+          setPendingOrdersCount(0);
+        }
+      });
+    };
+    refreshPendingCount();
+
+    const unsubSession = onPartnerSessionChange(refreshPendingCount);
+    const unsubAction = onSupabaseAction(refreshPendingCount);
+    const unsubRealtime = subscribeToOrdersRealtime(refreshPendingCount);
+
+    return () => {
+      unsubSession();
+      unsubAction();
+      unsubRealtime();
+    };
+  }, [currentScreen]);
 
   const toggleChime = () => {
     setChimeActive((prev) => !prev);
@@ -64,11 +132,13 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#161311] text-[#e9e1dd] font-['Inter'] selection:bg-[#facc15] selection:text-[#6c5700]">
-      {/* Fixed Left Navigation Sidebar */}
+      {/* Responsive Left Navigation Sidebar */}
       <Sidebar
         currentScreen={currentScreen}
         onNavigate={setCurrentScreen}
-        pendingOrdersCount={4}
+        pendingOrdersCount={pendingOrdersCount}
+        mobileOpen={mobileMenuOpen}
+        onCloseMobile={() => setMobileMenuOpen(false)}
       />
 
       {/* Main Top Header */}
@@ -77,10 +147,11 @@ export default function App() {
         onNavigate={setCurrentScreen}
         chimeActive={chimeActive}
         onToggleChime={toggleChime}
+        onOpenMobileMenu={() => setMobileMenuOpen(true)}
       />
 
       {/* Primary Scrollable Screen Content */}
-      <main className="pl-72 pt-20 w-full min-h-screen bg-[#161311] px-6 lg:px-8 py-6">
+      <main className="lg:pl-72 pt-20 w-full min-h-screen bg-[#161311] px-4 sm:px-6 lg:px-8 py-6">
         {currentScreen === 'dashboard' && (
           <DashboardScreen
             onNavigate={setCurrentScreen}
